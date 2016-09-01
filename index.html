@@ -183,8 +183,8 @@
 								{"lable" : "lablename2", "y" : 90, "color" : "#b84335"},
 								{"lable" : "lablename3", "y" : 45, "color" : "#fbbc05"},
 								{"lable" : "lablename4", "y" : 52, "color" : "#4285f4"},
-								{"lable" : "lablename6", "y" : 85, "color" : "#3a87ad"},
-								{"lable" : "lablename5", "y" : 60, "color" : "#34a853"}
+								{"lable" : "lablename5", "y" : 85, "color" : "#3a87ad"},
+								{"lable" : "lablename6", "y" : 60, "color" : "#34a853"}
 							]						
 					}
 
@@ -195,7 +195,7 @@
 		
 		var multilinebar = {
 			"container" : "multibarchart",
-			"chartnumber" : 4,
+			"chartnumber" : 5,
 			"type" : 'barchart',
 			"title" : {
 				"text" : "Multi Line Bar Chart"
@@ -476,11 +476,6 @@
 							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].y+5});
 							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
 						}
-						/*var distance=Math.sqrt(Math.pow(mousePos.x - linecord[i].x, 2) + Math.pow(mousePos.y - linecord[i].y, 2));
-						if( distance <= 5){
-							//console.log('#'+container+' .canvasjs-chart-tooltip');
-
-						}*/
 					}
 				}, false);
 			}
@@ -498,7 +493,7 @@
 					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
 					//console.log(mousePos);
 					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-
+					console.log(message);
 					for(var i = 0; i<linecord.length; i++){
 
 						ctx.beginPath();
@@ -517,29 +512,24 @@
 			}
 			
 			if(charttype == 'piechart'){
-				/*for(var i = 0; i<linecord.length; i++){
-					//console.log(linecord[i]);
-					ctx.beginPath();
-					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
-					ctx.stroke();
-				}*/
-
+				
 				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
-					var canvasupper = document.getElementById('canvasupper'+nr);
-					for(var i = 0; i<linecord.length; i++){
 					
+					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+					console.log(message);
+					for(var i = 0; i<linecord.length; i++){
+
 						ctx.beginPath();
 						ctx.lineTo(linecord[i].x, linecord[i].x);
 						ctx.arc(linecord[i].x, linecord[i].x, linecord[i].x, linecord[i].startangle, linecord[i].lastangle, false);
 						ctx.lineTo(linecord[i].x, linecord[i].x);
-						
-						var mousePos = getMousePos(canvasupper, evt);
 						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-							console.log('canvas hovered');
-							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].x+5});
+							//console.log('hovered');
+							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': mousePos.x, 'top' : mousePos.y+5});
 							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
 						}
-						ctx.stroke();
+						//ctx.stroke();
 						
 					}
 				
@@ -583,7 +573,7 @@
 		
 		function drawPie(canvas, ctx, verticalNr, data, range, stroke, linecord){
 			var canvas = document.getElementById(canvas);	
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			//ctx.clearRect(0, 0, canvas.width, canvas.height);
 			var lastend = 0;
 			var myTotal = 0; // Automatically calculated so don't touch
 			var radius = canvas.height / 2;
