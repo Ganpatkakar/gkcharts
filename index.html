@@ -272,7 +272,7 @@
 				//console.log(linecord);
 				
 				var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container);
+				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
 			
 			if(charttype == 'barchart'){
@@ -303,12 +303,12 @@
 				var nextcurve = 0;
 				for(var i = 0; i<chart.data.length; i++){
 					drawBar(canvas, ctx, 10, chart.data[i], maxdata, nextcurve, chart.data[i].stroke, linecord);
-					nextcurve +=20;
+					nextcurve +=15;
 				}
 				//console.log(linecord);
 				
 				var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container);
+				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
 			
 			if(charttype == 'piechart'){
@@ -341,7 +341,7 @@
 				//console.log(linecord);
 				
 				var ctx = preparePlotUpper(chart.chartnumber,  chart.hei, chart.hei, chart.container);
-				drawupercanvas(chart.chartnumber, ctx, chart.hei, chart.hei, linecord, chart.container);
+				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
 			
 			if(charttype == 'donutchart'){
@@ -355,7 +355,7 @@
 		
 		function prepSurface(nr, width, height, container){
 			//var container = document.getElementById(container);
-			$('#'+container).append('<canvas id="canvas'+nr+'" class="canvass" width="'+width+'" height="'+height+'"></canvas>');
+			$('#'+container).append('<canvas id="canvas'+nr+'" class="" style="position:absolute;" width="'+width+'" height="'+height+'"></canvas>');
 			//document.write();
 		}
 		
@@ -375,7 +375,7 @@
 		
 		function prepSurfaceupper(nr, width, height, container){
 			var container = document.getElementById(container);
-			container.insertAdjacentHTML('beforeend', '<canvas id="canvasupper'+nr+'" class="canvass" width="'+width+'" height="'+height+'"></canvas> 		<div class="canvasjs-chart-tooltip" style="position: absolute; height: auto; box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 2px; z-index: 1000; display: none; border-radius: 5px; transition: left 0.2s ease-out, bottom 0.2s ease-out;"><div style="width: auto; height: auto; min-width: 50px; margin: 0px; padding: 5px; font-family: Calibri, Arial, Georgia, serif; font-weight: normal; font-style: italic; font-size: 14px; color: rgb(0, 0, 0); text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px; text-align: left; border: 2px solid rgb(127, 96, 132); text-indent: 0px; white-space: nowrap; border-radius: 5px; -webkit-user-select: none; background: rgba(255, 255, 255, 0.901961);"><span style="color:#7F6084;"></span>3,125,844</div></div>');
+			container.insertAdjacentHTML('beforeend', '<canvas id="canvasupper'+nr+'" class="" style="position:absolute;" width="'+width+'" height="'+height+'"></canvas> 		<div class="canvasjs-chart-tooltip" style="position: absolute; height: auto; box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 2px; z-index: 1000; display: none; border-radius: 5px; transition: left 0.2s ease-out, bottom 0.2s ease-out;"><div style="width: auto; height: auto; min-width: 50px; margin: 0px; padding: 5px; font-family: Calibri, Arial, Georgia, serif; font-weight: normal; font-style: italic; font-size: 14px; color: rgb(0, 0, 0); text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px; text-align: left; border: 2px solid rgb(127, 96, 132); text-indent: 0px; white-space: nowrap; border-radius: 5px; -webkit-user-select: none; background: rgba(255, 255, 255, 0.901961);"><span style="color:#7F6084;"></span>3,125,844</div></div>');
 			//container.innerHTML = '<canvas id="canvasupper'+nr+'" width="'+width+'" height="'+height+'"></canvas>'
 			//document.write();
 		}
@@ -451,48 +451,111 @@
 			return linecord;
 		}
 		
-		function drawupercanvas(nr, ctx, width, height, linecord, container){
-			var canvas = document.getElementById('canvasupper'+nr);
-			console
+		function drawupercanvas(nr, ctx, width, height, linecord, container, charttype){
+			//var canvasid = document.getElementById('canvasupper'+nr);
 			
-			for(var i = 0; i<linecord.length; i++){
-				//console.log(linecord[i]);
-				ctx.beginPath();
-				ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
-				ctx.stroke();
+			if(charttype == 'linechartcomparision'){
+				for(var i = 0; i<linecord.length; i++){
+					//console.log(linecord[i]);
+					ctx.beginPath();
+					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
+					ctx.stroke();
+				}
+
+				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
+
+					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+					//console.log(mousePos);
+					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+
+					for(var i = 0; i<linecord.length; i++){
+
+						ctx.beginPath();
+						ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
+						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
+							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].y+5});
+							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+						}
+						/*var distance=Math.sqrt(Math.pow(mousePos.x - linecord[i].x, 2) + Math.pow(mousePos.y - linecord[i].y, 2));
+						if( distance <= 5){
+							//console.log('#'+container+' .canvasjs-chart-tooltip');
+
+						}*/
+					}
+				}, false);
 			}
 			
-			canvas.addEventListener('mousemove', function(evt) {
-				
-				var mousePos = getMousePos(canvas, evt);
-				//console.log(mousePos);
-				var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-				
-				//var distance = [];
-				//var tooltip = $('#canvasjs-chart-tooltip');
-				
-				for(var i = 0; i<linecord.length; i++){
-					var distance=Math.sqrt(Math.pow(mousePos.x - linecord[i].x, 2) + Math.pow(mousePos.y - linecord[i].y, 2));
-					if( distance <= 5){
-						//console.log('#'+container+' .canvasjs-chart-tooltip');
-						$('.canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].y+5});
-						$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+			if(charttype == 'barchart'){
+				/*for(var i = 0; i<linecord.length; i++){
+					//console.log(linecord[i]);
+					ctx.beginPath();
+					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
+					ctx.stroke();
+				}*/
+
+				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
+
+					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+					//console.log(mousePos);
+					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+
+					for(var i = 0; i<linecord.length; i++){
+
+						ctx.beginPath();
+						ctx.rect(linecord[i].x, linecord[i].y, linecord[i].wid, linecord[i].hei);
+						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
+							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].y+5});
+							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+						}
+						/*var distance=Math.sqrt(Math.pow(mousePos.x - linecord[i].x, 2) + Math.pow(mousePos.y - linecord[i].y, 2));
+						if( distance <= 5){
+							//console.log('#'+container+' .canvasjs-chart-tooltip');
+
+						}*/
 					}
-				}
+				}, false);
+			}
+			
+			if(charttype == 'piechart'){
+				/*for(var i = 0; i<linecord.length; i++){
+					//console.log(linecord[i]);
+					ctx.beginPath();
+					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
+					ctx.stroke();
+				}*/
+
+				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
+					var canvasupper = document.getElementById('canvasupper'+nr);
+					for(var i = 0; i<linecord.length; i++){
+					
+						ctx.beginPath();
+						ctx.lineTo(linecord[i].x, linecord[i].x);
+						ctx.arc(linecord[i].x, linecord[i].x, linecord[i].x, linecord[i].startangle, linecord[i].lastangle, false);
+						ctx.lineTo(linecord[i].x, linecord[i].x);
+						
+						var mousePos = getMousePos(canvasupper, evt);
+						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
+							console.log('canvas hovered');
+							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].x+5});
+							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+						}
+						ctx.stroke();
+						
+					}
 				
-				//console.log(message);
-				//writeMessage(canvas, message);
-			}, false);
+				}, false);
+			}
 			
 		}
+		
 			
 		function drawBar(canvas, ctx, verticalNr, data, range, curx, stroke, linecord){
 			var canvas = document.getElementById(canvas);
 			var spacingVertical = canvas.height/verticalNr;
 			var spacingHorizontal = canvas.width/data.datapoints.length;
-			console.log(spacingHorizontal);
+			//console.log(spacingHorizontal);
 			var hei = canvas.height-spacingVertical;
-			var width = 20;
+			var width = 15;
 
 			ctx.beginPath();
 			ctx.strokeStyle = stroke;
@@ -504,13 +567,18 @@
 
 				ctx.fillRect(curx, hei - h, width, h);
 				
-				ctx.fillStyle = plot;
-				ctx.fillText(data.datapoints[i].y, curx, hei-h + 10 );
+				var newobj = {x : curx, y : hei - h,  wid : width, hei : h, lable : data.datapoints[i].lable};
+				//console.log(newobj);
+				linecord.push(newobj);
+				
+				ctx.fillStyle = "#000";
+				ctx.fillText(data.datapoints[i].y, curx, hei-h  );
 				
 				curx +=  spacingHorizontal;
 			}
 			ctx.stroke();
 			ctx.closePath();
+			return linecord;
 		}
 		
 		function drawPie(canvas, ctx, verticalNr, data, range, stroke, linecord){
@@ -523,14 +591,18 @@
 			for (var e = 0; e < data.datapoints.length; e++) {
 				myTotal +=data.datapoints[e].y;
 			}
-			
 			for (var i = 0; i < data.datapoints.length; i++) {
 				ctx.fillStyle = data.datapoints[i].color;
 				ctx.beginPath();
 				ctx.moveTo(canvas.width / 2, canvas.height / 2);
 				
 				ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
+				//console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
 				ctx.lineTo(canvas.width / 2, canvas.height / 2);
+				
+				var newobj = {x : canvas.width / 2, startangle : lastend, lastangle : lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)),  lable : data.datapoints[i].lable };
+				//console.log(newobj);
+				linecord.push(newobj);
 				
 				lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
 				
@@ -557,6 +629,8 @@
 				//ctx.translate(-dx, -dy);
 				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
 			}
+			
+			return linecord;
 		}
 		
 		/*function drawmultiBar(canvas, ctx, verticalNr, data, range, stroke, linecord){
