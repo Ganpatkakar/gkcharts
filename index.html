@@ -38,6 +38,10 @@
 			<div id="piechart" class="col-sm-6"></div>
 			<div id="donutchart" class="col-sm-6"></div>
 		</section>
+		<section class="row">
+			<div id="splinechart" class="col-sm-6"></div>
+			<div id="" class="col-sm-6"></div>
+		</section>
 	</div>
 	
 	<!-- jQuery library -->
@@ -133,6 +137,37 @@
 		}
 				
 		chartCalling(chartline);
+		
+		var splinechart = {
+			"container" : "splinechart",
+			"chartnumber" : 7,
+			"type" : 'splinechart',
+			"title" : {
+				"text" : "Spline Chart"
+			},
+			"wid" : 500,
+			"hei" : 300,
+			"data" : [
+					{
+						"stroke" : "#ff0000",
+						"datapoints" : 
+							[
+								{"lable" : "lablename1", "y" : 100},
+								{"lable" : "lablename2", "y" : 90},
+								{"lable" : "lablename3", "y" : 45},
+								{"lable" : "lablename4", "y" : 52},
+								{"lable" : "lablename5", "y" : 72},
+								{"lable" : "lablename6", "y" : 85},
+								{"lable" : "lablename7", "y" : 95},
+								{"lable" : "lablename8", "y" : 150},
+								{"lable" : "lablename9", "y" : 77}
+							]						
+					}
+
+				]
+		}
+				
+		chartCalling(splinechart);
 		
 		var chartbar = {
 			"container" : "barchart",
@@ -299,6 +334,39 @@
 				var linecord = [];
 				for(var i = 0; i<chart.data.length; i++){
 					drawGraphicLinear(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+				}
+				//console.log(linecord);
+				
+				var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+			}
+			
+			if(charttype == 'splinechart'){
+				
+				$('#'+chart.container).css({'height': chart.hei+100});
+				$('#'+chart.container).html('<h2>'+chart.title.text+'</h2>');
+				
+				var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
+				
+				var canvas = 'canvas'+chart.chartnumber;
+				
+				var maxdata = [];
+				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
+				for(var i = 0; i<chart.data.length; i++){
+					for(var j = 0; j < chart.data[i].datapoints.length; j++){
+						if(chart.data[i].datapoints[j].y < maxdata[0]){
+							maxdata[0] = chart.data[i].datapoints[j].y;
+						}
+						if(chart.data[i].datapoints[j].y > maxdata[1]){
+							maxdata[1] = chart.data[i].datapoints[j].y;
+						}
+					}
+				}
+				//console.log(maxdata);
+				var linecord = [];
+				for(var i = 0; i<chart.data.length; i++){
+					drawsplinechart(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
 				}
 				//console.log(linecord);
 				
@@ -512,6 +580,46 @@
 			return linecord;
 		}
 		
+		function drawsplinechart(canvas, ctx, verticalNr, data, range, stroke, linecord){
+			var canvas = document.getElementById(canvas);
+			var spacingVertical = canvas.height/verticalNr;
+			var spacingHorizontal = canvas.width/data.datapoints.length;
+			var hei = canvas.height-3*spacingVertical;
+			
+			var totalRange = range[1]-range[0];
+			var verticalCoefficient = hei/totalRange;
+			var mov;
+			
+			ctx.strokeStyle = stroke;
+			ctx.beginPath();
+			//ctx.moveTo(0, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical);
+			
+				/*ctx.moveTo(1*spacingHorizontal, hei-(data.datapoints[1].y-range[0])*verticalCoefficient+spacingVertical);
+				console.log(0*spacingHorizontal, hei-(data.datapoints[1].y-range[1])*verticalCoefficient+spacingVertical)
+				ctx.bezierCurveTo(0*spacingHorizontal, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical + 5, 30, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical - 5, 30, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical);
+				console.log(0*spacingHorizontal, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical + 5, spacingHorizontal, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical - 5, 0 * spacingHorizontal, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical)*/
+			for(var i = 0; i<data.datapoints.length-1;i++){
+				
+				
+				ctx.moveTo(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
+				console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
+				
+				ctx.bezierCurveTo(i*spacingHorizontal + 10, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + 15,  (i + 1) * spacingHorizontal - 10, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - 15, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+				
+				console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + 15,  (i + 1) * spacingHorizontal - 10, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - 15, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+				
+				var newobj = {x : i*spacingHorizontal, y : hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical, lable : data.datapoints[i].lable };
+				//console.log(newobj);
+				linecord.push(newobj);
+				
+				ctx.fillText(data.datapoints[i].y, i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
+			}
+
+			ctx.stroke();
+			ctx.closePath();
+			return linecord;
+		}
+		
 		function drawupercanvas(nr, ctx, width, height, linecord, container, charttype){
 			//var canvasid = document.getElementById('canvasupper'+nr);
 			
@@ -645,9 +753,35 @@
 				}, false);
 			}
 			
+			if(charttype == 'splinechart'){
+				
+				for(var i = 0; i<linecord.length; i++){
+					//console.log(linecord[i]);
+					ctx.beginPath();
+					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
+					ctx.stroke();
+				}
+
+				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
+
+					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+					//console.log(mousePos);
+					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+
+					for(var i = 0; i<linecord.length; i++){
+
+						ctx.beginPath();
+						ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
+						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
+							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].y+5});
+							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+						}
+					}
+				}, false);
+			}
+			
 		}
 		
-			
 		function drawBar(canvas, ctx, verticalNr, data, range, curx, stroke, linecord){
 			var canvas = document.getElementById(canvas);
 			var spacingVertical = canvas.height/verticalNr;
@@ -835,14 +969,7 @@
 				ctx.fillText(i+1, spach*i+4, hei+2*spacv+20);
 			}
 		}
-		
-		var stroking = 'rgba(0,0,0,0.2)';
-		var plot = 'rgba(255,0,0,.7)';
-		var plot1 = 'rgba(0,255,0,.7)';
-		var enumerate = 1;
-		var text = '#000';
 				
-		
 		function writeMessage(canvas, message) {
 			ctx.font = '18pt Calibri';
 			ctx.fillStyle = 'black';
@@ -856,6 +983,7 @@
 				y: (evt.clientY-rect.top)/(rect.bottom-rect.top)*canvas.height
 			};
 		}
+		
 		
 	</script>
 </body>
