@@ -36,7 +36,7 @@
 		</section>
 		<section class="row">
 			<div id="piechart" class="col-sm-6"></div>
-			<div id="multilinebarchart" class="col-sm-6"></div>
+			<div id="donutchart" class="col-sm-6"></div>
 		</section>
 	</div>
 	
@@ -179,12 +179,15 @@
 						"stroke" : "#ff0000",
 						"datapoints" : 
 							[
-								{"lable" : "lablename1", "y" : 100, "color" : "#ea4335"},
+								{"lable" : "lablename1", "y" : 1200, "color" : "teal"},
 								{"lable" : "lablename2", "y" : 90, "color" : "#b84335"},
 								{"lable" : "lablename3", "y" : 45, "color" : "#fbbc05"},
 								{"lable" : "lablename4", "y" : 52, "color" : "#4285f4"},
 								{"lable" : "lablename5", "y" : 85, "color" : "#3a87ad"},
-								{"lable" : "lablename6", "y" : 60, "color" : "#34a853"}
+								{"lable" : "lablename6", "y" : 60, "color" : "#34a853"},
+								{"lable" : "lablename7", "y" : 18, "color" : "#4285f4"},
+								{"lable" : "lablename8", "y" : 85, "color" : "#3a87ad"},
+								{"lable" : "lablename9", "y" : 60, "color" : "#34a853"}
 							]						
 					}
 
@@ -237,6 +240,34 @@
 		}
 				
 		chartCalling(multilinebar);
+		
+		var donut = {
+			"container" : "donutchart", /*Give exact id of you container div*/
+			"chartnumber" : 6, /*Never keep it same with other charts*/
+			"type" : 'donutchart', /*keep same names as instructed - donutchart, linechartcomparision, barchart, piechart*/
+			"title" : {
+				"text" : "Donut Chart"
+			},
+			"wid" : 500,
+			"hei" : 300,
+			"data" : [ /*Give as required data in given formate, syntax error with json will cause of error in charts*/
+					{
+						"stroke" : "#ff0000",
+						"datapoints" : 
+							[
+								{"lable" : "lablename1", "y" : 1200, "color" : "teal"},
+								{"lable" : "lablename2", "y" : 90, "color" : "#b84335"},
+								{"lable" : "lablename3", "y" : 45, "color" : "#fbbc05"},
+								{"lable" : "lablename4", "y" : 52, "color" : "#4285f4"},
+								{"lable" : "lablename5", "y" : 85, "color" : "#3a87ad"},
+								{"lable" : "lablename6", "y" : 60, "color" : "#34a853"}
+							]						
+					}
+
+				]
+		}
+				
+		chartCalling(donut);
 		
 		function chartCalling(chart){
 			
@@ -345,8 +376,38 @@
 			}
 			
 			if(charttype == 'donutchart'){
+				$('#'+chart.container).css({'height': chart.hei+100});
+				$('#'+chart.container).html('<h2>'+chart.title.text+'</h2>');
 				
+				var ctx = preparePlot(chart.chartnumber,  chart.hei, chart.hei, chart.container);
+				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
+				
+				var canvas = 'canvas'+chart.chartnumber;
+				
+				var maxdata = [];
+				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
+				for(var i = 0; i<chart.data.length; i++){
+					for(var j = 0; j < chart.data[i].datapoints.length; j++){
+						if(chart.data[i].datapoints[j].y < maxdata[0]){
+							maxdata[0] = chart.data[i].datapoints[j].y;
+						}
+						if(chart.data[i].datapoints[j].y > maxdata[1]){
+							maxdata[1] = chart.data[i].datapoints[j].y;
+						}
+					}
+				}
+				//console.log(maxdata);
+				var linecord = [];
+				var linewidth = 50;
+				for(var i = 0; i<chart.data.length; i++){
+					drawDonut(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+				}
+				//console.log(linecord);
+				
+				var ctx = preparePlotUpper(chart.chartnumber,  chart.hei, chart.hei, chart.container);
+				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
+			
 			if(charttype == 'barcomparisionchart'){
 				
 			}
@@ -493,15 +554,24 @@
 					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
 					//console.log(mousePos);
 					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-					console.log(message);
+//					/console.log(message);
 					for(var i = 0; i<linecord.length; i++){
 
 						ctx.beginPath();
 						ctx.rect(linecord[i].x, linecord[i].y, linecord[i].wid, linecord[i].hei);
+						
 						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
+							ctx.lineWidth=.5;
+							ctx.stroke();
 							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].y+5});
 							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
 						}
+						/*else{
+							setTimeout(function(){ 
+								ctx.clearRect(0, 0, document.getElementById('canvasupper'+nr).width, document.getElementById('canvasupper'+nr).height);
+								$('#'+container+' .canvasjs-chart-tooltip').css({'display':'none'});
+							}, 4000);
+						}*/
 						/*var distance=Math.sqrt(Math.pow(mousePos.x - linecord[i].x, 2) + Math.pow(mousePos.y - linecord[i].y, 2));
 						if( distance <= 5){
 							//console.log('#'+container+' .canvasjs-chart-tooltip');
@@ -517,7 +587,7 @@
 					
 					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
 					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-					console.log(message);
+					//console.log(message);
 					for(var i = 0; i<linecord.length; i++){
 
 						ctx.beginPath();
@@ -525,11 +595,50 @@
 						ctx.arc(linecord[i].x, linecord[i].x, linecord[i].x, linecord[i].startangle, linecord[i].lastangle, false);
 						ctx.lineTo(linecord[i].x, linecord[i].x);
 						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-							//console.log('hovered');
+							/*ctx.lineWidth=1;
+							ctx.stroke();*/
 							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': mousePos.x, 'top' : mousePos.y+5});
 							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+						}else{
+							/*ctx.clearRect(0, 0, document.getElementById('canvasupper'+nr).width, document.getElementById('canvasupper'+nr).height);*/
+							
+							/*ctx.fillStyle = 'rgba(255,255,255,0)';
+							ctx.strokeStyle="#FF0000";
+							ctx.lineWidth=0;*/
 						}
-						//ctx.stroke();
+						//
+						
+					}
+				
+				}, false);
+			}
+			
+			if(charttype == 'donutchart'){
+				
+				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
+					var linewidth = 50;
+					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+					//console.log(message);
+					for(var i = 0; i<linecord.length; i++){
+						ctx.lineWidth = 70;
+						ctx.beginPath();
+						//ctx.lineTo(linecord[i].x, linecord[i].x);
+						ctx.arc(linecord[i].x, linecord[i].x, linecord[i].x - linewidth, linecord[i].startangle, linecord[i].lastangle, false);
+						//ctx.lineTo(linecord[i].x, linecord[i].x);
+						if (ctx.isPointInStroke(mousePos.x, mousePos.y)) {
+							/*ctx.lineWidth=1;*/
+							//ctx.stroke();
+							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': mousePos.x, 'top' : mousePos.y+5});
+							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+						}else{
+							/*ctx.clearRect(0, 0, document.getElementById('canvasupper'+nr).width, document.getElementById('canvasupper'+nr).height);*/
+							
+							/*ctx.fillStyle = 'rgba(255,255,255,0)';
+							ctx.strokeStyle="#FF0000";
+							ctx.lineWidth=0;*/
+						}
+						//
 						
 					}
 				
@@ -572,8 +681,8 @@
 		}
 		
 		function drawPie(canvas, ctx, verticalNr, data, range, stroke, linecord){
-			var canvas = document.getElementById(canvas);	
-			//ctx.clearRect(0, 0, canvas.width, canvas.height);
+			var canvas = document.getElementById(canvas);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			var lastend = 0;
 			var myTotal = 0; // Automatically calculated so don't touch
 			var radius = canvas.height / 2;
@@ -600,23 +709,82 @@
 				ctx.fill();				
 			}
 			
-			//drawNumbers(ctx, radius, myTotal, nr);
+			/* Draw piechart number values */
 			var angle = 0;
 			var x = Math.floor(canvas.width / 2);
 			var y = Math.floor(canvas.height / 2);
-			ctx.fillStyle = "#000";
+			ctx.fillStyle = "#fff";
 			ctx.font = radius*0.10 + "px arial";
-			var dx = Math.floor(canvas.width * 0.5) - 30;
-			var dy = Math.floor(canvas.height * 0.5);
 			ctx.font = radius*0.08 + "px arial";
 			
-			for(i = 0; i< data.datapoints.length; i++){
+			/*for(i = 0; i< data.datapoints.length; i++){
 				ctx.translate(x, y);
    			ctx.rotate(angle);
-				ctx.translate(-dx, -dy);
-				ctx.fillText(data.datapoints[i].y.toString(), 2*dx, dy+50);
-				//ctx.restore();
-				//ctx.translate(-dx, -dy);
+				ctx.translate(-x, -y);
+				ctx.fillText(data.datapoints[i].y.toString(), x + radius/1.3, y);
+				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+			}*/
+			
+			for(i = 0; i< data.datapoints.length; i++){
+				anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+				var anglemiddle =(anglenew - angle)/2;
+				ctx.translate(x, y);
+   			ctx.rotate(angle + anglemiddle);
+				ctx.translate(-x, -y);
+				ctx.fillText(data.datapoints[i].y.toString(), x + radius/1.3, y);
+				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+			}
+			
+			return linecord;
+		}
+		
+		function drawDonut(canvas, ctx, verticalNr, data, range, stroke, linecord){
+			var canvas = document.getElementById(canvas);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			var linewidth = 50;
+			ctx.lineWidth = 70;
+			var lastend = 0;
+			var myTotal = 0; // Automatically calculated so don't touch
+			var radius = canvas.height / 2 - linewidth;
+			
+			for (var e = 0; e < data.datapoints.length; e++) {
+				myTotal +=data.datapoints[e].y;
+			}
+			for (var i = 0; i < data.datapoints.length; i++) {
+				ctx.strokeStyle = data.datapoints[i].color;
+				
+				ctx.beginPath();
+				//ctx.moveTo(canvas.width / 2, canvas.height / 2);
+				
+				ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
+				//console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+				//ctx.lineTo(canvas.width / 2, canvas.height / 2);
+				
+				var newobj = {x : canvas.width / 2, startangle : lastend, lastangle : lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)),  lable : data.datapoints[i].lable };
+				//console.log(newobj);
+				linecord.push(newobj);
+				
+				lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
+				
+				//console.log(lastend);
+				//ctx.fill();				
+				ctx.stroke();				
+			}
+			
+			/* Draw piechart number values */
+			var angle = 0;
+			var x = Math.floor(canvas.width / 2);
+			var y = Math.floor(canvas.height / 2);
+			ctx.fillStyle = "#fff";
+			ctx.font = radius*0.12 + "px arial";
+			
+			for(i = 0; i< data.datapoints.length; i++){
+				anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+				var anglemiddle =(anglenew - angle)/2;
+				ctx.translate(x, y);
+   			ctx.rotate(angle + anglemiddle);
+				ctx.translate(-x, -y);
+				ctx.fillText(data.datapoints[i].y.toString(), x + radius, y);
 				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
 			}
 			
