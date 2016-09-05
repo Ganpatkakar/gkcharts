@@ -1,30 +1,36 @@
 <!DOCTYPE html>
 <html>
-	<head>	
-		<meta charset="utf-8">
-		<title>Table and chart by month</title>
 
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<style>
-			#linechartcomparision, #linechart, #barchart, #piechart, #multibarchart{
-				position: relative;
-			}
-			#canvas1{
-				position: absolute;
-			}
-			#canvasupper1{
-				position: absolute;
-				cursor: default;
-			}
-			.canvass{
-				position: absolute;
-			}
-		</style>
-	</head>
+<head>
+	<meta charset="utf-8">
+	<title>Table and chart by month</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<style>
+		#linechartcomparision,
+		#linechart,
+		#barchart,
+		#piechart,
+		#multibarchart {
+			position: relative;
+		}
+		
+		#canvas1 {
+			position: absolute;
+		}
+		
+		#canvasupper1 {
+			position: absolute;
+			cursor: default;
+		}
+		
+		.canvas {
+			position: absolute;
+		}
+	</style>
+</head>
 
 <body>
-
 	<div id="container" class="container">
 		<section class="row">
 			<div id="linechartcomparision" class="col-sm-6"></div>
@@ -43,17 +49,13 @@
 			<div id="" class="col-sm-6"></div>
 		</section>
 	</div>
-	
 	<!-- jQuery library -->
 	<script src="js/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<!--<script src="js/bootstrap.min.js"></script>-->
 	<script>
-		
 		//$('.container').html(prepSurface(1, 400, 300));
-		
 		//Prepare surface or canvas element with javascript
-		
 		/*what is required :- 
 		1. Class or ID for chart container.
 		2. Canvas container creation.
@@ -61,337 +63,554 @@
 		4. Chart variables and details.
 		5. Chart type from client side.
 		*/
-		
 		var charts = {
-			"container" : "linechartcomparision",
-			"chartnumber" : 1,
-			"type" : 'linechartcomparision',
-			"title" : {
-				"text" : "line chart Comparision"
-			},
-			"wid" : 500,
-			"hei" : 300,
-			"data" : [
-					{
-						"stroke" : "#ff0000",
-						"datapoints" : 
-							[
-								{"lable" : "lablename1", "y" : 100},
-								{"lable" : "lablename2", "y" : 90},
-								{"lable" : "lablename3", "y" : 45},
-								{"lable" : "lablename4", "y" : 52},
-								{"lable" : "lablename5", "y" : 72},
-								{"lable" : "lablename6", "y" : 85},
-								{"lable" : "lablename7", "y" : 95},
-								{"lable" : "lablename8", "y" : 150},
-								{"lable" : "lablename9", "y" : 77}
-							]						
-					},
-					{
-						"stroke" : "#00ff00",
-						"datapoints" : [
-								{"lable" : "lablearr1", "y" : 110},
-								{"lable" : "lablearr2", "y" : 30},
-								{"lable" : "lablearr3", "y" : 15},
-								{"lable" : "lablearr4", "y" : 92},
-								{"lable" : "lablearr5", "y" : 12},
-								{"lable" : "lablearr6", "y" : 150},
-								{"lable" : "lablearr7", "y" : 55},
-								{"lable" : "lablearr8", "y" : 200},
-								{"lable" : "lablearr9", "y" : 88}
+			"container": "linechartcomparision"
+			, "chartnumber": 1
+			, "type": 'linechartcomparision'
+			, "title": {
+				"text": "line chart Comparision"
+			}
+			, "wid": 500
+			, "hei": 300
+			, "data": [
+				{
+					"stroke": "#ff0000"
+					, "datapoints": [
+						{
+							"lable": "lablename1"
+							, "y": 100
+						}
+						, {
+							"lable": "lablename2"
+							, "y": 90
+						}
+						, {
+							"lable": "lablename3"
+							, "y": 45
+						}
+						, {
+							"lable": "lablename4"
+							, "y": 52
+						}
+						, {
+							"lable": "lablename5"
+							, "y": 72
+						}
+						, {
+							"lable": "lablename6"
+							, "y": 85
+						}
+						, {
+							"lable": "lablename7"
+							, "y": 95
+						}
+						, {
+							"lable": "lablename8"
+							, "y": 150
+						}
+						, {
+							"lable": "lablename9"
+							, "y": 77
+						}
+							]
+					}
+				, {
+					"stroke": "#00ff00"
+					, "datapoints": [
+						{
+							"lable": "lablearr1"
+							, "y": 110
+						}
+						, {
+							"lable": "lablearr2"
+							, "y": 30
+						}
+						, {
+							"lable": "lablearr3"
+							, "y": 15
+						}
+						, {
+							"lable": "lablearr4"
+							, "y": 92
+						}
+						, {
+							"lable": "lablearr5"
+							, "y": 12
+						}
+						, {
+							"lable": "lablearr6"
+							, "y": 150
+						}
+						, {
+							"lable": "lablearr7"
+							, "y": 55
+						}
+						, {
+							"lable": "lablearr8"
+							, "y": 200
+						}
+						, {
+							"lable": "lablearr9"
+							, "y": 88
+						}
 							]
 					}
 
 				]
 		}
-				
 		chartCalling(charts);
-		
 		var chartline = {
-			"container" : "linechart",
-			"chartnumber" : 2,
-			"type" : 'linechartcomparision',
-			"title" : {
-				"text" : "line Chart"
-			},
-			"wid" : 500,
-			"hei" : 300,
-			"data" : [
-					{
-						"stroke" : "#ff0000",
-						"datapoints" : 
-							[
-								{"lable" : "lablename1", "y" : 100},
-								{"lable" : "lablename2", "y" : 90},
-								{"lable" : "lablename3", "y" : 45},
-								{"lable" : "lablename4", "y" : 52},
-								{"lable" : "lablename5", "y" : 72},
-								{"lable" : "lablename6", "y" : 85},
-								{"lable" : "lablename7", "y" : 95},
-								{"lable" : "lablename8", "y" : 150},
-								{"lable" : "lablename9", "y" : 77}
-							]						
-					}
-
-				]
-		}
-				
-		chartCalling(chartline);
-		
-		var splinechart = {
-			"container" : "splinechart",
-			"chartnumber" : 7,
-			"type" : 'splinechart',
-			"title" : {
-				"text" : "Spline Chart"
-			},
-			"wid" : 500,
-			"hei" : 300,
-			"data" : [
-					{
-						"stroke" : "#ff0000",
-						"datapoints" : 
-							[
-								{"lable" : "lablename1", "y" : 100},
-								{"lable" : "lablename2", "y" : 90},
-								{"lable" : "lablename3", "y" : 45},
-								{"lable" : "lablename4", "y" : 52},
-								{"lable" : "lablename5", "y" : 72},
-								{"lable" : "lablename6", "y" : 85},
-								{"lable" : "lablename7", "y" : 95},
-								{"lable" : "lablename8", "y" : 150},
-								{"lable" : "lablename9", "y" : 77}
-							]						
-					}
-
-				]
-		}
-				
-		chartCalling(splinechart);
-		
-		var chartbar = {
-			"container" : "barchart",
-			"chartnumber" : 3,
-			"type" : 'barchart',
-			"title" : {
-				"text" : "Bar Chart"
-			},
-			"wid" : 500,
-			"hei" : 300,
-			"data" : [
-					{
-						"stroke" : "#ff0000",
-						"datapoints" : 
-							[
-								{"lable" : "lablename1", "y" : 100},
-								{"lable" : "lablename2", "y" : 90},
-								{"lable" : "lablename3", "y" : 45},
-								{"lable" : "lablename4", "y" : 52},
-								{"lable" : "lablename5", "y" : 72},
-								{"lable" : "lablename6", "y" : 85},
-								{"lable" : "lablename7", "y" : 95},
-								{"lable" : "lablename8", "y" : 150},
-								{"lable" : "lablename9", "y" : 77}
-							]						
-					}
-
-				]
-		}
-				
-		chartCalling(chartbar);
-		
-		var piechart = {
-			"container" : "piechart",
-			"chartnumber" : 4,
-			"type" : 'piechart',
-			"title" : {
-				"text" : "Pie Chart"
-			},
-			"wid" : 500,
-			"hei" : 300,
-			"data" : [
-					{
-						"stroke" : "#ff0000",
-						"datapoints" : 
-							[
-								{"lable" : "lablename1", "y" : 1200, "color" : "teal"},
-								{"lable" : "lablename2", "y" : 90, "color" : "#b84335"},
-								{"lable" : "lablename3", "y" : 45, "color" : "#fbbc05"},
-								{"lable" : "lablename4", "y" : 52, "color" : "#4285f4"},
-								{"lable" : "lablename5", "y" : 85, "color" : "#3a87ad"},
-								{"lable" : "lablename6", "y" : 60, "color" : "#34a853"},
-								{"lable" : "lablename7", "y" : 18, "color" : "#4285f4"},
-								{"lable" : "lablename8", "y" : 85, "color" : "#3a87ad"},
-								{"lable" : "lablename9", "y" : 60, "color" : "#34a853"}
-							]						
-					}
-
-				]
-		}
-				
-		chartCalling(piechart);
-		
-		var multilinebar = {
-			"container" : "multibarchart",
-			"chartnumber" : 5,
-			"type" : 'barchart',
-			"title" : {
-				"text" : "Multi Line Bar Chart"
-			},
-			"wid" : 500,
-			"hei" : 300,
-			"data" : [
-					{
-						"stroke" : "#ff0000",
-						"datapoints" : 
-							[
-								{"lable" : "lablename1", "y" : 100},
-								{"lable" : "lablename2", "y" : 90},
-								{"lable" : "lablename3", "y" : 45},
-								{"lable" : "lablename4", "y" : 52},
-								{"lable" : "lablename5", "y" : 72},
-								{"lable" : "lablename6", "y" : 85},
-								{"lable" : "lablename7", "y" : 95},
-								{"lable" : "lablename8", "y" : 150},
-								{"lable" : "lablename9", "y" : 77}
-							]						
-					},
-					{
-						"stroke" : "#00ff00",
-						"datapoints" : [
-								{"lable" : "lablearr1", "y" : 110},
-								{"lable" : "lablearr2", "y" : 30},
-								{"lable" : "lablearr3", "y" : 15},
-								{"lable" : "lablearr4", "y" : 92},
-								{"lable" : "lablearr5", "y" : 12},
-								{"lable" : "lablearr6", "y" : 150},
-								{"lable" : "lablearr7", "y" : 55},
-								{"lable" : "lablearr8", "y" : 200},
-								{"lable" : "lablearr9", "y" : 88}
+			"container": "linechart"
+			, "chartnumber": 2
+			, "type": 'linechartcomparision'
+			, "title": {
+				"text": "line Chart"
+			}
+			, "wid": 500
+			, "hei": 300
+			, "data": [
+				{
+					"stroke": "#ff0000"
+					, "datapoints": [
+						{
+							"lable": "lablename1"
+							, "y": 100
+						}
+						, {
+							"lable": "lablename2"
+							, "y": 90
+						}
+						, {
+							"lable": "lablename3"
+							, "y": 45
+						}
+						, {
+							"lable": "lablename4"
+							, "y": 52
+						}
+						, {
+							"lable": "lablename5"
+							, "y": 72
+						}
+						, {
+							"lable": "lablename6"
+							, "y": 85
+						}
+						, {
+							"lable": "lablename7"
+							, "y": 95
+						}
+						, {
+							"lable": "lablename8"
+							, "y": 150
+						}
+						, {
+							"lable": "lablename9"
+							, "y": 77
+						}
 							]
 					}
 
 				]
 		}
-				
-		chartCalling(multilinebar);
-		
-		var donut = {
-			"container" : "donutchart", /*Give exact id of you container div*/
-			"chartnumber" : 6, /*Never keep it same with other charts*/
-			"type" : 'donutchart', /*keep same names as instructed - donutchart, linechartcomparision, barchart, piechart*/
-			"title" : {
-				"text" : "Donut Chart"
-			},
-			"wid" : 500,
-			"hei" : 300,
-			"data" : [ /*Give as required data in given formate, syntax error with json will cause of error in charts*/
-					{
-						"stroke" : "#ff0000",
-						"datapoints" : 
-							[
-								{"lable" : "lablename1", "y" : 1200, "color" : "teal"},
-								{"lable" : "lablename2", "y" : 90, "color" : "#b84335"},
-								{"lable" : "lablename3", "y" : 45, "color" : "#fbbc05"},
-								{"lable" : "lablename4", "y" : 52, "color" : "#4285f4"},
-								{"lable" : "lablename5", "y" : 85, "color" : "#3a87ad"},
-								{"lable" : "lablename6", "y" : 60, "color" : "#34a853"}
-							]						
+		chartCalling(chartline);
+		var splinechart = {
+			"container": "splinechart"
+			, "chartnumber": 7
+			, "type": 'splinechart'
+			, "title": {
+				"text": "Spline Chart"
+			}
+			, "wid": 500
+			, "hei": 300
+			, "data": [
+				{
+					"stroke": "#ff0000"
+					, "datapoints": [
+						{
+							"lable": "lablename1"
+							, "y": 100
+						}
+						, {
+							"lable": "lablename2"
+							, "y": 90
+						}
+						, {
+							"lable": "lablename3"
+							, "y": 45
+						}
+						, {
+							"lable": "lablename4"
+							, "y": 52
+						}
+						, {
+							"lable": "lablename5"
+							, "y": 72
+						}
+						, {
+							"lable": "lablename6"
+							, "y": 85
+						}
+						, {
+							"lable": "lablename7"
+							, "y": 95
+						}
+						, {
+							"lable": "lablename8"
+							, "y": 150
+						}
+						, {
+							"lable": "lablename9"
+							, "y": 77
+						}
+							]
 					}
 
 				]
 		}
-				
+		chartCalling(splinechart);
+		var chartbar = {
+			"container": "barchart"
+			, "chartnumber": 3
+			, "type": 'barchart'
+			, "title": {
+				"text": "Bar Chart"
+			}
+			, "wid": 500
+			, "hei": 300
+			, "data": [
+				{
+					"stroke": "#ff0000"
+					, "datapoints": [
+						{
+							"lable": "lablename1"
+							, "y": 100
+						}
+						, {
+							"lable": "lablename2"
+							, "y": 90
+						}
+						, {
+							"lable": "lablename3"
+							, "y": 45
+						}
+						, {
+							"lable": "lablename4"
+							, "y": 52
+						}
+						, {
+							"lable": "lablename5"
+							, "y": 72
+						}
+						, {
+							"lable": "lablename6"
+							, "y": 85
+						}
+						, {
+							"lable": "lablename7"
+							, "y": 95
+						}
+						, {
+							"lable": "lablename8"
+							, "y": 150
+						}
+						, {
+							"lable": "lablename9"
+							, "y": 77
+						}
+							]
+					}
+
+				]
+		}
+		chartCalling(chartbar);
+		var piechart = {
+			"container": "piechart"
+			, "chartnumber": 4
+			, "type": 'piechart'
+			, "title": {
+				"text": "Pie Chart"
+			}
+			, "wid": 500
+			, "hei": 300
+			, "data": [
+				{
+					"stroke": "#ff0000"
+					, "datapoints": [
+						{
+							"lable": "lablename1"
+							, "y": 120
+							, "color": "teal"
+						}
+						, {
+							"lable": "lablename2"
+							, "y": 90
+							, "color": "#b84335"
+						}
+						, {
+							"lable": "lablename3"
+							, "y": 45
+							, "color": "#fbbc05"
+						}
+						, {
+							"lable": "lablename4"
+							, "y": 52
+							, "color": "#4285f4"
+						}
+						, {
+							"lable": "lablename5"
+							, "y": 85
+							, "color": "#3a87ad"
+						}
+						, {
+							"lable": "lablename6"
+							, "y": 60
+							, "color": "#34a853"
+						}
+						, {
+							"lable": "lablename7"
+							, "y": 18
+							, "color": "#4285f4"
+						}
+						, {
+							"lable": "lablename8"
+							, "y": 85
+							, "color": "#3a87ad"
+						}
+						, {
+							"lable": "lablename9"
+							, "y": 60
+							, "color": "#34a853"
+						}
+							]
+					}
+
+				]
+		}
+		chartCalling(piechart);
+		var multilinebar = {
+			"container": "multibarchart"
+			, "chartnumber": 5
+			, "type": 'barchart'
+			, "title": {
+				"text": "Multi Line Bar Chart"
+			}
+			, "wid": 500
+			, "hei": 300
+			, "data": [
+				{
+					"stroke": "#ff0000"
+					, "datapoints": [
+						{
+							"lable": "lablename1"
+							, "y": 100
+						}
+						, {
+							"lable": "lablename2"
+							, "y": 90
+						}
+						, {
+							"lable": "lablename3"
+							, "y": 45
+						}
+						, {
+							"lable": "lablename4"
+							, "y": 52
+						}
+						, {
+							"lable": "lablename5"
+							, "y": 72
+						}
+						, {
+							"lable": "lablename6"
+							, "y": 85
+						}
+						, {
+							"lable": "lablename7"
+							, "y": 95
+						}
+						, {
+							"lable": "lablename8"
+							, "y": 150
+						}
+						, {
+							"lable": "lablename9"
+							, "y": 77
+						}
+							]
+					}
+				, {
+					"stroke": "#00ff00"
+					, "datapoints": [
+						{
+							"lable": "lablearr1"
+							, "y": 110
+						}
+						, {
+							"lable": "lablearr2"
+							, "y": 30
+						}
+						, {
+							"lable": "lablearr3"
+							, "y": 15
+						}
+						, {
+							"lable": "lablearr4"
+							, "y": 92
+						}
+						, {
+							"lable": "lablearr5"
+							, "y": 12
+						}
+						, {
+							"lable": "lablearr6"
+							, "y": 150
+						}
+						, {
+							"lable": "lablearr7"
+							, "y": 55
+						}
+						, {
+							"lable": "lablearr8"
+							, "y": 200
+						}
+						, {
+							"lable": "lablearr9"
+							, "y": 88
+						}
+							]
+					}
+
+				]
+		}
+		chartCalling(multilinebar);
+		var donut = {
+			"container": "donutchart"
+			, /*Give exact id of you container div*/ "chartnumber": 6
+			, /*Never keep it same with other charts*/ "type": 'donutchart'
+			, /*keep same names as instructed - donutchart, linechartcomparision, barchart, piechart*/ "title": {
+				"text": "Donut Chart"
+			}
+			, "wid": 500
+			, "hei": 300
+			, "data": [ /*Give as required data in given formate, syntax error with json will cause of error in charts*/
+				{
+					"stroke": "#ff0000"
+					, "datapoints": [
+						{
+							"lable": "lablename1"
+							, "y": 1200
+							, "color": "teal"
+						}
+						, {
+							"lable": "lablename2"
+							, "y": 90
+							, "color": "#b84335"
+						}
+						, {
+							"lable": "lablename3"
+							, "y": 45
+							, "color": "#fbbc05"
+						}
+						, {
+							"lable": "lablename4"
+							, "y": 52
+							, "color": "#4285f4"
+						}
+						, {
+							"lable": "lablename5"
+							, "y": 85
+							, "color": "#3a87ad"
+						}
+						, {
+							"lable": "lablename6"
+							, "y": 60
+							, "color": "#34a853"
+						}
+							]
+					}
+
+				]
+		}
 		chartCalling(donut);
-		
-		function chartCalling(chart){
-			
+
+		function chartCalling(chart) {
 			var charttype = chart.type;
 			//console.log(charttype);
-			if(charttype == 'linechartcomparision'){
-				
-				$('#'+chart.container).css({'height': chart.hei+100});
-				$('#'+chart.container).html('<h2>'+chart.title.text+'</h2>');
-				
+			if (charttype == 'linechartcomparision') {
+				$('#' + chart.container).css({
+					'height': chart.hei + 100
+				});
+				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
 				var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
 				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
-				
-				var canvas = 'canvas'+chart.chartnumber;
-				
+				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-				for(var i = 0; i<chart.data.length; i++){
-					for(var j = 0; j < chart.data[i].datapoints.length; j++){
-						if(chart.data[i].datapoints[j].y < maxdata[0]){
+				for (var i = 0; i < chart.data.length; i++) {
+					for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+						if (chart.data[i].datapoints[j].y < maxdata[0]) {
 							maxdata[0] = chart.data[i].datapoints[j].y;
 						}
-						if(chart.data[i].datapoints[j].y > maxdata[1]){
+						if (chart.data[i].datapoints[j].y > maxdata[1]) {
 							maxdata[1] = chart.data[i].datapoints[j].y;
 						}
 					}
 				}
 				//console.log(maxdata);
 				var linecord = [];
-				for(var i = 0; i<chart.data.length; i++){
+				for (var i = 0; i < chart.data.length; i++) {
 					drawGraphicLinear(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
 				}
 				//console.log(linecord);
-				
 				var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
 				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
-			
-			if(charttype == 'splinechart'){
-				
-				$('#'+chart.container).css({'height': chart.hei+100});
-				$('#'+chart.container).html('<h2>'+chart.title.text+'</h2>');
-				
+			if (charttype == 'splinechart') {
+				$('#' + chart.container).css({
+					'height': chart.hei + 100
+				});
+				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
 				var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
 				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
-				
-				var canvas = 'canvas'+chart.chartnumber;
-				
+				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-				for(var i = 0; i<chart.data.length; i++){
-					for(var j = 0; j < chart.data[i].datapoints.length; j++){
-						if(chart.data[i].datapoints[j].y < maxdata[0]){
+				for (var i = 0; i < chart.data.length; i++) {
+					for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+						if (chart.data[i].datapoints[j].y < maxdata[0]) {
 							maxdata[0] = chart.data[i].datapoints[j].y;
 						}
-						if(chart.data[i].datapoints[j].y > maxdata[1]){
+						if (chart.data[i].datapoints[j].y > maxdata[1]) {
 							maxdata[1] = chart.data[i].datapoints[j].y;
 						}
 					}
 				}
 				//console.log(maxdata);
 				var linecord = [];
-				for(var i = 0; i<chart.data.length; i++){
+				for (var i = 0; i < chart.data.length; i++) {
 					drawsplinechart(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
 				}
 				//console.log(linecord);
-				
 				var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
 				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
-			
-			if(charttype == 'barchart'){
-				
-				$('#'+chart.container).css({'height': chart.hei+100});
-				$('#'+chart.container).html('<h2>'+chart.title.text+'</h2>');
-								
+			if (charttype == 'barchart') {
+				$('#' + chart.container).css({
+					'height': chart.hei + 100
+				});
+				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
 				var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
 				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
-				
-				var canvas = 'canvas'+chart.chartnumber;
-				
+				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-				for(var i = 0; i<chart.data.length; i++){
-					for(var j = 0; j < chart.data[i].datapoints.length; j++){
-						if(chart.data[i].datapoints[j].y < maxdata[0]){
+				for (var i = 0; i < chart.data.length; i++) {
+					for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+						if (chart.data[i].datapoints[j].y < maxdata[0]) {
 							maxdata[0] = chart.data[i].datapoints[j].y;
 						}
-						if(chart.data[i].datapoints[j].y > maxdata[1]){
+						if (chart.data[i].datapoints[j].y > maxdata[1]) {
 							maxdata[1] = chart.data[i].datapoints[j].y;
 						}
 					}
@@ -400,66 +619,59 @@
 				var linecord = [];
 				var nextcurve = 0;
 				var nextcurve = 0;
-				for(var i = 0; i<chart.data.length; i++){
+				for (var i = 0; i < chart.data.length; i++) {
 					drawBar(canvas, ctx, 10, chart.data[i], maxdata, nextcurve, chart.data[i].stroke, linecord);
-					nextcurve +=15;
+					nextcurve += 15;
 				}
 				//console.log(linecord);
-				
 				var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
 				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
-			
-			if(charttype == 'piechart'){
-				
-				$('#'+chart.container).css({'height': chart.hei+100});
-				$('#'+chart.container).html('<h2>'+chart.title.text+'</h2>');
-				
-				var ctx = preparePlot(chart.chartnumber,  chart.hei, chart.hei, chart.container);
+			if (charttype == 'piechart') {
+				$('#' + chart.container).css({
+					'height': chart.hei + 100
+				});
+				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
+				var ctx = preparePlot(chart.chartnumber, chart.hei, chart.hei, chart.container);
 				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
-				
-				var canvas = 'canvas'+chart.chartnumber;
-				
+				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-				for(var i = 0; i<chart.data.length; i++){
-					for(var j = 0; j < chart.data[i].datapoints.length; j++){
-						if(chart.data[i].datapoints[j].y < maxdata[0]){
+				for (var i = 0; i < chart.data.length; i++) {
+					for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+						if (chart.data[i].datapoints[j].y < maxdata[0]) {
 							maxdata[0] = chart.data[i].datapoints[j].y;
 						}
-						if(chart.data[i].datapoints[j].y > maxdata[1]){
+						if (chart.data[i].datapoints[j].y > maxdata[1]) {
 							maxdata[1] = chart.data[i].datapoints[j].y;
 						}
 					}
 				}
 				//console.log(maxdata);
 				var linecord = [];
-				for(var i = 0; i<chart.data.length; i++){
+				for (var i = 0; i < chart.data.length; i++) {
 					drawPie(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
 				}
 				//console.log(linecord);
-				
-				var ctx = preparePlotUpper(chart.chartnumber,  chart.hei, chart.hei, chart.container);
+				var ctx = preparePlotUpper(chart.chartnumber, chart.hei, chart.hei, chart.container);
 				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
-			
-			if(charttype == 'donutchart'){
-				$('#'+chart.container).css({'height': chart.hei+100});
-				$('#'+chart.container).html('<h2>'+chart.title.text+'</h2>');
-				
-				var ctx = preparePlot(chart.chartnumber,  chart.hei, chart.hei, chart.container);
+			if (charttype == 'donutchart') {
+				$('#' + chart.container).css({
+					'height': chart.hei + 100
+				});
+				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
+				var ctx = preparePlot(chart.chartnumber, chart.hei, chart.hei, chart.container);
 				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
-				
-				var canvas = 'canvas'+chart.chartnumber;
-				
+				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-				for(var i = 0; i<chart.data.length; i++){
-					for(var j = 0; j < chart.data[i].datapoints.length; j++){
-						if(chart.data[i].datapoints[j].y < maxdata[0]){
+				for (var i = 0; i < chart.data.length; i++) {
+					for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+						if (chart.data[i].datapoints[j].y < maxdata[0]) {
 							maxdata[0] = chart.data[i].datapoints[j].y;
 						}
-						if(chart.data[i].datapoints[j].y > maxdata[1]){
+						if (chart.data[i].datapoints[j].y > maxdata[1]) {
 							maxdata[1] = chart.data[i].datapoints[j].y;
 						}
 					}
@@ -467,237 +679,237 @@
 				//console.log(maxdata);
 				var linecord = [];
 				var linewidth = 50;
-				for(var i = 0; i<chart.data.length; i++){
+				for (var i = 0; i < chart.data.length; i++) {
 					drawDonut(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
 				}
 				//console.log(linecord);
-				
-				var ctx = preparePlotUpper(chart.chartnumber,  chart.hei, chart.hei, chart.container);
+				var ctx = preparePlotUpper(chart.chartnumber, chart.hei, chart.hei, chart.container);
 				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
-			
-			if(charttype == 'barcomparisionchart'){
-				
-			}
-			
+			if (charttype == 'barcomparisionchart') {}
 		}
-		
-		function prepSurface(nr, width, height, container){
+
+		function prepSurface(nr, width, height, container) {
 			//var container = document.getElementById(container);
-			$('#'+container).append('<canvas id="canvas'+nr+'" class="" style="position:absolute;" width="'+width+'" height="'+height+'"></canvas>');
+			$('#' + container).append('<canvas id="canvas' + nr + '" class="canvas" style="position:absolute;" width="' + width + '" height="' + height + '"></canvas>');
 			//document.write();
 		}
-		
-		function prepUI(nr){
-			var canvas = document.getElementById('canvas'+nr);
+
+		function prepUI(nr) {
+			var canvas = document.getElementById('canvas' + nr);
 			var ctx = canvas.getContext('2d');
 			ctx.font = '12px helvetica';
 			ctx.lineWidth = 1;
 			return ctx;
 		}
-		
-		function preparePlot(nr, sizex, sizey, container){
+
+		function preparePlot(nr, sizex, sizey, container) {
 			prepSurface(nr, sizex, sizey, container);
 			var canvasContext = prepUI(nr);
 			return canvasContext;
 		}
-		
-		function prepSurfaceupper(nr, width, height, container){
+
+		function prepSurfaceupper(nr, width, height, container) {
 			var container = document.getElementById(container);
-			container.insertAdjacentHTML('beforeend', '<canvas id="canvasupper'+nr+'" class="" style="position:absolute;" width="'+width+'" height="'+height+'"></canvas> 		<div class="canvasjs-chart-tooltip" style="position: absolute; height: auto; box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 2px; z-index: 1000; display: none; border-radius: 5px; transition: left 0.2s ease-out, bottom 0.2s ease-out;"><div style="width: auto; height: auto; min-width: 50px; margin: 0px; padding: 5px; font-family: Calibri, Arial, Georgia, serif; font-weight: normal; font-style: italic; font-size: 14px; color: rgb(0, 0, 0); text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px; text-align: left; border: 2px solid rgb(127, 96, 132); text-indent: 0px; white-space: nowrap; border-radius: 5px; -webkit-user-select: none; background: rgba(255, 255, 255, 0.901961);"><span style="color:#7F6084;"></span>3,125,844</div></div>');
+			container.insertAdjacentHTML('beforeend', '<canvas id="canvasupper' + nr + '" class="canvas" style="position:absolute;" width="' + width + '" height="' + height + '"></canvas> 		<div class="canvasjs-chart-tooltip" style="position: absolute; height: auto; box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 2px; z-index: 1000; display: none; border-radius: 5px; transition: left 0.2s ease-out, bottom 0.2s ease-out;"><div style="width: auto; height: auto; min-width: 50px; margin: 0px; padding: 5px; font-family: Calibri, Arial, Georgia, serif; font-weight: normal; font-style: italic; font-size: 14px; color: rgb(0, 0, 0); text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px; text-align: left; border: 2px solid rgb(127, 96, 132); text-indent: 0px; white-space: nowrap; border-radius: 5px; -webkit-user-select: none; background: rgba(255, 255, 255, 0.901961);"><span style="color:#7F6084;"></span>3,125,844</div></div>');
 			//container.innerHTML = '<canvas id="canvasupper'+nr+'" width="'+width+'" height="'+height+'"></canvas>'
 			//document.write();
 		}
-		
-		function prepUIUpper(nr){
-			var canvas = document.getElementById('canvasupper'+nr);
+
+		function prepUIUpper(nr) {
+			var canvas = document.getElementById('canvasupper' + nr);
 			var ctx = canvas.getContext('2d');
 			ctx.font = '12px helvetica';
 			ctx.lineWidth = 1;
 			return ctx;
 		}
-		
-		function preparePlotUpper(nr, sizex, sizey, container){
+
+		function preparePlotUpper(nr, sizex, sizey, container) {
 			prepSurfaceupper(nr, sizex, sizey, container);
 			var canvasContext = prepUIUpper(nr);
 			return canvasContext;
 		}
-		
-		function drawGrid(nr, verticanNr, ctx, data){
-			var canvas = document.getElementById('canvas'+nr);
+
+		function drawGrid(nr, verticanNr, ctx, data) {
+			var canvas = document.getElementById('canvas' + nr);
 			var hei = canvas.height;
 			var wid = canvas.width;
 			ctx.strokeStyle = 'rgba(0,0,0,0.2)';
-			
-			var spacingVertical = canvas.height/verticanNr;
-			var spacingHorizontal = canvas.width/data.length;
+			var spacingVertical = canvas.height / verticanNr;
+			var spacingHorizontal = canvas.width / data.length;
 			//console.log(spacingVertical);
 			ctx.beginPath();
-			for(var i = 0; i<data.length; i++){
-				ctx.moveTo(i*spacingHorizontal, 1);
-				ctx.lineTo(i*spacingHorizontal, hei);
+			for (var i = 0; i < data.length; i++) {
+				ctx.moveTo(i * spacingHorizontal, 1);
+				ctx.lineTo(i * spacingHorizontal, hei);
 			}
-			
-			for(var i = 0; i<verticanNr; i++){
-				ctx.moveTo(1, i*spacingVertical);
-				ctx.lineTo(wid, i*spacingVertical);
+			for (var i = 0; i < verticanNr; i++) {
+				ctx.moveTo(1, i * spacingVertical);
+				ctx.lineTo(wid, i * spacingVertical);
 			}
 			ctx.closePath();
 			ctx.stroke();
 		}
-				
-		function drawGraphicLinear(canvas, ctx, verticalNr, data, range, stroke, linecord){
+
+		function drawGraphicLinear(canvas, ctx, verticalNr, data, range, stroke, linecord) {
 			var canvas = document.getElementById(canvas);
-			var spacingVertical = canvas.height/verticalNr;
-			var spacingHorizontal = canvas.width/data.datapoints.length;
-			var hei = canvas.height-3*spacingVertical;
-			
-			var totalRange = range[1]-range[0];
-			var verticalCoefficient = hei/totalRange;
+			var spacingVertical = canvas.height / verticalNr;
+			var spacingHorizontal = canvas.width / data.datapoints.length;
+			var hei = canvas.height - 3 * spacingVertical;
+			var totalRange = range[1] - range[0];
+			var verticalCoefficient = hei / totalRange;
 			var mov;
-			
 			ctx.strokeStyle = stroke;
 			ctx.beginPath();
-			ctx.moveTo(0, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical);
-			
-			for(var i = 0; i<data.datapoints.length;i++){
-				ctx.lineTo(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
-				/*if(data.datapoints[i].y<data.datapoints[i+1].y && data.datapoints[i-1].y>data.datapoints[i].y){
-					mov = 15;
+			ctx.moveTo(0, hei - (data.datapoints[0].y - range[0]) * verticalCoefficient + spacingVertical);
+			for (var i = 0; i < data.datapoints.length; i++) {
+				ctx.lineTo(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
+				(function () {
+					ctx.arc(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical, 3, 0, 2 * Math.PI)
+						//ctx.fill();
+				})()
+				var newobj = {
+					x: i * spacingHorizontal
+					, y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical
+					, lable: data.datapoints[i].lable
+				};
+				//console.log(newobj);
+				linecord.push(newobj);
+				ctx.fillText(data.datapoints[i].y, i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
+			}
+			ctx.stroke();
+			ctx.closePath();
+			return linecord;
+		}
+
+		function drawsplinechart(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+			var canvas = document.getElementById(canvas);
+			var spacingVertical = canvas.height / verticalNr;
+			var spacingHorizontal = canvas.width / data.datapoints.length;
+			var hei = canvas.height - 3 * spacingVertical;
+			var totalRange = range[1] - range[0];
+			var verticalCoefficient = hei / totalRange;
+			var mov;
+			ctx.strokeStyle = stroke;
+			ctx.beginPath();
+			for (var i = 0; i < data.datapoints.length - 1; i++) {
+				ctx.moveTo(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
+				//console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
+				/*if(i == 0){
+					if(data.datapoints[i].y < data.datapoints[i+1].y ){
+						var anglepoint = 10;
+						ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+					}else{
+						var anglepoint = -10;
+						ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+					}
+				}else if(i == data.datapoints.length){
+					if(data.datapoints[i].y < data.datapoints[i+1].y ){
+						var anglepoint = 10;
+						ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+					}else{
+						var anglepoint = -10;
+						ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+					}
 				}else{
-					mov = -10;
+					if(data.datapoints[i].y < data.datapoints[i+1].y ){
+						var anglepoint = 10;
+						ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+					}else{
+						var anglepoint = -10;
+						ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+					}
 				}*/
-				
-				var newobj = {x : i*spacingHorizontal, y : hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical, lable : data.datapoints[i].lable };
+				ctx.bezierCurveTo(i * spacingHorizontal + 10, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical + 15, (i + 1) * spacingHorizontal - 10, hei - (data.datapoints[i + 1].y - range[0]) * verticalCoefficient + spacingVertical - 15, (i + 1) * spacingHorizontal, hei - (data.datapoints[i + 1].y - range[0]) * verticalCoefficient + spacingVertical);
+				//console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + 15,  (i + 1) * spacingHorizontal - 10, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - 15, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+				var newobj = {
+					x: i * spacingHorizontal
+					, y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical
+					, lable: data.datapoints[i].lable
+				};
 				//console.log(newobj);
 				linecord.push(newobj);
-				
-				ctx.fillText(data.datapoints[i].y, i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
+				ctx.fillText(data.datapoints[i].y, i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
 			}
-
 			ctx.stroke();
 			ctx.closePath();
 			return linecord;
 		}
-		
-		function drawsplinechart(canvas, ctx, verticalNr, data, range, stroke, linecord){
-			var canvas = document.getElementById(canvas);
-			var spacingVertical = canvas.height/verticalNr;
-			var spacingHorizontal = canvas.width/data.datapoints.length;
-			var hei = canvas.height-3*spacingVertical;
-			
-			var totalRange = range[1]-range[0];
-			var verticalCoefficient = hei/totalRange;
-			var mov;
-			
-			ctx.strokeStyle = stroke;
-			ctx.beginPath();
-			//ctx.moveTo(0, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical);
-			
-				/*ctx.moveTo(1*spacingHorizontal, hei-(data.datapoints[1].y-range[0])*verticalCoefficient+spacingVertical);
-				console.log(0*spacingHorizontal, hei-(data.datapoints[1].y-range[1])*verticalCoefficient+spacingVertical)
-				ctx.bezierCurveTo(0*spacingHorizontal, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical + 5, 30, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical - 5, 30, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical);
-				console.log(0*spacingHorizontal, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical + 5, spacingHorizontal, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical - 5, 0 * spacingHorizontal, hei-(data.datapoints[0].y-range[0])*verticalCoefficient+spacingVertical)*/
-			for(var i = 0; i<data.datapoints.length-1;i++){
-				
-				
-				ctx.moveTo(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
-				console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
-				
-				ctx.bezierCurveTo(i*spacingHorizontal + 10, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + 15,  (i + 1) * spacingHorizontal - 10, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - 15, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
-				
-				console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + 15,  (i + 1) * spacingHorizontal - 10, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - 15, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
-				
-				var newobj = {x : i*spacingHorizontal, y : hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical, lable : data.datapoints[i].lable };
-				//console.log(newobj);
-				linecord.push(newobj);
-				
-				ctx.fillText(data.datapoints[i].y, i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
-			}
 
-			ctx.stroke();
-			ctx.closePath();
-			return linecord;
-		}
-		
-		function drawupercanvas(nr, ctx, width, height, linecord, container, charttype){
+		function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) {
 			//var canvasid = document.getElementById('canvasupper'+nr);
-			
-			if(charttype == 'linechartcomparision'){
-				for(var i = 0; i<linecord.length; i++){
+			if (charttype == 'linechartcomparision') {
+				for (var i = 0; i < linecord.length; i++) {
 					//console.log(linecord[i]);
 					ctx.beginPath();
-					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
-					ctx.stroke();
+					ctx.arc(linecord[i].x, linecord[i].y, 4, 0, 2 * Math.PI);
+					//ctx.stroke();
 				}
-
-				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
-
-					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
+					ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+					var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
 					//console.log(mousePos);
 					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-
-					for(var i = 0; i<linecord.length; i++){
-
+					for (var i = 0; i < linecord.length; i++) {
 						ctx.beginPath();
-						ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
+						ctx.arc(linecord[i].x, linecord[i].y, 4, 0, 2 * Math.PI);
 						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].y+5});
-							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							ctx.lineWidth = 4;
+							ctx.strokeStyle = 'rgba(0,0,0,.5)';
+							ctx.stroke();
+							//ctx.fill();
+							$('#' + container + ' .canvasjs-chart-tooltip').css({
+								'display': 'block'
+								, 'left': linecord[i].x
+								, 'top': linecord[i].y + 5
+							});
+							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							break;
+						}
+						else {
+							ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+							//$('#'+container+' .canvasjs-chart-tooltip').css({'display':'none'});
 						}
 					}
 				}, false);
 			}
-			
-			if(charttype == 'barchart'){
-				/*for(var i = 0; i<linecord.length; i++){
-					//console.log(linecord[i]);
-					ctx.beginPath();
-					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
-					ctx.stroke();
-				}*/
-
-				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
-
-					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+			if (charttype == 'barchart') {
+				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
+					ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+					var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
 					//console.log(mousePos);
 					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-//					/console.log(message);
-					for(var i = 0; i<linecord.length; i++){
-
+					//					/console.log(message);
+					for (var i = 0; i < linecord.length; i++) {
 						ctx.beginPath();
 						ctx.rect(linecord[i].x, linecord[i].y, linecord[i].wid, linecord[i].hei);
-						
 						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-							ctx.lineWidth=.5;
+							ctx.lineWidth = .5;
+							ctx.fillStyle = 'rgba(0,0,0,.3)'
+							ctx.fill();
 							ctx.stroke();
-							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].y+5});
-							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							$('#' + container + ' .canvasjs-chart-tooltip').css({
+								'display': 'block'
+								, 'left': linecord[i].x
+								, 'top': linecord[i].y + 5
+							});
+							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							break;
 						}
-						/*else{
-							setTimeout(function(){ 
-								ctx.clearRect(0, 0, document.getElementById('canvasupper'+nr).width, document.getElementById('canvasupper'+nr).height);
-								$('#'+container+' .canvasjs-chart-tooltip').css({'display':'none'});
-							}, 4000);
-						}*/
-						/*var distance=Math.sqrt(Math.pow(mousePos.x - linecord[i].x, 2) + Math.pow(mousePos.y - linecord[i].y, 2));
-						if( distance <= 5){
-							//console.log('#'+container+' .canvasjs-chart-tooltip');
-
-						}*/
+						else {
+							ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+							//$('#'+container+' .canvasjs-chart-tooltip').css({'display':'none'});
+						}
 					}
 				}, false);
 			}
-			
-			if(charttype == 'piechart'){
-				
-				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
-					
-					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+			if (charttype == 'piechart') {
+				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
+					ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+					var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
 					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
 					//console.log(message);
-					for(var i = 0; i<linecord.length; i++){
-
+					for (var i = 0; i < linecord.length; i++) {
 						ctx.beginPath();
 						ctx.lineTo(linecord[i].x, linecord[i].x);
 						ctx.arc(linecord[i].x, linecord[i].x, linecord[i].x, linecord[i].startangle, linecord[i].lastangle, false);
@@ -705,30 +917,35 @@
 						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
 							/*ctx.lineWidth=1;
 							ctx.stroke();*/
-							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': mousePos.x, 'top' : mousePos.y+5});
-							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
-						}else{
-							/*ctx.clearRect(0, 0, document.getElementById('canvasupper'+nr).width, document.getElementById('canvasupper'+nr).height);*/
-							
+							ctx.fillStyle = 'rgba(0,0,0,.3)'
+							ctx.fill();
+							$('#' + container + ' .canvasjs-chart-tooltip').css({
+								'display': 'block'
+								, 'left': mousePos.x
+								, 'top': mousePos.y + 5
+							});
+							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							break;
+						}
+						else {
+							ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+							//$('#'+container+' .canvasjs-chart-tooltip').css({'display':'none'});
 							/*ctx.fillStyle = 'rgba(255,255,255,0)';
 							ctx.strokeStyle="#FF0000";
 							ctx.lineWidth=0;*/
 						}
 						//
-						
 					}
-				
 				}, false);
 			}
-			
-			if(charttype == 'donutchart'){
-				
-				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
+			if (charttype == 'donutchart') {
+				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
+					ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
 					var linewidth = 50;
-					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+					var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
 					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
 					//console.log(message);
-					for(var i = 0; i<linecord.length; i++){
+					for (var i = 0; i < linecord.length; i++) {
 						ctx.lineWidth = 70;
 						ctx.beginPath();
 						//ctx.lineTo(linecord[i].x, linecord[i].x);
@@ -736,121 +953,116 @@
 						//ctx.lineTo(linecord[i].x, linecord[i].x);
 						if (ctx.isPointInStroke(mousePos.x, mousePos.y)) {
 							/*ctx.lineWidth=1;*/
-							//ctx.stroke();
-							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': mousePos.x, 'top' : mousePos.y+5});
-							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
-						}else{
-							/*ctx.clearRect(0, 0, document.getElementById('canvasupper'+nr).width, document.getElementById('canvasupper'+nr).height);*/
-							
-							/*ctx.fillStyle = 'rgba(255,255,255,0)';
-							ctx.strokeStyle="#FF0000";
-							ctx.lineWidth=0;*/
+							ctx.strokeStyle = "rgba(0,0,0,0.2)";
+							ctx.stroke();
+							$('#' + container + ' .canvasjs-chart-tooltip').css({
+								'display': 'block'
+								, 'left': mousePos.x
+								, 'top': mousePos.y + 5
+							});
+							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							break;
 						}
-						//
-						
+						if (!(ctx.isPointInStroke(mousePos.x, mousePos.y))) {
+							ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+						}
 					}
-				
 				}, false);
 			}
-			
-			if(charttype == 'splinechart'){
-				
-				for(var i = 0; i<linecord.length; i++){
+			if (charttype == 'splinechart') {
+				for (var i = 0; i < linecord.length; i++) {
 					//console.log(linecord[i]);
 					ctx.beginPath();
-					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
+					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2 * Math.PI);
 					ctx.stroke();
 				}
-
-				document.getElementById('canvasupper'+nr).addEventListener('mousemove', function(evt) {
-
-					var mousePos = getMousePos(document.getElementById('canvasupper'+nr), evt);
+				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
+					var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
 					//console.log(mousePos);
 					var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-
-					for(var i = 0; i<linecord.length; i++){
-
+					for (var i = 0; i < linecord.length; i++) {
 						ctx.beginPath();
-						ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2*Math.PI);
+						ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2 * Math.PI);
 						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-							$('#'+container+' .canvasjs-chart-tooltip').css({'display':'block','left': linecord[i].x, 'top' : linecord[i].y+5});
-							$('#'+container+' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							$('#' + container + ' .canvasjs-chart-tooltip').css({
+								'display': 'block'
+								, 'left': linecord[i].x
+								, 'top': linecord[i].y + 5
+							});
+							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
 						}
 					}
 				}, false);
 			}
-			
 		}
-		
-		function drawBar(canvas, ctx, verticalNr, data, range, curx, stroke, linecord){
-			var canvas = document.getElementById(canvas);
-			var spacingVertical = canvas.height/verticalNr;
-			var spacingHorizontal = canvas.width/data.datapoints.length;
-			//console.log(spacingHorizontal);
-			var hei = canvas.height-spacingVertical;
-			var width = 15;
 
+		function drawBar(canvas, ctx, verticalNr, data, range, curx, stroke, linecord) {
+			var canvas = document.getElementById(canvas);
+			var spacingVertical = canvas.height / verticalNr;
+			var spacingHorizontal = canvas.width / data.datapoints.length;
+			//console.log(spacingHorizontal);
+			var hei = canvas.height - spacingVertical;
+			var width = 15;
 			ctx.beginPath();
 			ctx.strokeStyle = stroke;
 			//ctx.moveTo(0, hei-(data[0]-range[0])*verticalCoefficient+spacingVertical);
-			
-			for(var i = 0; i<data.datapoints.length;i++){
+			for (var i = 0; i < data.datapoints.length; i++) {
 				ctx.fillStyle = stroke;
-				var h = (data.datapoints[i].y/range[1])*hei;
-
+				var h = (data.datapoints[i].y / range[1]) * hei;
 				ctx.fillRect(curx, hei - h, width, h);
-				
-				var newobj = {x : curx, y : hei - h,  wid : width, hei : h, lable : data.datapoints[i].lable};
+				var newobj = {
+					x: curx
+					, y: hei - h
+					, wid: width
+					, hei: h
+					, lable: data.datapoints[i].lable
+				};
 				//console.log(newobj);
 				linecord.push(newobj);
-				
 				ctx.fillStyle = "#000";
-				ctx.fillText(data.datapoints[i].y, curx, hei-h  );
-				
-				curx +=  spacingHorizontal;
+				ctx.fillText(data.datapoints[i].y, curx, hei - h);
+				curx += spacingHorizontal;
 			}
 			ctx.stroke();
 			ctx.closePath();
 			return linecord;
 		}
-		
-		function drawPie(canvas, ctx, verticalNr, data, range, stroke, linecord){
+
+		function drawPie(canvas, ctx, verticalNr, data, range, stroke, linecord) {
 			var canvas = document.getElementById(canvas);
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			var lastend = 0;
 			var myTotal = 0; // Automatically calculated so don't touch
 			var radius = canvas.height / 2;
-			
 			for (var e = 0; e < data.datapoints.length; e++) {
-				myTotal +=data.datapoints[e].y;
+				myTotal += data.datapoints[e].y;
 			}
 			for (var i = 0; i < data.datapoints.length; i++) {
 				ctx.fillStyle = data.datapoints[i].color;
 				ctx.beginPath();
 				ctx.moveTo(canvas.width / 2, canvas.height / 2);
-				
 				ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
 				//console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
 				ctx.lineTo(canvas.width / 2, canvas.height / 2);
-				
-				var newobj = {x : canvas.width / 2, startangle : lastend, lastangle : lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)),  lable : data.datapoints[i].lable };
+				var newobj = {
+					x: canvas.width / 2
+					, startangle: lastend
+					, lastangle: lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal))
+					, lable: data.datapoints[i].lable
+				};
 				//console.log(newobj);
 				linecord.push(newobj);
-				
 				lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
-				
 				//console.log(lastend);
-				ctx.fill();				
+				ctx.fill();
 			}
-			
 			/* Draw piechart number values */
 			var angle = 0;
 			var x = Math.floor(canvas.width / 2);
 			var y = Math.floor(canvas.height / 2);
 			ctx.fillStyle = "#fff";
-			ctx.font = radius*0.10 + "px arial";
-			ctx.font = radius*0.08 + "px arial";
-			
+			ctx.font = radius * 0.10 + "px arial";
+			ctx.font = radius * 0.08 + "px arial";
 			/*for(i = 0; i< data.datapoints.length; i++){
 				ctx.translate(x, y);
    			ctx.rotate(angle);
@@ -858,21 +1070,19 @@
 				ctx.fillText(data.datapoints[i].y.toString(), x + radius/1.3, y);
 				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
 			}*/
-			
-			for(i = 0; i< data.datapoints.length; i++){
+			for (i = 0; i < data.datapoints.length; i++) {
 				anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
-				var anglemiddle =(anglenew - angle)/2;
+				var anglemiddle = (anglenew - angle) / 2;
 				ctx.translate(x, y);
-   			ctx.rotate(angle + anglemiddle);
+				ctx.rotate(angle + anglemiddle);
 				ctx.translate(-x, -y);
-				ctx.fillText(data.datapoints[i].y.toString(), x + radius/1.3, y);
+				ctx.fillText(data.datapoints[i].y.toString(), x + radius / 1.3, y);
 				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
 			}
-			
 			return linecord;
 		}
-		
-		function drawDonut(canvas, ctx, verticalNr, data, range, stroke, linecord){
+
+		function drawDonut(canvas, ctx, verticalNr, data, range, stroke, linecord) {
 			var canvas = document.getElementById(canvas);
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			var linewidth = 50;
@@ -880,51 +1090,46 @@
 			var lastend = 0;
 			var myTotal = 0; // Automatically calculated so don't touch
 			var radius = canvas.height / 2 - linewidth;
-			
 			for (var e = 0; e < data.datapoints.length; e++) {
-				myTotal +=data.datapoints[e].y;
+				myTotal += data.datapoints[e].y;
 			}
 			for (var i = 0; i < data.datapoints.length; i++) {
 				ctx.strokeStyle = data.datapoints[i].color;
-				
 				ctx.beginPath();
 				//ctx.moveTo(canvas.width / 2, canvas.height / 2);
-				
 				ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
 				//console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
 				//ctx.lineTo(canvas.width / 2, canvas.height / 2);
-				
-				var newobj = {x : canvas.width / 2, startangle : lastend, lastangle : lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)),  lable : data.datapoints[i].lable };
+				var newobj = {
+					x: canvas.width / 2
+					, startangle: lastend
+					, lastangle: lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal))
+					, lable: data.datapoints[i].lable
+				};
 				//console.log(newobj);
 				linecord.push(newobj);
-				
 				lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
-				
 				//console.log(lastend);
 				//ctx.fill();				
-				ctx.stroke();				
+				ctx.stroke();
 			}
-			
 			/* Draw piechart number values */
 			var angle = 0;
 			var x = Math.floor(canvas.width / 2);
 			var y = Math.floor(canvas.height / 2);
 			ctx.fillStyle = "#fff";
-			ctx.font = radius*0.12 + "px arial";
-			
-			for(i = 0; i< data.datapoints.length; i++){
+			ctx.font = radius * 0.12 + "px arial";
+			for (i = 0; i < data.datapoints.length; i++) {
 				anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
-				var anglemiddle =(anglenew - angle)/2;
+				var anglemiddle = (anglenew - angle) / 2;
 				ctx.translate(x, y);
-   			ctx.rotate(angle + anglemiddle);
+				ctx.rotate(angle + anglemiddle);
 				ctx.translate(-x, -y);
 				ctx.fillText(data.datapoints[i].y.toString(), x + radius, y);
 				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
 			}
-			
 			return linecord;
 		}
-		
 		/*function drawmultiBar(canvas, ctx, verticalNr, data, range, stroke, linecord){
 			var canvas = document.getElementById('canvas'+nr);
 			var spacingVertical = canvas.height/verticalNr;
@@ -961,30 +1166,28 @@
 			ctx.stroke();
 			ctx.closePath();
 		}*/
-		
-		function enumerateIt(nr, hei, spacv, spach){
-			var data = data2; 
+		function enumerateIt(nr, hei, spacv, spach) {
+			var data = data2;
 			ctx.fillStyle = text;
-			for(var i= 0; i<data.length; i++){
-				ctx.fillText(i+1, spach*i+4, hei+2*spacv+20);
+			for (var i = 0; i < data.length; i++) {
+				ctx.fillText(i + 1, spach * i + 4, hei + 2 * spacv + 20);
 			}
 		}
-				
+
 		function writeMessage(canvas, message) {
 			ctx.font = '18pt Calibri';
 			ctx.fillStyle = 'black';
 			ctx.fillText(message, 10, 25);
 		}
-		
+
 		function getMousePos(canvas, evt) {
 			var rect = canvas.getBoundingClientRect();
 			return {
-				x: (evt.clientX-rect.left)/(rect.right-rect.left)*canvas.width,
-				y: (evt.clientY-rect.top)/(rect.bottom-rect.top)*canvas.height
+				x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width
+				, y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
 			};
 		}
-		
-		
 	</script>
 </body>
+
 </html>
