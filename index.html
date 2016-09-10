@@ -46,7 +46,7 @@
 		</section>
 		<section class="row">
 			<div id="splinechart" class="col-sm-6"></div>
-			<div id="" class="col-sm-6"></div>
+			<div id="meterchart" class="col-sm-6"></div>
 		</section>
 	</div>
 	<!-- jQuery library -->
@@ -69,12 +69,176 @@
 			, "type": 'linechartcomparision'
 			, "title": {
 				"text": "line chart Comparision"
+			},
+			"yaxis" : {
+				"min" : 0,
+				"max" : 3,
+				"difference" : 1,
+				"title" : "Days"
+			},
+			"xaxis" : {
+				"categories" : ["gfee", "fusionfoods"]
 			}
 			, "wid": 500
-			, "hei": 300
+			, "hei": 400
 			, "data": [
 				{
 					"stroke": "#ff0000"
+					, "datapoints": [
+						{
+							"lable": "Actual"
+							, "ylable": ''
+							, "y": 0
+						}
+						, {
+							"lable": "Actual1"
+							, "ylable": ''
+							, "y": 1
+						}
+							]
+					}
+				, {
+					"stroke": "#00ff00"
+					, "ydataname": "Days"
+					, "datapoints": [
+						{
+							"lable": "planed"
+							, "y": 2
+						}
+						, {
+							"lable": "planed2"
+							, "y": 3
+						}
+							]
+					}
+
+				]
+		}
+		chartCalling(charts);
+		var chartline = {
+			"container": "linechart"
+			, "chartnumber": 2
+			, "type": 'linechartcomparision'
+			, "title": {
+				"text": "line Chart"
+			},
+			"yaxis" : {
+				"min" : 0,
+				"max" : 8,
+				"difference" : 1,
+				"title" : "Hours"
+			},
+			"xaxis" : {
+				"categories" : ["lablename1", "lablename2", "lablename3", "lablename4", "lablename5", "lablename6"]
+			}
+			, "wid": 500
+			, "hei": 400
+			, "data": [
+				{
+					"stroke": "#ff0000"
+					, "datapoints": [
+						{
+							"lable": "lablename1"
+							, "y": 100
+						}
+						, {
+							"lable": "lablename2"
+							, "y": 90
+						}
+						, {
+							"lable": "lablename3"
+							, "y": 45
+						}
+						, {
+							"lable": "lablename4"
+							, "y": 52
+						}
+						, {
+							"lable": "lablename5"
+							, "y": 72
+						}
+						, {
+							"lable": "lablename6"
+							, "y": 85
+						}
+							]
+					}
+
+				]
+		}
+		chartCalling(chartline);
+		var chartbar = {
+			"container": "barchart"
+			, "chartnumber": 3
+			, "type": 'barchart'
+			, "title": {
+				"text": "Bar Chart"
+			},
+			"yaxis" : {
+				"min" : 0,
+				"max" : 8,
+				"difference" : 1,
+				"title" : "Hours"
+			},
+			"xaxis" : {
+				"categories" : ["lablename1", "lablename2", "lablename3", "lablename4", "lablename5", "lablename6", "lablename7", "lablename8", "lablename9"]
+			}
+			, "wid": 500
+			, "hei": 400
+			, "data": [{
+				"stroke": "#ff0000"
+				, "datapoints": [{
+					"lable": "lablename1"
+					, "y": 100
+				}, {
+					"lable": "lablename2"
+					, "y": 90
+				}, {
+					"lable": "lablename3"
+					, "y": 45
+				}, {
+					"lable": "lablename4"
+					, "y": 52
+				}, {
+					"lable": "lablename5"
+					, "y": 72
+				}, {
+					"lable": "lablename6"
+					, "y": 85
+				}, {
+					"lable": "lablename7"
+					, "y": 95
+				}, {
+					"lable": "lablename8"
+					, "y": 95
+				}, {
+					"lable": "lablename9"
+					, "y": 95
+				}]
+			}]
+		}
+		chartCalling(chartbar);
+		var multilinebar = {
+			"container": "multibarchart"
+			, "chartnumber": 5
+			, "type": 'barchart'
+			, "title": {
+				"text": "Multi Line Bar Chart"
+			},
+			"yaxis" : {
+				"min" : 0,
+				"max" : 8,
+				"difference" : 1,
+				"title" : "Hours"
+			},
+			"xaxis" : {
+				"categories" : ["lablename1", "lablename2", "lablename3", "lablename4", "lablename5", "lablename6", "lablename7", "lablename8"]
+			}
+			, "wid": 500
+			, "hei": 400
+			, "data": [
+				{
+					"stroke": "#b84335"
 					, "datapoints": [
 						{
 							"lable": "lablename1"
@@ -106,16 +270,12 @@
 						}
 						, {
 							"lable": "lablename8"
-							, "y": 150
-						}
-						, {
-							"lable": "lablename9"
-							, "y": 77
+							, "y": 95
 						}
 							]
 					}
 				, {
-					"stroke": "#00ff00"
+					"stroke": "#fbbc05"
 					, "datapoints": [
 						{
 							"lable": "lablearr1"
@@ -147,73 +307,188 @@
 						}
 						, {
 							"lable": "lablearr8"
-							, "y": 200
+							, "y": 55
+						}
+							]
+					}
+				, {
+					"stroke": "#4285f4"
+					, "datapoints": [
+						{
+							"lable": "lablearr1"
+							, "y": 11
 						}
 						, {
-							"lable": "lablearr9"
-							, "y": 88
+							"lable": "lablearr2"
+							, "y": 38
+						}
+						, {
+							"lable": "lablearr3"
+							, "y": 45
+						}
+						, {
+							"lable": "lablearr4"
+							, "y": 62
+						}
+						, {
+							"lable": "lablearr5"
+							, "y": 22
+						}
+						, {
+							"lable": "lablearr6"
+							, "y": 10
+						}
+						, {
+							"lable": "lablearr7"
+							, "y": 95
+						}
+						, {
+							"lable": "lablearr8"
+							, "y": 25
+						}
+							]
+					}
+				, {
+					"stroke": "teal"
+					, "datapoints": [
+						{
+							"lable": "lablearr1"
+							, "y": 18
+						}
+						, {
+							"lable": "lablearr2"
+							, "y": 40
+						}
+						, {
+							"lable": "lablearr3"
+							, "y": 25
+						}
+						, {
+							"lable": "lablearr4"
+							, "y": 22
+						}
+						, {
+							"lable": "lablearr5"
+							, "y": 92
+						}
+						, {
+							"lable": "lablearr6"
+							, "y": 70
+						}
+						, {
+							"lable": "lablearr7"
+							, "y": 35
+						}
+						, {
+							"lable": "lablearr8"
+							, "y": 75
 						}
 							]
 					}
 
 				]
 		}
-		chartCalling(charts);
-		var chartline = {
-			"container": "linechart"
-			, "chartnumber": 2
-			, "type": 'linechartcomparision'
+		chartCalling(multilinebar);
+		var piechart = {
+			"container": "piechart"
+			, "chartnumber": 4
+			, "type": 'piechart'
 			, "title": {
-				"text": "line Chart"
+				"text": "Pie Chart"
 			}
 			, "wid": 500
 			, "hei": 300
-			, "data": [
+			, "data": [{
+				"stroke": "#ff0000"
+				, "datapoints": [{
+					"lable": "lablename1"
+					, "y": 120
+					, "color": "teal"
+				}, {
+					"lable": "lablename2"
+					, "y": 90
+					, "color": "#b84335"
+				}, {
+					"lable": "lablename3"
+					, "y": 45
+					, "color": "#fbbc05"
+				}, {
+					"lable": "lablename4"
+					, "y": 52
+					, "color": "#4285f4"
+				}, {
+					"lable": "lablename5"
+					, "y": 85
+					, "color": "#3a87ad"
+				}, {
+					"lable": "lablename6"
+					, "y": 60
+					, "color": "#34a853"
+				}, {
+					"lable": "lablename7"
+					, "y": 18
+					, "color": "#4285f4"
+				}, {
+					"lable": "lablename8"
+					, "y": 85
+					, "color": "#3a87ad"
+				}, {
+					"lable": "lablename9"
+					, "y": 60
+					, "color": "#34a853"
+				}]
+			}]
+		}
+		chartCalling(piechart);
+		var donut = {
+			"container": "donutchart"
+			, /*Give exact id of you container div*/ "chartnumber": 6
+			, /*Never keep it same with other charts*/ "type": 'donutchart'
+			, /*keep same names as instructed - donutchart, linechartcomparision, barchart, piechart*/ "title": {
+				"text": "Donut Chart"
+			}
+			, "wid": 500
+			, "hei": 300
+			, "data": [ /*Give as required data in given formate, syntax error with json will cause of error in charts*/
 				{
 					"stroke": "#ff0000"
 					, "datapoints": [
 						{
 							"lable": "lablename1"
-							, "y": 100
+							, "y": 1200
+							, "color": "teal"
 						}
 						, {
 							"lable": "lablename2"
 							, "y": 90
+							, "color": "#b84335"
 						}
 						, {
 							"lable": "lablename3"
 							, "y": 45
+							, "color": "#fbbc05"
 						}
 						, {
 							"lable": "lablename4"
 							, "y": 52
+							, "color": "#4285f4"
 						}
 						, {
 							"lable": "lablename5"
-							, "y": 72
+							, "y": 0
+							, "color": "#3a87ad"
 						}
 						, {
 							"lable": "lablename6"
-							, "y": 85
-						}
-						, {
-							"lable": "lablename7"
-							, "y": 95
-						}
-						, {
-							"lable": "lablename8"
-							, "y": 150
-						}
-						, {
-							"lable": "lablename9"
-							, "y": 77
+							, "y": 60
+							, "color": "#34a853"
 						}
 							]
 					}
 
 				]
 		}
-		chartCalling(chartline);
+		chartCalling(donut);
 		var splinechart = {
 			"container": "splinechart"
 			, "chartnumber": 7
@@ -269,270 +544,50 @@
 				]
 		}
 		chartCalling(splinechart);
-		var chartbar = {
-			"container": "barchart"
-			, "chartnumber": 3
-			, "type": 'barchart'
-			, "title": {
-				"text": "Bar Chart"
-			}
-			, "wid": 500
-			, "hei": 300
-			, "data": [
-				{
-					"stroke": "#ff0000"
-					, "datapoints": [
-						{
-							"lable": "lablename1"
-							, "y": 100
-						}
-						, {
-							"lable": "lablename2"
-							, "y": 90
-						}
-						, {
-							"lable": "lablename3"
-							, "y": 45
-						}
-						, {
-							"lable": "lablename4"
-							, "y": 52
-						}
-						, {
-							"lable": "lablename5"
-							, "y": 72
-						}
-						, {
-							"lable": "lablename6"
-							, "y": 85
-						}
-						, {
-							"lable": "lablename7"
-							, "y": 95
-						}
-						, {
-							"lable": "lablename8"
-							, "y": 150
-						}
-						, {
-							"lable": "lablename9"
-							, "y": 77
-						}
-							]
-					}
-
-				]
-		}
-		chartCalling(chartbar);
-		var piechart = {
-			"container": "piechart"
-			, "chartnumber": 4
-			, "type": 'piechart'
-			, "title": {
-				"text": "Pie Chart"
-			}
-			, "wid": 500
-			, "hei": 300
-			, "data": [
-				{
-					"stroke": "#ff0000"
-					, "datapoints": [
-						{
-							"lable": "lablename1"
-							, "y": 120
-							, "color": "teal"
-						}
-						, {
-							"lable": "lablename2"
-							, "y": 90
-							, "color": "#b84335"
-						}
-						, {
-							"lable": "lablename3"
-							, "y": 45
-							, "color": "#fbbc05"
-						}
-						, {
-							"lable": "lablename4"
-							, "y": 52
-							, "color": "#4285f4"
-						}
-						, {
-							"lable": "lablename5"
-							, "y": 85
-							, "color": "#3a87ad"
-						}
-						, {
-							"lable": "lablename6"
-							, "y": 60
-							, "color": "#34a853"
-						}
-						, {
-							"lable": "lablename7"
-							, "y": 18
-							, "color": "#4285f4"
-						}
-						, {
-							"lable": "lablename8"
-							, "y": 85
-							, "color": "#3a87ad"
-						}
-						, {
-							"lable": "lablename9"
-							, "y": 60
-							, "color": "#34a853"
-						}
-							]
-					}
-
-				]
-		}
-		chartCalling(piechart);
-		var multilinebar = {
-			"container": "multibarchart"
-			, "chartnumber": 5
-			, "type": 'barchart'
-			, "title": {
-				"text": "Multi Line Bar Chart"
-			}
-			, "wid": 500
-			, "hei": 300
-			, "data": [
-				{
-					"stroke": "#ff0000"
-					, "datapoints": [
-						{
-							"lable": "lablename1"
-							, "y": 100
-						}
-						, {
-							"lable": "lablename2"
-							, "y": 90
-						}
-						, {
-							"lable": "lablename3"
-							, "y": 45
-						}
-						, {
-							"lable": "lablename4"
-							, "y": 52
-						}
-						, {
-							"lable": "lablename5"
-							, "y": 72
-						}
-						, {
-							"lable": "lablename6"
-							, "y": 85
-						}
-						, {
-							"lable": "lablename7"
-							, "y": 95
-						}
-						, {
-							"lable": "lablename8"
-							, "y": 150
-						}
-						, {
-							"lable": "lablename9"
-							, "y": 77
-						}
-							]
-					}
-				, {
-					"stroke": "#00ff00"
-					, "datapoints": [
-						{
-							"lable": "lablearr1"
-							, "y": 110
-						}
-						, {
-							"lable": "lablearr2"
-							, "y": 30
-						}
-						, {
-							"lable": "lablearr3"
-							, "y": 15
-						}
-						, {
-							"lable": "lablearr4"
-							, "y": 92
-						}
-						, {
-							"lable": "lablearr5"
-							, "y": 12
-						}
-						, {
-							"lable": "lablearr6"
-							, "y": 150
-						}
-						, {
-							"lable": "lablearr7"
-							, "y": 55
-						}
-						, {
-							"lable": "lablearr8"
-							, "y": 200
-						}
-						, {
-							"lable": "lablearr9"
-							, "y": 88
-						}
-							]
-					}
-
-				]
-		}
-		chartCalling(multilinebar);
-		var donut = {
-			"container": "donutchart"
-			, /*Give exact id of you container div*/ "chartnumber": 6
-			, /*Never keep it same with other charts*/ "type": 'donutchart'
+		var meter = {
+			"container": "meterchart"
+			, /*Give exact id of you container div*/ "chartnumber": 8
+			, /*Never keep it same with other charts*/ "type": 'meterchart'
 			, /*keep same names as instructed - donutchart, linechartcomparision, barchart, piechart*/ "title": {
-				"text": "Donut Chart"
+				"text": "Meter Gauge Chart"
 			}
 			, "wid": 500
-			, "hei": 300
+			, "hei": 500
 			, "data": [ /*Give as required data in given formate, syntax error with json will cause of error in charts*/
 				{
 					"stroke": "#ff0000"
 					, "datapoints": [
 						{
-							"lable": "lablename1"
-							, "y": 1200
-							, "color": "teal"
+							"lable": "Poor"
+							, "y": 25
+							, "color": "#ff0000"
 						}
 						, {
-							"lable": "lablename2"
-							, "y": 90
-							, "color": "#b84335"
+							"lable": "Blw Avg"
+							, "y": 25
+							, "color": ""
 						}
 						, {
-							"lable": "lablename3"
-							, "y": 45
-							, "color": "#fbbc05"
+							"lable": "Average"
+							, "y": 25
+							, "color": "#00ff00"
 						}
 						, {
-							"lable": "lablename4"
-							, "y": 52
-							, "color": "#4285f4"
+							"lable": "Abv Avg"
+							, "y": 15
+							, "color": "#00ff00"
 						}
 						, {
-							"lable": "lablename5"
-							, "y": 85
-							, "color": "#3a87ad"
+							"lable": "Exceed"
+							, "y": 10
+							, "color": "#00ff00"
 						}
-						, {
-							"lable": "lablename6"
-							, "y": 60
-							, "color": "#34a853"
-						}
-							]
-					}
-
-				]
+					]
+					, dataval: 80
+				}
+			]
 		}
-		chartCalling(donut);
+		chartCalling(meter);
 
 		function chartCalling(chart) {
 			var charttype = chart.type;
@@ -543,7 +598,8 @@
 				});
 				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
 				var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
+				var verticaldevisions = chart.yaxis.max;
+				drawGrid(chart.chartnumber, verticaldevisions, ctx, chart.data);
 				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
@@ -560,8 +616,10 @@
 				//console.log(maxdata);
 				var linecord = [];
 				for (var i = 0; i < chart.data.length; i++) {
-					drawGraphicLinear(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+					drawGraphicLinear(canvas, ctx, verticaldevisions, chart.data[i], maxdata, chart.data[i].stroke, linecord);
 				}
+				
+				drawGraphicLinearYcord(canvas, ctx, verticaldevisions, chart);
 				//console.log(linecord);
 				var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
 				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
@@ -572,7 +630,7 @@
 				});
 				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
 				var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
+				drawGrid(chart.chartnumber, 10, ctx, chart.data);
 				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
@@ -599,9 +657,12 @@
 				$('#' + chart.container).css({
 					'height': chart.hei + 100
 				});
+				//console.log(chart);
 				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
 				var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
+				var verticaldevisions = chart.yaxis.max;
+				//console.log(verticaldevisions);
+				var barwidth = drawGrid(chart.chartnumber, verticaldevisions, ctx, chart.data);
 				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
@@ -618,11 +679,12 @@
 				//console.log(maxdata);
 				var linecord = [];
 				var nextcurve = 0;
-				var nextcurve = 0;
+				var nextcurve = 30;
 				for (var i = 0; i < chart.data.length; i++) {
-					drawBar(canvas, ctx, 10, chart.data[i], maxdata, nextcurve, chart.data[i].stroke, linecord);
-					nextcurve += 15;
+					drawBar(canvas, ctx, verticaldevisions, chart.data[i], maxdata, nextcurve, chart.data[i].stroke, linecord, barwidth);
+					nextcurve += barwidth;
 				}
+				drawGraphicLinearYcord(canvas, ctx, verticaldevisions, chart);
 				//console.log(linecord);
 				var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
 				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
@@ -633,7 +695,7 @@
 				});
 				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
 				var ctx = preparePlot(chart.chartnumber, chart.hei, chart.hei, chart.container);
-				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
+				drawGrid(chart.chartnumber, 10, ctx, chart.data);
 				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
@@ -662,7 +724,37 @@
 				});
 				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
 				var ctx = preparePlot(chart.chartnumber, chart.hei, chart.hei, chart.container);
-				drawGrid(chart.chartnumber, 10, ctx, chart.data[0].datapoints);
+				drawGrid(chart.chartnumber, 10, ctx, chart.data);
+				var canvas = 'canvas' + chart.chartnumber;
+				var maxdata = [];
+				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
+				for (var i = 0; i < chart.data.length; i++) {
+					for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+						if (chart.data[i].datapoints[j].y < maxdata[0]) {
+							maxdata[0] = chart.data[i].datapoints[j].y;
+						}
+						if (chart.data[i].datapoints[j].y > maxdata[1]) {
+							maxdata[1] = chart.data[i].datapoints[j].y;
+						}
+					}
+				}
+				//console.log(maxdata);
+				var linecord = [];
+				var linewidth = 60;
+				for (var i = 0; i < chart.data.length; i++) {
+					drawDonut(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+				}
+				//console.log(linecord);
+				var ctx = preparePlotUpper(chart.chartnumber, chart.hei, chart.hei, chart.container);
+				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+			}
+			if (charttype == 'meterchart') {
+				$('#' + chart.container).css({
+					'height': chart.hei + 100
+				});
+				$('#' + chart.container).html('<h2>' + chart.title.text + '</h2>');
+				var ctx = preparePlot(chart.chartnumber, chart.hei, chart.hei, chart.container);
+				drawGrid(chart.chartnumber, 10, ctx, chart.data);
 				var canvas = 'canvas' + chart.chartnumber;
 				var maxdata = [];
 				maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
@@ -680,13 +772,12 @@
 				var linecord = [];
 				var linewidth = 50;
 				for (var i = 0; i < chart.data.length; i++) {
-					drawDonut(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+					drawMeter(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
 				}
 				//console.log(linecord);
 				var ctx = preparePlotUpper(chart.chartnumber, chart.hei, chart.hei, chart.container);
 				drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 			}
-			if (charttype == 'barcomparisionchart') {}
 		}
 
 		function prepSurface(nr, width, height, container) {
@@ -732,54 +823,127 @@
 
 		function drawGrid(nr, verticanNr, ctx, data) {
 			var canvas = document.getElementById('canvas' + nr);
-			var hei = canvas.height;
-			var wid = canvas.width;
-			ctx.strokeStyle = 'rgba(0,0,0,0.2)';
-			var spacingVertical = canvas.height / verticanNr;
-			var spacingHorizontal = canvas.width / data.length;
-			//console.log(spacingVertical);
+			var hei = canvas.height - 60;
+			var wid = canvas.width - 30;
+			ctx.strokeStyle = 'rgba(0,0,0,1)';
+			ctx.lineWidth = .5;
+			var spacingVertical = hei / verticanNr;
+			var spacingHorizontal = wid / data[0].datapoints.length;
+			/*console.log(spacingVertical + 20);
+			console.log(wid);*/
+			
+			if(data.length > 1){
+				var barwidth = (spacingHorizontal - 15) / data.length;
+			}else{
+				var barwidth = 15;
+			}
 			ctx.beginPath();
-			for (var i = 0; i < data.length; i++) {
-				ctx.moveTo(i * spacingHorizontal, 1);
-				ctx.lineTo(i * spacingHorizontal, hei);
+			/*Horizontal grid*/
+			for (var i = 0; i < data[0].datapoints.length + 1; i++) {
+				ctx.moveTo(i * spacingHorizontal + 30, hei);
+				ctx.lineTo(i * spacingHorizontal + 30, hei + 15);
 			}
-			for (var i = 0; i < verticanNr; i++) {
-				ctx.moveTo(1, i * spacingVertical);
-				ctx.lineTo(wid, i * spacingVertical);
-			}
-			ctx.closePath();
 			ctx.stroke();
+			/*Vertical grid*/
+			for (var i = 0; i < verticanNr + 1; i++) {
+				ctx.moveTo(30, i * spacingVertical);
+				ctx.lineTo(wid+30, i * spacingVertical);
+			}
+			ctx.stroke();
+			ctx.closePath();
+			return barwidth;
 		}
 
 		function drawGraphicLinear(canvas, ctx, verticalNr, data, range, stroke, linecord) {
 			var canvas = document.getElementById(canvas);
-			var spacingVertical = canvas.height / verticalNr;
-			var spacingHorizontal = canvas.width / data.datapoints.length;
-			var hei = canvas.height - 3 * spacingVertical;
+			var hei = canvas.height - 60;
+			var wid = canvas.width - 30
+			var spacingVertical = hei / verticalNr;
+			var spacingHorizontal = wid / data.datapoints.length;
+			
 			var totalRange = range[1] - range[0];
 			var verticalCoefficient = hei / totalRange;
 			var mov;
 			ctx.strokeStyle = stroke;
 			ctx.beginPath();
-			ctx.moveTo(0, hei - (data.datapoints[0].y - range[0]) * verticalCoefficient + spacingVertical);
+			ctx.moveTo( spacingHorizontal / 2 , hei - (data.datapoints[0].y - range[0]) * verticalCoefficient);
 			for (var i = 0; i < data.datapoints.length; i++) {
-				ctx.lineTo(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
+				//ctx.beginPath();
+				ctx.strokeStyle = stroke;
+				ctx.lineWidth = 1;
+				ctx.lineTo(i * spacingHorizontal + spacingHorizontal / 2, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient);
+				//ctx.closePath();
 				(function () {
-					ctx.arc(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical, 3, 0, 2 * Math.PI)
-						//ctx.fill();
+					ctx.save();
+					ctx.arc(i * spacingHorizontal + spacingHorizontal / 2, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient, 1.5, 0, 2 * Math.PI)
+					//ctx.fill();
+					ctx.lineWidth = 3;
+					ctx.restore();
 				})()
+				ctx.lineWidth = 1;/**/
 				var newobj = {
-					x: i * spacingHorizontal
-					, y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical
+					x: i * spacingHorizontal + spacingHorizontal / 2
+					, y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient
 					, lable: data.datapoints[i].lable
+					, dataval: data.datapoints[i].y
 				};
 				//console.log(newobj);
 				linecord.push(newobj);
-				ctx.fillText(data.datapoints[i].y, i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
+				/*Fill Text as per cordinates*/
+				//ctx.fillText(data.datapoints[i].y, i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
 			}
 			ctx.stroke();
 			ctx.closePath();
+			
 			return linecord;
+		}
+		function drawGraphicLinearYcord(canvas, ctx, verticalNr, cdata){
+			//console.log(cdata);
+			var canvas = document.getElementById(canvas);
+			var hei = canvas.height - 60;
+			var wid = canvas.width - 30;
+			var spacingVertical =  hei / verticalNr;
+			var spacingHorizontal = wid / cdata.xaxis.categories.length;
+			//console.log(spacingHorizontal);
+			
+			ctx.save();
+			ctx.translate(0, canvas.height / 2);
+			ctx.rotate(-Math.PI/2);
+			ctx.textAlign = "center";
+			ctx.fillText(cdata.yaxis.title, 0, 10);
+			ctx.restore();
+			
+			/* xaxis Horizontal Documents*/
+			ctx.save();
+			ctx.font = "12px arial";
+			ctx.fillStyle = "#000";
+			for (var i = 0; i < cdata.xaxis.categories.length; i++) {
+				if(ctx.measureText(cdata.xaxis.categories[i]).width > spacingHorizontal/1.1){
+					ctx.translate(i*spacingHorizontal + 32, hei + 5);
+					ctx.rotate(Math.PI/4);
+					ctx.fillText(cdata.xaxis.categories[i], 0, 0);
+					//console.log(cdata.xaxis.categories[i], i*spacingHorizontal, hei-spacingVertical);
+					ctx.rotate(-Math.PI/4);
+					ctx.translate(-(i*spacingHorizontal + 32), -(hei + 5));
+				}else if(ctx.measureText(cdata.xaxis.categories[i]).width < spacingHorizontal/2){
+					ctx.fillText(cdata.xaxis.categories[i], i*spacingHorizontal + spacingHorizontal/2 + 30, hei + 10);
+				}else{
+					ctx.fillText(cdata.xaxis.categories[i], i*spacingHorizontal + 32, hei + 10);
+				}
+			}
+			ctx.restore();
+
+			
+			/* yaxis Vertical Documents*/
+			ctx.save();
+			for (var i = 0; i < verticalNr + 1; i++) {
+				var max = cdata.yaxis.max;
+				var min = cdata.yaxis.min;
+				var difference = cdata.yaxis.difference;
+				ctx.fillText(i * difference, 10, canvas.height - (i*spacingVertical + 50));
+			}
+			ctx.restore();
+			
 		}
 
 		function drawsplinechart(canvas, ctx, verticalNr, data, range, stroke, linecord) {
@@ -832,6 +996,13 @@
 				ctx.fillText(data.datapoints[i].y, i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
 			}
 			ctx.stroke();
+			for (var i = 0; i < linecord.length; i++) {
+				//console.log(linecord[i]);
+				ctx.beginPath();
+				ctx.arc(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical, 2, 0, 2 * Math.PI);
+				ctx.fill();
+				ctx.stroke();
+			}
 			ctx.closePath();
 			return linecord;
 		}
@@ -842,7 +1013,8 @@
 				for (var i = 0; i < linecord.length; i++) {
 					//console.log(linecord[i]);
 					ctx.beginPath();
-					ctx.arc(linecord[i].x, linecord[i].y, 4, 0, 2 * Math.PI);
+					ctx.arc(linecord[i].x, linecord[i].y, 3, 0, 2 * Math.PI);
+					//ctx.fill();
 					//ctx.stroke();
 				}
 				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
@@ -861,9 +1033,9 @@
 							$('#' + container + ' .canvasjs-chart-tooltip').css({
 								'display': 'block'
 								, 'left': linecord[i].x
-								, 'top': linecord[i].y + 5
+								, 'top': linecord[i].y
 							});
-							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable + ' : ' + linecord[i].dataval);
 							break;
 						}
 						else {
@@ -891,7 +1063,7 @@
 							$('#' + container + ' .canvasjs-chart-tooltip').css({
 								'display': 'block'
 								, 'left': linecord[i].x
-								, 'top': linecord[i].y + 5
+								, 'top': linecord[i].y
 							});
 							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
 							break;
@@ -922,9 +1094,9 @@
 							$('#' + container + ' .canvasjs-chart-tooltip').css({
 								'display': 'block'
 								, 'left': mousePos.x
-								, 'top': mousePos.y + 5
+								, 'top': mousePos.y
 							});
-							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable + ' : ' + linecord[i].y);
 							break;
 						}
 						else {
@@ -960,7 +1132,7 @@
 								, 'left': mousePos.x
 								, 'top': mousePos.y + 5
 							});
-							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable + ' : ' + linecord[i].y);
 							break;
 						}
 						if (!(ctx.isPointInStroke(mousePos.x, mousePos.y))) {
@@ -970,12 +1142,13 @@
 				}, false);
 			}
 			if (charttype == 'splinechart') {
-				for (var i = 0; i < linecord.length; i++) {
+				/*for (var i = 0; i < linecord.length; i++) {
 					//console.log(linecord[i]);
 					ctx.beginPath();
 					ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2 * Math.PI);
 					ctx.stroke();
-				}
+				}*/
+				ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
 				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
 					var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
 					//console.log(mousePos);
@@ -984,43 +1157,54 @@
 						ctx.beginPath();
 						ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2 * Math.PI);
 						if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
+							ctx.lineWidth = 4;
+							ctx.strokeStyle = 'rgba(0,0,0,.5)';
+							ctx.stroke();
 							$('#' + container + ' .canvasjs-chart-tooltip').css({
 								'display': 'block'
 								, 'left': linecord[i].x
 								, 'top': linecord[i].y + 5
 							});
 							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							break;
+						}
+						if (!(ctx.isPointInStroke(mousePos.x, mousePos.y))) {
+							ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
 						}
 					}
 				}, false);
 			}
 		}
 
-		function drawBar(canvas, ctx, verticalNr, data, range, curx, stroke, linecord) {
+		function drawBar(canvas, ctx, verticalNr, data, range, curx, stroke, linecord, barwidth) {
 			var canvas = document.getElementById(canvas);
-			var spacingVertical = canvas.height / verticalNr;
-			var spacingHorizontal = canvas.width / data.datapoints.length;
-			//console.log(spacingHorizontal);
-			var hei = canvas.height - spacingVertical;
-			var width = 15;
+			var hei = canvas.height - 60;
+			var wid = canvas.width - 30;
+			var spacingVertical = hei / verticalNr;
+			var spacingHorizontal = wid / data.datapoints.length;
+			/*console.log(spacingHorizontal);
+			console.log(wid);*/
+			var totalcompare = data.datapoints.length;
+			//var barwidth = 15;
 			ctx.beginPath();
 			ctx.strokeStyle = stroke;
 			//ctx.moveTo(0, hei-(data[0]-range[0])*verticalCoefficient+spacingVertical);
 			for (var i = 0; i < data.datapoints.length; i++) {
 				ctx.fillStyle = stroke;
 				var h = (data.datapoints[i].y / range[1]) * hei;
-				ctx.fillRect(curx, hei - h, width, h);
+				ctx.fillRect(curx, hei - h, barwidth, h);
 				var newobj = {
 					x: curx
 					, y: hei - h
-					, wid: width
+					, wid: barwidth
 					, hei: h
 					, lable: data.datapoints[i].lable
+					, dataval : data.datapoints[i].y
 				};
 				//console.log(newobj);
 				linecord.push(newobj);
 				ctx.fillStyle = "#000";
-				ctx.fillText(data.datapoints[i].y, curx, hei - h);
+				//ctx.fillText(data.datapoints[i].y, curx, hei - h);
 				curx += spacingHorizontal;
 			}
 			ctx.stroke();
@@ -1041,6 +1225,14 @@
 				ctx.fillStyle = data.datapoints[i].color;
 				ctx.beginPath();
 				ctx.moveTo(canvas.width / 2, canvas.height / 2);
+				if (data.datapoints[i].y == 0) {
+					ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
+					//console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+					ctx.lineTo(canvas.width / 2, canvas.height / 2);
+					ctx.strokeStyle = '1';
+					ctx.strokeStyle = '#fff';
+					ctx.stroke();
+				}
 				ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
 				//console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
 				ctx.lineTo(canvas.width / 2, canvas.height / 2);
@@ -1049,6 +1241,7 @@
 					, startangle: lastend
 					, lastangle: lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal))
 					, lable: data.datapoints[i].lable
+					, y: data.datapoints[i].y
 				};
 				//console.log(newobj);
 				linecord.push(newobj);
@@ -1056,28 +1249,22 @@
 				//console.log(lastend);
 				ctx.fill();
 			}
-			/* Draw piechart number values */
+			/* Draw piechart number values and numbers*/
 			var angle = 0;
 			var x = Math.floor(canvas.width / 2);
 			var y = Math.floor(canvas.height / 2);
 			ctx.fillStyle = "#fff";
 			ctx.font = radius * 0.10 + "px arial";
-			ctx.font = radius * 0.08 + "px arial";
-			/*for(i = 0; i< data.datapoints.length; i++){
-				ctx.translate(x, y);
-   			ctx.rotate(angle);
-				ctx.translate(-x, -y);
-				ctx.fillText(data.datapoints[i].y.toString(), x + radius/1.3, y);
-				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
-			}*/
 			for (i = 0; i < data.datapoints.length; i++) {
-				anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
-				var anglemiddle = (anglenew - angle) / 2;
-				ctx.translate(x, y);
-				ctx.rotate(angle + anglemiddle);
-				ctx.translate(-x, -y);
-				ctx.fillText(data.datapoints[i].y.toString(), x + radius / 1.3, y);
-				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+				if (data.datapoints[i].y != 0) {
+					anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+					var anglemiddle = (anglenew - angle) / 2;
+					ctx.translate(x, y);
+					ctx.rotate(angle + anglemiddle);
+					ctx.translate(-x, -y);
+					ctx.fillText(data.datapoints[i].y.toString(), x + radius / 1.3, y);
+					angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+				}
 			}
 			return linecord;
 		}
@@ -1094,6 +1281,12 @@
 				myTotal += data.datapoints[e].y;
 			}
 			for (var i = 0; i < data.datapoints.length; i++) {
+				if (data.datapoints[i].y == 0) {
+					ctx.beginPath();
+					ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
+					ctx.strokeStyle = '#fff';
+					ctx.stroke()
+				}
 				ctx.strokeStyle = data.datapoints[i].color;
 				ctx.beginPath();
 				//ctx.moveTo(canvas.width / 2, canvas.height / 2);
@@ -1105,6 +1298,7 @@
 					, startangle: lastend
 					, lastangle: lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal))
 					, lable: data.datapoints[i].lable
+					, y: data.datapoints[i].y
 				};
 				//console.log(newobj);
 				linecord.push(newobj);
@@ -1120,14 +1314,106 @@
 			ctx.fillStyle = "#fff";
 			ctx.font = radius * 0.12 + "px arial";
 			for (i = 0; i < data.datapoints.length; i++) {
-				anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
-				var anglemiddle = (anglenew - angle) / 2;
-				ctx.translate(x, y);
+				if (data.datapoints[i].y != 0) {
+					anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+					var anglemiddle = (anglenew - angle) / 2;
+					ctx.translate(x, y);
+					ctx.rotate(angle + anglemiddle);
+					ctx.translate(-x, -y);
+					ctx.fillText(data.datapoints[i].y.toString(), x + radius, y);
+					angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+				}
+			}
+			return linecord;
+		}
+
+		function drawMeter(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+			var canvas = document.getElementById(canvas);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			var linewidth = 50;
+			ctx.lineWidth = 4;
+			var lastend = 3.141592653589793;
+			var myTotal = 0; // Automatically calculated so don't touch
+			var radius = canvas.height / 2 - linewidth;
+			for (var e = 0; e < data.datapoints.length; e++) {
+				myTotal += data.datapoints[e].y;
+			}
+			for (var i = 0; i < data.datapoints.length; i++) {
+				ctx.strokeStyle = "#fff";
+				ctx.fillStyle = data.datapoints[i].color;
+				ctx.beginPath();
+				ctx.moveTo(canvas.width / 2, canvas.height / 2);
+				ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * (data.datapoints[i].y / myTotal)));
+				//console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+				ctx.lineTo(canvas.width / 2, canvas.height / 2);
+				ctx.fill();
+				ctx.stroke();
+				var newobj = {
+					x: canvas.width / 2
+					, startangle: lastend
+					, lastangle: lastend + (Math.PI * (data.datapoints[i].y / myTotal))
+					, lable: data.datapoints[i].lable
+				};
+				linecord.push(newobj);
+				lastend += Math.PI * (data.datapoints[i].y / myTotal);
+			}
+			//console.log(linecord);
+			ctx.beginPath();
+			ctx.fillStyle = "#fff";
+			ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.7, 0, 2 * Math.PI);
+			ctx.fill();
+			ctx.closePath();
+			ctx.beginPath();
+			ctx.fillStyle = "#000";
+			ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.1, 0, 2 * Math.PI);
+			ctx.fill();
+			ctx.closePath();
+			ctx.beginPath();
+			var rotateangel = Math.PI * (data.dataval / 100) + 3.141592653589793;
+			//console.log(rotateangel);
+			var headlen = 10;
+			ctx.lineWidth = 6;
+			ctx.lineCap = "round";
+			var tox = canvas.width / 2 + (radius * .8) * Math.cos(rotateangel);
+			var toy = canvas.height / 2 + (radius * .8) * Math.sin(rotateangel);
+			var fromx = canvas.width / 2;
+			var fromy = canvas.height / 2;
+			ctx.moveTo(canvas.width / 2, canvas.height / 2);
+			ctx.lineTo(tox, toy);
+			ctx.strokeStyle = "#000";
+			ctx.stroke();
+			ctx.beginPath();
+			ctx.fillStyle = "#fff";
+			ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.07, 0, 2 * Math.PI);
+			ctx.fill();
+			ctx.closePath();
+			/* Draw piechart number values */
+			var angle = 3.141592653589793;
+			var x = Math.floor(canvas.width / 2);
+			var y = Math.floor(canvas.height / 2);
+			ctx.fillStyle = "#000";
+			ctx.font ="14px arial";
+			ctx.save();
+			for (i = 0; i < data.datapoints.length; i++) {
+				anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal)) / 2;
+				var anglemiddle = anglenew / 6;
+				/*ctx.translate(x, y);
 				ctx.rotate(angle + anglemiddle);
 				ctx.translate(-x, -y);
-				ctx.fillText(data.datapoints[i].y.toString(), x + radius, y);
-				angle = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+				ctx.fillText(data.datapoints[i].lable.toString(), x + radius, y);
+				angle = (Math.PI * (data.datapoints[i].y / myTotal)) - anglemiddle;*/
+				//console.log(angle);
+
+				var fx = canvas.width / 2 + (radius*1.01) * Math.cos(angle + anglemiddle);
+				var fy = canvas.height / 2 + (radius*1.01) * Math.sin(angle + anglemiddle);
+				ctx.translate(fx, fy);
+				ctx.rotate(angle + 1.8);
+				ctx.fillText(data.datapoints[i].lable.toString(), 0, 0);
+				ctx.rotate(-(angle + 1.8));
+				ctx.translate(-fx, -fy);
+				angle += (Math.PI * (data.datapoints[i].y / myTotal));
 			}
+			ctx.restore();
 			return linecord;
 		}
 		/*function drawmultiBar(canvas, ctx, verticalNr, data, range, stroke, linecord){
