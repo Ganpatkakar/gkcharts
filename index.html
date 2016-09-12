@@ -129,7 +129,7 @@
 				"title" : "Hours"
 			},
 			"xaxis" : {
-				"categories" : ["lablename1", "lablename2", "lablename3", "lablename4", "lablename5", "lablename6"]
+				"categories" : ["lablename1", "la2", "lablename3", "lablename4", "lablename5", "lablename6"]
 			}
 			, "wid": 500
 			, "hei": 400
@@ -181,7 +181,7 @@
 				"title" : "Hours"
 			},
 			"xaxis" : {
-				"categories" : ["lablename1", "lablename2", "lablename3", "lablename4", "lablename5", "lablename6", "lablename7", "lablename8", "lablename9"]
+				"categories" : ["la1", "lablename2", "lablename3", "lablename4", "lablename5", "lablename6", "lablename7", "lable8", "lable9"]
 			}
 			, "wid": 500
 			, "hei": 400
@@ -917,22 +917,36 @@
 			ctx.save();
 			ctx.font = "12px arial";
 			ctx.fillStyle = "#000";
-			for (var i = 0; i < cdata.xaxis.categories.length; i++) {
+			var xangle;
+			for(var i = 0; i < cdata.xaxis.categories.length; i++){
 				if(ctx.measureText(cdata.xaxis.categories[i]).width > spacingHorizontal/1.1){
-					ctx.translate(i*spacingHorizontal + 32, hei + 5);
+					xangle = 'a'; /*angular*/
+					break;
+				}else if(ctx.measureText(cdata.xaxis.categories[i]).width < spacingHorizontal/2){
+					xangle = 'ms'; /*straight*/
+				}/*else{
+					xangle = 's'; medium straight
+				}*/
+			}
+			if(xangle === 'a'){
+				for (var i = 0; i < cdata.xaxis.categories.length; i++) {
+					ctx.translate(i*spacingHorizontal + 32, hei + 8);
 					ctx.rotate(Math.PI/4);
 					ctx.fillText(cdata.xaxis.categories[i], 0, 0);
 					//console.log(cdata.xaxis.categories[i], i*spacingHorizontal, hei-spacingVertical);
 					ctx.rotate(-Math.PI/4);
-					ctx.translate(-(i*spacingHorizontal + 32), -(hei + 5));
-				}else if(ctx.measureText(cdata.xaxis.categories[i]).width < spacingHorizontal/2){
-					ctx.fillText(cdata.xaxis.categories[i], i*spacingHorizontal + spacingHorizontal/2 + 30, hei + 10);
-				}else{
-					ctx.fillText(cdata.xaxis.categories[i], i*spacingHorizontal + 32, hei + 10);
+					ctx.translate(-(i*spacingHorizontal + 32), -(hei + 8));
+				}
+			}else{ /*if(xangle === 'ms'){
+				for (var i = 0; i < cdata.xaxis.categories.length; i++) {
+					ctx.fillText(cdata.xaxis.categories[i], i*spacingHorizontal + spacingHorizontal/2 + 30, hei + 15);
+				}
+			}else if(xangle === 's'){*/
+				for (var i = 0; i < cdata.xaxis.categories.length; i++) {
+					ctx.fillText(cdata.xaxis.categories[i], i*spacingHorizontal + 34, hei + 15);
 				}
 			}
 			ctx.restore();
-
 			
 			/* yaxis Vertical Documents*/
 			ctx.save();
@@ -1044,6 +1058,13 @@
 						}
 					}
 				}, false);
+				document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
+					setTimeout(function(){
+						$('#' + container + ' .canvasjs-chart-tooltip').css({
+							'display': 'none'
+						});
+					}, 2000);
+				});
 			}
 			if (charttype == 'barchart') {
 				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
@@ -1065,7 +1086,7 @@
 								, 'left': linecord[i].x
 								, 'top': linecord[i].y
 							});
-							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
+							$('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable + ' : ' + linecord[i].dataval);
 							break;
 						}
 						else {
@@ -1074,6 +1095,13 @@
 						}
 					}
 				}, false);
+				document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
+					setTimeout(function(){
+						$('#' + container + ' .canvasjs-chart-tooltip').css({
+							'display': 'none'
+						});
+					}, 2000);
+				});
 			}
 			if (charttype == 'piechart') {
 				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
@@ -1109,6 +1137,13 @@
 						//
 					}
 				}, false);
+				document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
+					setTimeout(function(){
+						$('#' + container + ' .canvasjs-chart-tooltip').css({
+							'display': 'none'
+						});
+					}, 2000);
+				});
 			}
 			if (charttype == 'donutchart') {
 				document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
@@ -1140,6 +1175,13 @@
 						}
 					}
 				}, false);
+				document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
+					setTimeout(function(){
+						$('#' + container + ' .canvasjs-chart-tooltip').css({
+							'display': 'none'
+						});
+					}, 2000);
+				});
 			}
 			if (charttype == 'splinechart') {
 				/*for (var i = 0; i < linecord.length; i++) {
@@ -1173,6 +1215,13 @@
 						}
 					}
 				}, false);
+				document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
+					setTimeout(function(){
+						$('#' + container + ' .canvasjs-chart-tooltip').css({
+							'display': 'none'
+						});
+					}, 2000);
+				});
 			}
 		}
 
