@@ -4,7 +4,7 @@ Custom charts and custome js
 
 
 # Contact Developer (Me)
-You can contact the developer "Ganpat Kakar" on 8197354601
+You can contact the developer "Ganpat Kakar" on kakarganpat@gmail.com or 8197354601
 
 # About Me
 
