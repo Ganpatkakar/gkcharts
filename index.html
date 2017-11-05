@@ -12,447 +12,58 @@
 		#barchart,
 		#piechart,
 		#multibarchart {
-			position: relative;
+		    position: relative;
 		}
-		
+
 		#canvas1 {
-			position: absolute;
+		    position: absolute;
 		}
-		
+
 		#canvasupper1 {
-			position: absolute;
-			cursor: default;
+		    position: absolute;
+		    cursor: default;
 		}
-		
+
 		.canvas {
-			position: absolute;
+		    position: absolute;
 		}
 	</style>
 </head>
-
-<body>
-	<div id="container" class="container">
-	<section class="row">
-            <section class="row">
-            <div id="linechart" class="col-sm-6"></div>
-            <div id="linechartcomparision" class="col-sm-6"></div>
-		</section>
-		<section class="row">
-			<div id="barchart" class="col-sm-6"></div>
-			<div id="multibarchart" class="col-sm-6"></div>
-		</section>
-		<section class="row">
-			<div id="piechart" class="col-sm-6"></div>
-			<div id="donutchart" class="col-sm-6"></div>
-		</section>
-		<section class="row">
-            <div id="meterchart" class="col-sm-6"></div>
-            <div id="splinechart" class="col-sm-6"></div>
-		</section>
-	</div>
-	<!-- jQuery library -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	
-	<!-- Latest compiled and minified JavaScript -->
-	<!--<script src="js/bootstrap.min.js"></script>-->
-    <script src="./chart.js"></script>
-	<script>
-		//$('.container').html(prepSurface(1, 400, 300));
-		//Prepare surface or canvas element with javascript
-		/*what is required :- 
-		1. Class or ID for chart container.
-		2. Canvas container creation.
-		3. Canvas ID or class to set internal chart.
-		4. Chart variables and details.
-		5. Chart type from client side.
-		*/
-		var datapoints = [{
-            "lable": "Jan"
-            , "y": 20
-        }, {
-            "lable": "Feb"
-            , "y": 90
-        }, {
-            "lable": "Mar"
-            , "y": 30
-        }, {
-            "lable": "Apr"
-            , "y": 50
-        }, {
-            "lable": "May"
-            , "y": 70
-        }, {
-            "lable": "Jun"
-            , "y": 80
-        }/*, {
-            "lable": "Jul"
-            , "y": 95
-        }, {
-            "lable": "Aug"
-            , "y": 50
-        }, {
-            "lable": "Sep"
-            , "y": 59
-        },{
-            "lable": "Oct",
-            "y":30
-        },{
-            "lable": "Nov",
-            "y":35
-        },{
-            "lable": "Dec",
-            "y":65
-        }*/];
-
-        var datapoints1 = [{
-            "lable": "January"
-            , "y": 10
-        }, {
-            "lable": "Feb"
-            , "y": 40
-        }, {
-            "lable": "Mar"
-            , "y": 70
-        }, {
-            "lable": "Apr"
-            , "y": 82
-        }, {
-            "lable": "May"
-            , "y": 32
-        }, {
-            "lable": "Jun"
-            , "y": 5
-        }/*, {
-            "lable": "Jul"
-            , "y": 0
-        }, {
-            "lable": "Aug"
-            , "y": 50
-        }, {
-            "lable": "Sep"
-            , "y": 69
-        },{
-            "lable": "Oct",
-            "y":40
-        },{
-            "lable": "Nov",
-            "y":15
-        },{
-            "lable": "Dec",
-            "y":25
-        }*/];
-
-        var chartline = {
-            "container": "linechart"
-            , "chartnumber": 2
-            , "type": 'linechartcomparision'
-            , "title": {
-                "text": "line Chart"
-            },
-            "yaxis" : {
-                "min" : 0,
-                "max" : 350,
-                "difference" : 25,
-                "title" : "Hours"
-            }
-            , "wid": 500
-            , "hei": 400
-            , "data": [
-                {
-                    "stroke": "#00d554"
-                    , "datapoints": datapoints
-                }
-
-            ]
-        };
-        chartCalling(chartline);
-
-		var charts = {
-			"container": "linechartcomparision"
-			, "chartnumber": 1
-			, "type": 'linechartcomparision'
-			, "title": {
-				"text": "line chart Comparision"
-			},
-			"yaxis" : {
-				"min" : 0,
-				"max" : 100,
-				"difference" : 10,
-				"title" : "Days"
-			}
-			, "wid": 500
-			, "hei": 400
-			, "data": [
-				{
-					"stroke": "#00d554"
-					, "datapoints": datapoints
-					}
-				, {
-					"stroke": "#ff0000"
-					, "ydataname": "Days"
-					, "datapoints": datapoints1
-					}
-
-				]
-		};
-		chartCalling(charts);
-		var chartbar = {
-			"container": "barchart"
-			, "chartnumber": 3
-			, "type": 'barchart'
-			, "title": {
-				"text": "Bar Chart"
-			},
-			"yaxis" : {
-				"min" : 0,
-				"max" : 100,
-				"difference" : 10,
-				"title" : "Hours"
-			}
-			, "wid": 500
-			, "hei": 400
-			, "data": [{
-				"stroke": "#00d554"
-				, "datapoints": datapoints
-			}]
-		};
-		chartCalling(chartbar);
-		var multilinebar = {
-			"container": "multibarchart"
-			, "chartnumber": 5
-			, "type": 'barchart'
-			, "title": {
-				"text": "Multi Line Bar Chart"
-			},
-			"yaxis" : {
-				"min" : 0,
-				"max" : 100,
-				"difference" : 10,
-				"title" : "Hours"
-			}
-			, "wid": 500
-			, "hei": 400
-			, "data": [
-				{
-					"stroke": "#009788"
-					, "datapoints": datapoints
-					}
-				, {
-					"stroke": "#00d554"
-					, "datapoints": datapoints1
-					}
-
-				]
-		};
-		chartCalling(multilinebar);
-		var piechart = {
-			"container": "piechart"
-			, "chartnumber": 4
-			, "type": 'piechart'
-			, "title": {
-				"text": "Pie Chart"
-			}
-			, "wid": 500
-			, "hei": 300
-			, "data": [{
-				"stroke": "#ff0000"
-				, "datapoints": [{
-					"lable": "lablename1"
-					, "y": 200
-					, "color": "teal"
-				}, {
-					"lable": "lablename2"
-					, "y": 90
-					, "color": "#b84335"
-				}, {
-					"lable": "lablename3"
-					, "y": 45
-					, "color": "#fbbc05"
-				}, {
-					"lable": "lablename4"
-					, "y": 52
-					, "color": "#4285f4"
-				}, {
-					"lable": "lablename5"
-					, "y": 85
-					, "color": "#3a87ad"
-				}, {
-					"lable": "lablename6"
-					, "y": 60
-					, "color": "#34a853"
-				}, {
-					"lable": "lablename7"
-					, "y": 188
-					, "color": "#4285f4"
-				}, {
-					"lable": "lablename8"
-					, "y": 85
-					, "color": "#3a87ad"
-				}, {
-					"lable": "lablename9"
-					, "y": 60
-					, "color": "#34a853"
-				}]
-			}]
-		}
-		chartCalling(piechart);
-		var donut = {
-			"container": "donutchart"
-			, /*Give exact id of you container div*/ "chartnumber": 6
-			, /*Never keep it same with other charts*/ "type": 'donutchart'
-			, /*keep same names as instructed - donutchart, linechartcomparision, barchart, piechart*/ "title": {
-				"text": "Donut Chart"
-			}
-			, "wid": 500
-			, "hei": 300
-			, "data": [ /*Give as required data in given formate, syntax error with json will cause of error in charts*/
-				{
-					"stroke": "#ff0000"
-					, "datapoints": [
-                    {
-                        "lable": "lablename1"
-                        , "y": 200
-                        , "color": "teal"
-                    }, {
-                        "lable": "lablename2"
-                        , "y": 90
-                        , "color": "#b84335"
-                    }, {
-                        "lable": "lablename3"
-                        , "y": 45
-                        , "color": "#fbbc05"
-                    }, {
-                        "lable": "lablename4"
-                        , "y": 52
-                        , "color": "#4285f4"
-                    }, {
-                        "lable": "lablename5"
-                        , "y": 85
-                        , "color": "#3a87ad"
-                    }, {
-                        "lable": "lablename6"
-                        , "y": 60
-                        , "color": "#34a853"
-                    }, {
-                        "lable": "lablename7"
-                        , "y": 188
-                        , "color": "#4285f4"
-                    }, {
-                        "lable": "lablename8"
-                        , "y": 85
-                        , "color": "#3a87ad"
-                    }, {
-                        "lable": "lablename9"
-                        , "y": 60
-                        , "color": "#34a853"
-                    }
-							]
-					}
-
-				]
-		}
-		chartCalling(donut);
-		var meter = {
-			"container": "meterchart"
-			, /*Give exact id of you container div*/ "chartnumber": 8
-			, /*Never keep it same with other charts*/ "type": 'meterchart'
-			, /*keep same names as instructed - donutchart, linechartcomparision, barchart, piechart*/ "title": {
-				"text": "Meter Gauge Chart"
-			}
-			, "wid": 500
-			, "hei": 500
-			, "data": [ /*Give as required data in given formate, syntax error with json will cause of error in charts*/
-				{
-					"stroke": "#ff0000"
-					, "datapoints": [
-						{
-							"lable": "Poor"
-							, "y": 25
-							, "color": "#ff0000"
-						}
-						, {
-							"lable": "Blw Avg"
-							, "y": 25
-							, "color": "#ff0000"
-						}
-						, {
-							"lable": "Average"
-							, "y": 25
-							, "color": "#00ff00"
-						}
-						, {
-							"lable": "Abv Avg"
-							, "y": 15
-							, "color": "#00ff00"
-						}
-						, {
-							"lable": "Exceed"
-							, "y": 10
-							, "color": "#00ff00"
-						}
-					]
-					, dataval: 77
-				}
-			]
-		}
-		chartCalling(meter);
-        /*var splinechart = {
-         "container": "splinechart"
-         , "chartnumber": 7
-         , "type": 'splinechart'
-         , "title": {
-         "text": "Spline Chart"
-         }
-         , "wid": 500
-         , "hei": 300
-         , "data": [
-         {
-         "stroke": "#ff0000"
-         , "datapoints": [
-         {
-         "lable": "lablename1"
-         , "y": 100
-         }
-         , {
-         "lable": "lablename2"
-         , "y": 90
-         }
-         , {
-         "lable": "lablename3"
-         , "y": 45
-         }
-         , {
-         "lable": "lablename4"
-         , "y": 52
-         }
-         , {
-         "lable": "lablename5"
-         , "y": 72
-         }
-         , {
-         "lable": "lablename6"
-         , "y": 85
-         }
-         , {
-         "lable": "lablename7"
-         , "y": 95
-         }
-         , {
-         "lable": "lablename8"
-         , "y": 150
-         }
-         , {
-         "lable": "lablename9"
-         , "y": 77
-         }
-         ]
-         }
-
-         ]
-         }
-         chartCalling(splinechart);*/
-
-	</script>
+    <div id="container" class="">
+        <section class="row">
+            <div class="col-sm-6">
+                <div id="linechart" class="chartDiv" style="height:350px"></div>
+            </div>
+            <div class="col-sm-6">
+                <div id="linechartcomparision" class="chartDiv" style="height:350px"></div>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-sm-6">
+                <div id="barchart" class="chartDiv" style="height:350px"></div>
+            </div>
+            <div class="col-sm-6">
+                <div id="multibarchart" class="chartDiv" style="height:350px"></div>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-sm-6 ">
+                <div id="piechart" class="chartDiv" style="height:350px"></div>
+            </div>
+            <div class="col-sm-6">
+                <div id="donutchart" class="chartDiv" style="height:350px"></div>
+            </div>
+        </section>
+        <section class="row">
+            <div class="col-sm-6">
+                <div id="meterchart" class="chartDiv" style="height:450px"></div>
+            </div>
+        </section>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="kakarChart.js"></script>
+    <script src="js/data.js"></script>
 
 </body>
 
