@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Table and chart by month</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<style>
+		#linechartcomparision,
+		#linechart,
+		#barchart,
+		#piechart,
+		#multibarchart {
+		    position: relative;
+		}
+
+		#canvas1 {
+		    position: absolute;
+		}
+
+		#canvasupper1 {
+		    position: absolute;
+		    cursor: default;
+		}
+
+		.canvas {
+		    position: absolute;
+		}
+        .chartDiv {
+            height: 500px;
+            width: 100%;
+            min-height: 490px;
+            max-height: 501px;
+        }
+	</style>
+</head>
+<div id="container" class="">
+    <section class="row">
+        <div class="col-sm-6">
+            <!--<div id="linechart" class="chartDiv"></div>-->
+            <kakarChart id="linechart" data-chart-type="linechartcomparision" class="chartDiv col-sm-6" data-value="charts"></kakarChart>
+        </div>
+        <div class="col-sm-6">
+            <div id="linechartcomparision" class="chartDiv"></div>
+            <!--<kakarChart id="linechartcomparision" data-chart-type="linechartcomparision" class="chartDiv" data-value="charts"></kakarChart>-->
+        </div>
+    </section>
+    <section class="row">
+        <div class="col-sm-6">
+            <div id="barchart" class="chartDiv"></div>
+        </div>
+        <div class="col-sm-6">
+            <div id="multibarchart" class="chartDiv"></div>
+        </div>
+    </section>
+    <section class="row">
+        <div class="col-sm-6 ">
+            <div id="piechart" class="chartDiv"></div>
+        </div>
+        <div class="col-sm-6">
+            <div id="donutchart" class="chartDiv"></div>
+        </div>
+    </section>
+    <section class="row">
+        <div class="col-sm-6">
+            <div id="meterchart" class="chartDiv"></div>
+        </div>
+    </section>
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<script src="data.js"></script>-->
+<script>
+
+    var datapoints = [{
+        "lable": "Jan"
+        , "y": 40
+    }, {
+        "lable": "Feb"
+        , "y": 180
+    }, {
+        "lable": "Mar"
+        , "y": 60
+    }, {
+        "lable": "Apr"
+        , "y": 300
+    }, {
+        "lable": "May"
+        , "y": 140
+    }, {
+        "lable": "Jun"
+        , "y": 240
+    }
+    ];
+
+    var charts = {
+        "chartnumber": 1
+        , "title": {
+            "text": "line chart Comparision"
+        },
+        "yaxis" : {
+            "min" : 0,
+            "max" : 400,
+            "difference" : 50,
+            "title" : "Days"
+        }
+        , "data": [
+            {
+                "stroke": "#00d554"
+                , "datapoints": datapoints
+            }
+        ]
+    };
+</script>
+<script type="text/javascript" src="kakar_chart.js"></script>
+</body>
+
+</html>
