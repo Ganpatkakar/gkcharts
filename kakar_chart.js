@@ -1,44 +1,50 @@
-function prepSurface(nr, width, height, container) {
-    //var container = document.getElementById(container);
-    $('#' + container).append('<canvas id="canvas' + nr + '" class="canvas"' +
-        ' style="position:absolute;" width="' + width + '" height="' + height + '"></canvas> ');
-    //document.write();
-}
+class ChartSurface {
+    constructor() {
+    }
 
-function prepUI(nr) {
-    console.log(nr);
-    var canvas = document.getElementById('canvas' + nr);
-    var ctx = canvas.getContext('2d');
-    ctx.font = '12px helvetica';
-    ctx.lineWidth = 1;
-    return ctx;
-}
+    static prepSurface(nr, width, height, container) {
+        //var container = document.getElementById(container);
+        $('#' + container).append('<canvas id="canvas' + nr + '" class="canvas"' +
+            ' style="position:absolute;" width="' + width + '" height="' + height + '"></canvas> ');
+        //document.write();
+    }
 
-function preparePlot(nr, sizex, sizey, container) {
-    prepSurface(nr, sizex, sizey, container);
-    var canvasContext = prepUI(nr);
-    return canvasContext;
-}
+    static prepUI(nr) {
+        console.log(nr);
+        var canvas = document.getElementById('canvas' + nr);
+        var ctx = canvas.getContext('2d');
+        ctx.font = '12px helvetica';
+        ctx.lineWidth = 1;
+        return ctx;
+    }
 
-function prepSurfaceupper(nr, width, height, container) {
-    var container = document.getElementById(container);
-    container.insertAdjacentHTML('beforeend', '<canvas id="canvasupper' + nr + '" class="canvas" style="position:absolute;" width="' + width + '" height="' + height + '"></canvas> 		<div class="canvasjs-chart-tooltip" style="position: absolute; height: auto; box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 2px; z-index: 1000; display: none; border-radius: 5px; transition: left 0.2s ease-out, bottom 0.2s ease-out;"><div style="width: auto; height: auto; min-width: 50px; margin: 0px; padding: 5px; font-family: Calibri, Arial, Georgia, serif; font-weight: normal; font-style: italic; font-size: 14px; color: rgb(0, 0, 0); text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px; text-align: left; border: 2px solid rgb(127, 96, 132); text-indent: 0px; white-space: nowrap; border-radius: 5px; -webkit-user-select: none; background: rgba(255, 255, 255, 0.901961);"><span style="color:#7F6084;"></span>3,125,844</div></div>');
-    //container.innerHTML = '<canvas id="canvasupper'+nr+'" width="'+width+'" height="'+height+'"></canvas>'
-    //document.write();
-}
+    preparePlot(nr, sizex, sizey, container) {
+        ChartSurface.prepSurface(nr, sizex, sizey, container);
+        var canvasContext = ChartSurface.prepUI(nr);
+        return canvasContext;
+    }
 
-function prepUIUpper(nr) {
-    var canvas = document.getElementById('canvasupper' + nr);
-    var ctx = canvas.getContext('2d');
-    ctx.font = '12px helvetica';
-    ctx.lineWidth = 1;
-    return ctx;
-}
+    static prepSurfaceupper(nr, width, height, container) {
+        var container = document.getElementById(container);
+        container.insertAdjacentHTML('beforeend', '<canvas id="canvasupper' + nr + '" class="canvas" style="position:absolute;" width="' + width + '" height="' + height + '"></canvas> 		<div class="canvasjs-chart-tooltip" style="position: absolute; height: auto; box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 2px; z-index: 1000; display: none; border-radius: 5px; transition: left 0.2s ease-out, bottom 0.2s ease-out;"><div style="width: auto; height: auto; min-width: 50px; margin: 0px; padding: 5px; font-family: Calibri, Arial, Georgia, serif; font-weight: normal; font-style: italic; font-size: 14px; color: rgb(0, 0, 0); text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px; text-align: left; border: 2px solid rgb(127, 96, 132); text-indent: 0px; white-space: nowrap; border-radius: 5px; -webkit-user-select: none; background: rgba(255, 255, 255, 0.901961);"><span style="color:#7F6084;"></span>3,125,844</div></div>');
+        //container.innerHTML = '<canvas id="canvasupper'+nr+'" width="'+width+'" height="'+height+'"></canvas>'
+        //document.write();
+    }
 
-function preparePlotUpper(nr, sizex, sizey, container) {
-    prepSurfaceupper(nr, sizex, sizey, container);
-    var canvasContext = prepUIUpper(nr);
-    return canvasContext;
+    static prepUIUpper(nr) {
+        var canvas = document.getElementById('canvasupper' + nr);
+        var ctx = canvas.getContext('2d');
+        ctx.font = '12px helvetica';
+        ctx.lineWidth = 1;
+        return ctx;
+    }
+
+    preparePlotUpper(nr, sizex, sizey, container) {
+        ChartSurface.prepSurfaceupper(nr, sizex, sizey, container);
+        var canvasContext = ChartSurface.prepUIUpper(nr);
+        return canvasContext;
+    }
+
 }
 
 function drawGrid(nr, verticanNr, ctx, data) {
@@ -144,6 +150,326 @@ function drawGraphicLinearYcord(canvas, ctx, verticalNr, cdata) {
 
 }
 
+class DrawChart {
+    constructor () {}
+    drawGraphicLinear(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+        var canvas = document.getElementById(canvas);
+        var hei = canvas.height - 60;
+        var wid = canvas.width - +60
+        var spacingVertical = hei / verticalNr;
+        console.log("spacingVertical:" + spacingVertical);
+        var spacingHorizontal = wid / data.datapoints.length;
+        console.log("spacingHorizontal:" + spacingHorizontal);
+
+        var totalRange = range[1] - range[0];
+        var verticalCoefficient = hei / totalRange;
+        var mov;
+        ctx.strokeStyle = stroke;
+        ctx.beginPath();
+        var xcord = 60;
+        var ycord = hei - (data.datapoints[0].y - range[0]) * verticalCoefficient;
+        for (var i = 0; i < data.datapoints.length; i++) {
+            console.log(xcord, ycord);
+            ctx.beginPath();
+            ctx.moveTo(xcord + 7, ycord);
+            ctx.strokeStyle = stroke;
+            ctx.lineWidth = .6;
+            if (i > 0) {
+                xcord = i * spacingHorizontal + 60;
+                ycord = hei - (data.datapoints[i].y - range[0]) * verticalCoefficient;
+
+                /*Draw line for line chart connecting and end points*/
+                ctx.lineTo(xcord - 5, ycord);
+            }
+            ctx.closePath();
+            ctx.stroke();
+            (function () {
+                /*Draw arc for line chart connecting and end points*/
+                //ctx.save();
+                ctx.beginPath();
+                ctx.lineWidth = 2.5;
+                //ctx.strokeStyle = "red";
+                ctx.arc(xcord, ycord, 7, 0, 2 * Math.PI);
+                ctx.fillStyle = "#ffffff";
+                ctx.fill();
+                ctx.stroke();
+                ctx.closePath();
+                ctx.lineWidth = 3;
+                //ctx.restore();
+            })();
+            ctx.closePath();
+            ctx.lineWidth = 1;
+
+            var newobj = {
+                x: i * spacingHorizontal + 60
+                , y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient
+                , lable: data.datapoints[i].lable
+                , dataval: data.datapoints[i].y
+            };
+            //console.log(newobj);
+            linecord.push(newobj);
+        }
+        return linecord;
+    };
+
+    drawBar(canvas, ctx, verticalNr, data, range, curx, stroke, linecord, barwidth) {
+        var canvas = document.getElementById(canvas);
+        var hei = canvas.height - 60;
+        var wid = canvas.width - 60;
+        var spacingVertical = hei / verticalNr;
+        var spacingHorizontal = wid / data.datapoints.length;
+        console.log("barChart spacingHorizontal :" + spacingHorizontal);
+        console.log("barchart div width :" + wid);
+        var totalcompare = data.datapoints.length;
+        //var barwidth = 15;
+        ctx.beginPath();
+        ctx.strokeStyle = stroke;
+        //ctx.moveTo(0, hei-(data[0]-range[0])*verticalCoefficient+spacingVertical);
+        for (var i = 0; i < data.datapoints.length; i++) {
+            ctx.fillStyle = stroke;
+            var h = (data.datapoints[i].y / range[1]) * hei;
+            ctx.fillRect(curx, hei - h, barwidth, h);
+            var newobj = {
+                x: curx
+                , y: hei - h
+                , wid: barwidth
+                , hei: h
+                , lable: data.datapoints[i].lable
+                , dataval: data.datapoints[i].y
+            };
+            //console.log(newobj);
+            linecord.push(newobj);
+            ctx.fillStyle = "#000";
+            //ctx.fillText(data.datapoints[i].y, curx, hei - h);
+            curx += spacingHorizontal;
+        }
+        ctx.stroke();
+        ctx.closePath();
+        console.log(linecord);
+        return linecord;
+    };
+
+    drawPie(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+        var canvas = document.getElementById(canvas);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var lastend = 0;
+        var myTotal = 0; // Automatically calculated so don't touch
+        var radius = canvas.height / 2;
+        for (var e = 0; e < data.datapoints.length; e++) {
+            myTotal += data.datapoints[e].y;
+        }
+        for (var i = 0; i < data.datapoints.length; i++) {
+            ctx.fillStyle = data.datapoints[i].color;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, canvas.height / 2);
+            if (data.datapoints[i].y == 0) {
+                ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
+                //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+                ctx.lineTo(canvas.width / 2, canvas.height / 2);
+                ctx.strokeStyle = '1';
+                ctx.strokeStyle = '#fff';
+                ctx.stroke();
+            }
+            ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
+            //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+            ctx.lineTo(canvas.width / 2, canvas.height / 2);
+            var newobj = {
+                wid: canvas.width
+                , hei: canvas.height
+                , startangle: lastend
+                , lastangle: lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal))
+                , lable: data.datapoints[i].lable
+                , y: data.datapoints[i].y
+            };
+            //console.log(newobj);
+            linecord.push(newobj);
+            lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
+            //console.log(lastend);
+            ctx.fill();
+        }
+        /* Draw piechart number values and numbers*/
+        var angle = 0;
+        var x = Math.floor(canvas.width / 2);
+        var y = Math.floor(canvas.height / 2);
+        ctx.fillStyle = "#fff";
+        ctx.font = radius * 0.10 + "px arial";
+        var anglenew;
+        for (i = 0; i < data.datapoints.length; i++) {
+            if (data.datapoints[i].y != 0) {
+                anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+                var anglemiddle = anglenew / 3;
+                var fx = canvas.width / 2 + (radius * .7) * Math.cos(angle + anglemiddle);
+                var fy = radius + (radius * .7) * Math.sin(angle + anglemiddle);
+                //ctx.moveTo(x, y);
+                ctx.translate(fx, fy);
+                //ctx.rotate(angle + anglemiddle);
+                ctx.fillText(data.datapoints[i].y.toString(), 0, 0 /*x + radius / 1.3, y*/);
+                ctx.translate(-fx, -fy);
+                angle += (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+            }
+        }
+        return linecord;
+    }
+
+    drawDonut(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+        var canvas = document.getElementById(canvas);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var linewidth = 50;
+        var radius = canvas.height / 2 - linewidth;
+        ctx.lineWidth = radius / 2;
+        var lastend = 0;
+        var myTotal = 0; // Automatically calculated so don't touch
+        for (var e = 0; e < data.datapoints.length; e++) {
+            myTotal += data.datapoints[e].y;
+        }
+        for (var i = 0; i < data.datapoints.length; i++) {
+            if (data.datapoints[i].y == 0) {
+                ctx.beginPath();
+                ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
+                ctx.strokeStyle = '#fff';
+                ctx.stroke()
+            }
+            ctx.strokeStyle = data.datapoints[i].color;
+            ctx.beginPath();
+            //ctx.moveTo(canvas.width / 2, canvas.height / 2);
+            ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
+            //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+            //ctx.lineTo(canvas.width / 2, canvas.height / 2);
+            var newobj = {
+                hei: canvas.height,
+                wid: canvas.width
+                , startangle: lastend
+                , lastangle: lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal))
+                , lable: data.datapoints[i].lable
+                , y: data.datapoints[i].y
+            };
+            //console.log(newobj);
+            linecord.push(newobj);
+            lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
+            //console.log(lastend);
+            //ctx.fill();
+            ctx.stroke();
+        }
+        /* Draw piechart number values */
+        var angle = 0;
+        var x = Math.floor(canvas.width / 2);
+        var y = Math.floor(canvas.height / 2);
+        ctx.fillStyle = "#fff";
+        ctx.font = radius * 0.12 + "px arial";
+        var anglenew;
+        for (i = 0; i < data.datapoints.length; i++) {
+            if (data.datapoints[i].y != 0) {
+                anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+                var anglemiddle = anglenew / 3;
+                var fx = (canvas.width / 2) + radius * Math.cos(angle + anglemiddle);
+                var fy = (radius * 1.5) + radius * Math.sin(angle + anglemiddle);
+                //ctx.moveTo(x, y);
+                ctx.translate(fx, fy);
+                //ctx.rotate(angle + anglemiddle);
+                ctx.fillText(data.datapoints[i].y.toString(), 0, 0 /*x + radius / 1.3, y*/);
+                ctx.translate(-fx, -fy);
+                angle += (Math.PI * 2 * (data.datapoints[i].y / myTotal));
+            }
+        }
+        return linecord;
+    }
+
+    drawMeter(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+        var canvas = document.getElementById(canvas);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var linewidth = 50;
+        ctx.lineWidth = 4;
+        var lastend = 3.141592653589793;
+        var myTotal = 0; // Automatically calculated so don't touch
+        var radius = canvas.height / 2 - linewidth;
+        for (var e = 0; e < data.datapoints.length; e++) {
+            myTotal += data.datapoints[e].y;
+        }
+        for (var i = 0; i < data.datapoints.length; i++) {
+            ctx.strokeStyle = "#fff";
+            ctx.fillStyle = data.datapoints[i].color;
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, canvas.height / 2);
+            ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * (data.datapoints[i].y / myTotal)));
+            //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+            ctx.lineTo(canvas.width / 2, canvas.height / 2);
+            ctx.fill();
+            ctx.stroke();
+            var newobj = {
+                x: canvas.width / 2
+                , startangle: lastend
+                , lastangle: lastend + (Math.PI * (data.datapoints[i].y / myTotal))
+                , lable: data.datapoints[i].lable
+            };
+            linecord.push(newobj);
+            lastend += Math.PI * (data.datapoints[i].y / myTotal);
+        }
+        //console.log(linecord);
+        ctx.beginPath();
+        ctx.fillStyle = "#fff";
+        ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.7, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.fillStyle = "#000";
+        ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.1, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        var rotateangel = Math.PI * (data.dataval / 100) + 3.141592653589793;
+        //console.log(rotateangel);
+        var headlen = 10;
+        ctx.lineWidth = 6;
+        ctx.lineCap = "round";
+        var tox = canvas.width / 2 + (radius * .8) * Math.cos(rotateangel);
+        var toy = canvas.height / 2 + (radius * .8) * Math.sin(rotateangel);
+        var fromx = canvas.width / 2;
+        var fromy = canvas.height / 2;
+        ctx.moveTo(canvas.width / 2, canvas.height / 2);
+        ctx.lineTo(tox, toy);
+        ctx.strokeStyle = "#000";
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.fillStyle = "#fff";
+        ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.07, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        /* Draw piechart number values */
+        var angle = 3.141592653589793;
+        var x = Math.floor(canvas.width / 2);
+        var y = Math.floor(canvas.height / 2);
+        ctx.fillStyle = "#000";
+        ctx.font = "14px arial";
+        ctx.save();
+
+        /*Text in data format loop*/
+        var anglenew;
+        for (i = 0; i < data.datapoints.length; i++) {
+            anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal)) / 2;
+            var anglemiddle = anglenew / 6;
+            /*ctx.translate(x, y);
+             ctx.rotate(angle + anglemiddle);
+             ctx.translate(-x, -y);
+             ctx.fillText(data.datapoints[i].lable.toString(), x + radius, y);
+             angle = (Math.PI * (data.datapoints[i].y / myTotal)) - anglemiddle;*/
+            //console.log(angle);
+
+            var fx = canvas.width / 2 + (radius * 1.01) * Math.cos(angle + anglemiddle);
+            var fy = canvas.height / 2 + (radius * 1.01) * Math.sin(angle + anglemiddle);
+            ctx.translate(fx, fy);
+            ctx.rotate(angle + 1.8);
+            ctx.fillText(data.datapoints[i].lable.toString(), 0, 0);
+            ctx.rotate(-(angle + 1.8));
+            ctx.translate(-fx, -fy);
+            angle += (Math.PI * (data.datapoints[i].y / myTotal));
+        }
+        ctx.restore();
+        return linecord;
+    }
+}
+
+/*Currently Spline Chart Functionality is not present*/
 var drawsplinechart = function (canvas, ctx, verticalNr, data, range, stroke, linecord) {
     var canvas = document.getElementById(canvas);
     var spacingVertical = canvas.height / verticalNr;
@@ -409,318 +735,6 @@ function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) 
     }
 };
 
-function drawGraphicLinear(canvas, ctx, verticalNr, data, range, stroke, linecord) {
-    var canvas = document.getElementById(canvas);
-    var hei = canvas.height - 60;
-    var wid = canvas.width - +60
-    var spacingVertical = hei / verticalNr;
-    console.log("spacingVertical:" + spacingVertical);
-    var spacingHorizontal = wid / data.datapoints.length;
-    console.log("spacingHorizontal:" + spacingHorizontal);
-
-    var totalRange = range[1] - range[0];
-    var verticalCoefficient = hei / totalRange;
-    var mov;
-    ctx.strokeStyle = stroke;
-    ctx.beginPath();
-    var xcord = 60;
-    var ycord = hei - (data.datapoints[0].y - range[0]) * verticalCoefficient;
-    for (var i = 0; i < data.datapoints.length; i++) {
-        console.log(xcord, ycord);
-        ctx.beginPath();
-        ctx.moveTo(xcord + 7, ycord);
-        ctx.strokeStyle = stroke;
-        ctx.lineWidth = .6;
-        if (i > 0) {
-            xcord = i * spacingHorizontal + 60;
-            ycord = hei - (data.datapoints[i].y - range[0]) * verticalCoefficient;
-
-            /*Draw line for line chart connecting and end points*/
-            ctx.lineTo(xcord - 5, ycord);
-        }
-        ctx.closePath();
-        ctx.stroke();
-        (function () {
-            /*Draw arc for line chart connecting and end points*/
-            //ctx.save();
-            ctx.beginPath();
-            ctx.lineWidth = 2.5;
-            //ctx.strokeStyle = "red";
-            ctx.arc(xcord, ycord, 7, 0, 2 * Math.PI);
-            ctx.fillStyle = "#ffffff";
-            ctx.fill();
-            ctx.stroke();
-            ctx.closePath();
-            ctx.lineWidth = 3;
-            //ctx.restore();
-        })();
-        ctx.closePath();
-        ctx.lineWidth = 1;
-
-        var newobj = {
-            x: i * spacingHorizontal + 60
-            , y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient
-            , lable: data.datapoints[i].lable
-            , dataval: data.datapoints[i].y
-        };
-        //console.log(newobj);
-        linecord.push(newobj);
-    }
-    return linecord;
-};
-
-var drawBar = function (canvas, ctx, verticalNr, data, range, curx, stroke, linecord, barwidth) {
-    var canvas = document.getElementById(canvas);
-    var hei = canvas.height - 60;
-    var wid = canvas.width - 60;
-    var spacingVertical = hei / verticalNr;
-    var spacingHorizontal = wid / data.datapoints.length;
-    console.log("barChart spacingHorizontal :" + spacingHorizontal);
-    console.log("barchart div width :" + wid);
-    var totalcompare = data.datapoints.length;
-    //var barwidth = 15;
-    ctx.beginPath();
-    ctx.strokeStyle = stroke;
-    //ctx.moveTo(0, hei-(data[0]-range[0])*verticalCoefficient+spacingVertical);
-    for (var i = 0; i < data.datapoints.length; i++) {
-        ctx.fillStyle = stroke;
-        var h = (data.datapoints[i].y / range[1]) * hei;
-        ctx.fillRect(curx, hei - h, barwidth, h);
-        var newobj = {
-            x: curx
-            , y: hei - h
-            , wid: barwidth
-            , hei: h
-            , lable: data.datapoints[i].lable
-            , dataval: data.datapoints[i].y
-        };
-        //console.log(newobj);
-        linecord.push(newobj);
-        ctx.fillStyle = "#000";
-        //ctx.fillText(data.datapoints[i].y, curx, hei - h);
-        curx += spacingHorizontal;
-    }
-    ctx.stroke();
-    ctx.closePath();
-    console.log(linecord);
-    return linecord;
-};
-
-var drawPie = function (canvas, ctx, verticalNr, data, range, stroke, linecord) {
-    var canvas = document.getElementById(canvas);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var lastend = 0;
-    var myTotal = 0; // Automatically calculated so don't touch
-    var radius = canvas.height / 2;
-    for (var e = 0; e < data.datapoints.length; e++) {
-        myTotal += data.datapoints[e].y;
-    }
-    for (var i = 0; i < data.datapoints.length; i++) {
-        ctx.fillStyle = data.datapoints[i].color;
-        ctx.beginPath();
-        ctx.moveTo(canvas.width / 2, canvas.height / 2);
-        if (data.datapoints[i].y == 0) {
-            ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
-            //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
-            ctx.lineTo(canvas.width / 2, canvas.height / 2);
-            ctx.strokeStyle = '1';
-            ctx.strokeStyle = '#fff';
-            ctx.stroke();
-        }
-        ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
-        //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
-        ctx.lineTo(canvas.width / 2, canvas.height / 2);
-        var newobj = {
-            wid: canvas.width
-            , hei: canvas.height
-            , startangle: lastend
-            , lastangle: lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal))
-            , lable: data.datapoints[i].lable
-            , y: data.datapoints[i].y
-        };
-        //console.log(newobj);
-        linecord.push(newobj);
-        lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
-        //console.log(lastend);
-        ctx.fill();
-    }
-    /* Draw piechart number values and numbers*/
-    var angle = 0;
-    var x = Math.floor(canvas.width / 2);
-    var y = Math.floor(canvas.height / 2);
-    ctx.fillStyle = "#fff";
-    ctx.font = radius * 0.10 + "px arial";
-    for (i = 0; i < data.datapoints.length; i++) {
-        if (data.datapoints[i].y != 0) {
-            anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
-            var anglemiddle = anglenew / 3;
-            var fx = canvas.width / 2 + (radius * .7) * Math.cos(angle + anglemiddle);
-            var fy = radius + (radius * .7) * Math.sin(angle + anglemiddle);
-            //ctx.moveTo(x, y);
-            ctx.translate(fx, fy);
-            //ctx.rotate(angle + anglemiddle);
-            ctx.fillText(data.datapoints[i].y.toString(), 0, 0 /*x + radius / 1.3, y*/);
-            ctx.translate(-fx, -fy);
-            angle += (Math.PI * 2 * (data.datapoints[i].y / myTotal));
-        }
-    }
-    return linecord;
-}
-
-var drawDonut = function (canvas, ctx, verticalNr, data, range, stroke, linecord) {
-    var canvas = document.getElementById(canvas);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var linewidth = 50;
-    var radius = canvas.height / 2 - linewidth;
-    ctx.lineWidth = radius / 2;
-    var lastend = 0;
-    var myTotal = 0; // Automatically calculated so don't touch
-    for (var e = 0; e < data.datapoints.length; e++) {
-        myTotal += data.datapoints[e].y;
-    }
-    for (var i = 0; i < data.datapoints.length; i++) {
-        if (data.datapoints[i].y == 0) {
-            ctx.beginPath();
-            ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
-            ctx.strokeStyle = '#fff';
-            ctx.stroke()
-        }
-        ctx.strokeStyle = data.datapoints[i].color;
-        ctx.beginPath();
-        //ctx.moveTo(canvas.width / 2, canvas.height / 2);
-        ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
-        //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
-        //ctx.lineTo(canvas.width / 2, canvas.height / 2);
-        var newobj = {
-            hei: canvas.height,
-            wid: canvas.width
-            , startangle: lastend
-            , lastangle: lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal))
-            , lable: data.datapoints[i].lable
-            , y: data.datapoints[i].y
-        };
-        //console.log(newobj);
-        linecord.push(newobj);
-        lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
-        //console.log(lastend);
-        //ctx.fill();
-        ctx.stroke();
-    }
-    /* Draw piechart number values */
-    var angle = 0;
-    var x = Math.floor(canvas.width / 2);
-    var y = Math.floor(canvas.height / 2);
-    ctx.fillStyle = "#fff";
-    ctx.font = radius * 0.12 + "px arial";
-    for (i = 0; i < data.datapoints.length; i++) {
-        if (data.datapoints[i].y != 0) {
-            anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
-            var anglemiddle = anglenew / 3;
-            var fx = (canvas.width / 2) + radius * Math.cos(angle + anglemiddle);
-            var fy = (radius * 1.5) + radius * Math.sin(angle + anglemiddle);
-            //ctx.moveTo(x, y);
-            ctx.translate(fx, fy);
-            //ctx.rotate(angle + anglemiddle);
-            ctx.fillText(data.datapoints[i].y.toString(), 0, 0 /*x + radius / 1.3, y*/);
-            ctx.translate(-fx, -fy);
-            angle += (Math.PI * 2 * (data.datapoints[i].y / myTotal));
-        }
-    }
-    return linecord;
-}
-
-function drawMeter(canvas, ctx, verticalNr, data, range, stroke, linecord) {
-    var canvas = document.getElementById(canvas);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    var linewidth = 50;
-    ctx.lineWidth = 4;
-    var lastend = 3.141592653589793;
-    var myTotal = 0; // Automatically calculated so don't touch
-    var radius = canvas.height / 2 - linewidth;
-    for (var e = 0; e < data.datapoints.length; e++) {
-        myTotal += data.datapoints[e].y;
-    }
-    for (var i = 0; i < data.datapoints.length; i++) {
-        ctx.strokeStyle = "#fff";
-        ctx.fillStyle = data.datapoints[i].color;
-        ctx.beginPath();
-        ctx.moveTo(canvas.width / 2, canvas.height / 2);
-        ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * (data.datapoints[i].y / myTotal)));
-        //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
-        ctx.lineTo(canvas.width / 2, canvas.height / 2);
-        ctx.fill();
-        ctx.stroke();
-        var newobj = {
-            x: canvas.width / 2
-            , startangle: lastend
-            , lastangle: lastend + (Math.PI * (data.datapoints[i].y / myTotal))
-            , lable: data.datapoints[i].lable
-        };
-        linecord.push(newobj);
-        lastend += Math.PI * (data.datapoints[i].y / myTotal);
-    }
-    //console.log(linecord);
-    ctx.beginPath();
-    ctx.fillStyle = "#fff";
-    ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.7, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.closePath();
-    ctx.beginPath();
-    ctx.fillStyle = "#000";
-    ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.1, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.closePath();
-    ctx.beginPath();
-    var rotateangel = Math.PI * (data.dataval / 100) + 3.141592653589793;
-    //console.log(rotateangel);
-    var headlen = 10;
-    ctx.lineWidth = 6;
-    ctx.lineCap = "round";
-    var tox = canvas.width / 2 + (radius * .8) * Math.cos(rotateangel);
-    var toy = canvas.height / 2 + (radius * .8) * Math.sin(rotateangel);
-    var fromx = canvas.width / 2;
-    var fromy = canvas.height / 2;
-    ctx.moveTo(canvas.width / 2, canvas.height / 2);
-    ctx.lineTo(tox, toy);
-    ctx.strokeStyle = "#000";
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.fillStyle = "#fff";
-    ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.07, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.closePath();
-
-    /* Draw piechart number values */
-    var angle = 3.141592653589793;
-    var x = Math.floor(canvas.width / 2);
-    var y = Math.floor(canvas.height / 2);
-    ctx.fillStyle = "#000";
-    ctx.font = "14px arial";
-    ctx.save();
-
-    /*Text in data format loop*/
-    for (i = 0; i < data.datapoints.length; i++) {
-        anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal)) / 2;
-        var anglemiddle = anglenew / 6;
-        /*ctx.translate(x, y);
-         ctx.rotate(angle + anglemiddle);
-         ctx.translate(-x, -y);
-         ctx.fillText(data.datapoints[i].lable.toString(), x + radius, y);
-         angle = (Math.PI * (data.datapoints[i].y / myTotal)) - anglemiddle;*/
-        //console.log(angle);
-
-        var fx = canvas.width / 2 + (radius * 1.01) * Math.cos(angle + anglemiddle);
-        var fy = canvas.height / 2 + (radius * 1.01) * Math.sin(angle + anglemiddle);
-        ctx.translate(fx, fy);
-        ctx.rotate(angle + 1.8);
-        ctx.fillText(data.datapoints[i].lable.toString(), 0, 0);
-        ctx.rotate(-(angle + 1.8));
-        ctx.translate(-fx, -fy);
-        angle += (Math.PI * (data.datapoints[i].y / myTotal));
-    }
-    ctx.restore();
-    return linecord;
-}
 
 function enumerateIt(nr, hei, spacv, spach) {
     var data = data2;
@@ -746,7 +760,8 @@ function getMousePos(canvas, evt) {
 
 class chartCalling {
     constructor() {
-
+        this.chartSurface = new ChartSurface();
+        this.drawChart = new DrawChart();
     }
 
     lineChart(chart, chartID, chartNumber) {
@@ -763,7 +778,7 @@ class chartCalling {
             'height': chart.hei + 100
         });
         $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
         var verticaldevisions = (chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference;
         console.log("verticaldevisions" + verticaldevisions);
         drawGrid(chart.chartnumber, verticaldevisions, ctx, chart.data);
@@ -771,12 +786,12 @@ class chartCalling {
         var maxdata = [chart.yaxis.min, chart.yaxis.max];
         var linecord = [];
         for (var i = 0; i < chart.data.length; i++) {
-            drawGraphicLinear(canvas, ctx, verticaldevisions, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+            this.drawChart.drawGraphicLinear(canvas, ctx, verticaldevisions, chart.data[i], maxdata, chart.data[i].stroke, linecord);
         }
 
         drawGraphicLinearYcord(canvas, ctx, verticaldevisions, chart);
         //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
         drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
     }
 
@@ -791,7 +806,7 @@ class chartCalling {
         });
         //console.log(chart);
         $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
         var verticaldevisions = (chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference;
         console.log("verticaldevisions" + verticaldevisions);
         var barwidth = drawGrid(chart.chartnumber, verticaldevisions, ctx, chart.data);
@@ -803,16 +818,17 @@ class chartCalling {
         var nextcurve = 0;
         var nextcurve = 60;
         for (var i = 0; i < chart.data.length; i++) {
-            drawBar(canvas, ctx, verticaldevisions, chart.data[i], maxdata, nextcurve, chart.data[i].stroke, linecord, barwidth);
+            this.drawChart.drawBar(canvas, ctx, verticaldevisions, chart.data[i], maxdata, nextcurve, chart.data[i].stroke, linecord, barwidth);
             nextcurve += barwidth;
         }
         drawGraphicLinearYcord(canvas, ctx, verticaldevisions, chart);
         //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
         drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
     }
 
     pieChart(chart, chartID, chartNumber) {
+
         chart.container = chartID;
         chart.chartnumber = chartNumber;
         chart.wid = $("#" + chart.container).width() - 10;
@@ -822,7 +838,7 @@ class chartCalling {
             'height': chart.hei + 100
         });
         $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
         drawGrid(chart.chartnumber, 10, ctx, chart.data);
         var canvas = 'canvas' + chart.chartnumber;
         var maxdata = [];
@@ -840,14 +856,15 @@ class chartCalling {
         //console.log(maxdata);
         var linecord = [];
         for (var i = 0; i < chart.data.length; i++) {
-            drawPie(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+            this.drawChart.drawPie(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
         }
         //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
         drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
     }
 
     donutChart(chart, chartID, chartNumber) {
+
         chart.container = chartID;
         chart.chartnumber = chartNumber;
         chart.wid = $("#" + chart.container).width() - 10;
@@ -857,7 +874,7 @@ class chartCalling {
             'height': chart.hei + 100
         });
         $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
         drawGrid(chart.chartnumber, 10, ctx, chart.data);
         var canvas = 'canvas' + chart.chartnumber;
         var maxdata = [];
@@ -876,10 +893,10 @@ class chartCalling {
         var linecord = [];
         var linewidth = 60;
         for (var i = 0; i < chart.data.length; i++) {
-            drawDonut(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+            this.drawChart.drawDonut(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
         }
         //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
         drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 
     }
@@ -895,7 +912,7 @@ class chartCalling {
             'height': chart.hei + 100
         });
         $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
         drawGrid(chart.chartnumber, 10, ctx, chart.data);
         var canvas = 'canvas' + chart.chartnumber;
         var maxdata = [];
@@ -914,10 +931,10 @@ class chartCalling {
         var linecord = [];
         var linewidth = 50;
         for (var i = 0; i < chart.data.length; i++) {
-            drawMeter(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+            this.drawChart.drawMeter(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
         }
         //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var ctx = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
         drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 
     }
@@ -935,7 +952,7 @@ class cChartMain {
             console.log(chartDefining);
 
             let chartCall = new chartCalling();
-            
+
             for (var i = 0; i < chartDefining.length; i++) {
                 let chartType = $(chartDefining[i]).attr("data-chart-type");
                 let chartID = $(chartDefining[i]).attr("id");
@@ -943,7 +960,7 @@ class cChartMain {
                 let chartNumber = i + 1;
                 console.log("chartType : " + chartType + ", chartID : " + chartID + ", dataVal : " + dataVal);
 
-                switch(chartType) {
+                switch (chartType) {
                     case "linechart": {
                         chartCall.lineChart(eval(dataVal), chartID, chartNumber);
                         break;
