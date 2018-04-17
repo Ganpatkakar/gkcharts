@@ -572,7 +572,7 @@ class DrawChartUpperCanvas {
             }, 2000);
         });
     }
-    barChartUpperCanvas() {
+    barChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
         document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
             var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
@@ -609,7 +609,7 @@ class DrawChartUpperCanvas {
             }, 2000);
         });
     }
-    pieChartUpperCanvas() {
+    pieChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
         document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
             var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
@@ -652,7 +652,7 @@ class DrawChartUpperCanvas {
             }, 2000);
         });
     }
-    donutChartUpperCanvas() {
+    donutChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
         document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
             var linewidth = 50;
@@ -692,7 +692,7 @@ class DrawChartUpperCanvas {
             }, 2000);
         });
     }
-    splineChartUpperCanvas() {
+    splineChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
         /*for (var i = 0; i < linecord.length; i++) {
          //console.log(linecord[i]);
          ctx.beginPath();
@@ -1027,7 +1027,7 @@ class chartCalling {
         drawGraphicLinearYcord(canvas, ctx, verticaldevisions, chart);
         //console.log(linecord);
         var ctx = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+        this.drawUpperChart.barChartUpperCanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
     }
 
     pieChart(chart, chartID, chartNumber) {
@@ -1063,7 +1063,7 @@ class chartCalling {
         }
         //console.log(linecord);
         var ctx = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+        this.drawUpperChart.pieChartUpperCanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
     }
 
     donutChart(chart, chartID, chartNumber) {
@@ -1100,7 +1100,7 @@ class chartCalling {
         }
         //console.log(linecord);
         var ctx = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+        this.drawUpperChart.donutChartUpperCanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
 
     }
 
