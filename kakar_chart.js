@@ -467,69 +467,69 @@ class DrawChart {
         ctx.restore();
         return linecord;
     }
-}
 
-/*Currently Spline Chart Functionality is not present*/
-var drawsplinechart = function (canvas, ctx, verticalNr, data, range, stroke, linecord) {
-    var canvas = document.getElementById(canvas);
-    var spacingVertical = canvas.height / verticalNr;
-    var spacingHorizontal = canvas.width / data.datapoints.length;
-    var hei = canvas.height - 3 * spacingVertical;
-    var totalRange = range[1] - range[0];
-    var verticalCoefficient = hei / totalRange;
-    var mov;
-    ctx.strokeStyle = stroke;
-    ctx.beginPath();
-    for (var i = 0; i < data.datapoints.length - 1; i++) {
-        ctx.moveTo(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
-        //console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
-        /*if(i == 0){
-         if(data.datapoints[i].y < data.datapoints[i+1].y ){
-         var anglepoint = 10;
-         ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
-         }else{
-         var anglepoint = -10;
-         ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
-         }
-         }else if(i == data.datapoints.length){
-         if(data.datapoints[i].y < data.datapoints[i+1].y ){
-         var anglepoint = 10;
-         ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
-         }else{
-         var anglepoint = -10;
-         ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
-         }
-         }else{
-         if(data.datapoints[i].y < data.datapoints[i+1].y ){
-         var anglepoint = 10;
-         ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
-         }else{
-         var anglepoint = -10;
-         ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
-         }
-         }*/
-        ctx.bezierCurveTo(i * spacingHorizontal + 10, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical + 15, (i + 1) * spacingHorizontal - 10, hei - (data.datapoints[i + 1].y - range[0]) * verticalCoefficient + spacingVertical - 15, (i + 1) * spacingHorizontal, hei - (data.datapoints[i + 1].y - range[0]) * verticalCoefficient + spacingVertical);
-        //console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + 15,  (i + 1) * spacingHorizontal - 10, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - 15, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
-        var newobj = {
-            x: i * spacingHorizontal
-            , y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical
-            , lable: data.datapoints[i].lable
-        };
-        //console.log(newobj);
-        linecord.push(newobj);
-        ctx.fillText(data.datapoints[i].y, i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
-    }
-    ctx.stroke();
-    for (var i = 0; i < linecord.length; i++) {
-        //console.log(linecord[i]);
+    /*Currently Spline Chart Functionality is not present*/
+    drawsplinechart(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+        var canvas = document.getElementById(canvas);
+        var spacingVertical = canvas.height / verticalNr;
+        var spacingHorizontal = canvas.width / data.datapoints.length;
+        var hei = canvas.height - 3 * spacingVertical;
+        var totalRange = range[1] - range[0];
+        var verticalCoefficient = hei / totalRange;
+        var mov;
+        ctx.strokeStyle = stroke;
         ctx.beginPath();
-        ctx.arc(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical, 2, 0, 2 * Math.PI);
-        ctx.fill();
+        for (var i = 0; i < data.datapoints.length - 1; i++) {
+            ctx.moveTo(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
+            //console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical);
+            /*if(i == 0){
+             if(data.datapoints[i].y < data.datapoints[i+1].y ){
+             var anglepoint = 10;
+             ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+             }else{
+             var anglepoint = -10;
+             ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+             }
+             }else if(i == data.datapoints.length){
+             if(data.datapoints[i].y < data.datapoints[i+1].y ){
+             var anglepoint = 10;
+             ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+             }else{
+             var anglepoint = -10;
+             ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+             }
+             }else{
+             if(data.datapoints[i].y < data.datapoints[i+1].y ){
+             var anglepoint = 10;
+             ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+             }else{
+             var anglepoint = -10;
+             ctx.bezierCurveTo(i*spacingHorizontal + anglepoint, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + anglepoint,  (i + 1) * spacingHorizontal - anglepoint, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - anglepoint, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+             }
+             }*/
+            ctx.bezierCurveTo(i * spacingHorizontal + 10, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical + 15, (i + 1) * spacingHorizontal - 10, hei - (data.datapoints[i + 1].y - range[0]) * verticalCoefficient + spacingVertical - 15, (i + 1) * spacingHorizontal, hei - (data.datapoints[i + 1].y - range[0]) * verticalCoefficient + spacingVertical);
+            //console.log(i*spacingHorizontal, hei-(data.datapoints[i].y-range[0])*verticalCoefficient+spacingVertical + 15,  (i + 1) * spacingHorizontal - 10, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical - 15, (i + 1) * spacingHorizontal, hei-(data.datapoints[i+1].y-range[0])*verticalCoefficient+spacingVertical);
+            var newobj = {
+                x: i * spacingHorizontal
+                , y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical
+                , lable: data.datapoints[i].lable
+            };
+            //console.log(newobj);
+            linecord.push(newobj);
+            ctx.fillText(data.datapoints[i].y, i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical);
+        }
         ctx.stroke();
-    }
-    ctx.closePath();
-    return linecord;
-};
+        for (var i = 0; i < linecord.length; i++) {
+            //console.log(linecord[i]);
+            ctx.beginPath();
+            ctx.arc(i * spacingHorizontal, hei - (data.datapoints[i].y - range[0]) * verticalCoefficient + spacingVertical, 2, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.stroke();
+        }
+        ctx.closePath();
+        return linecord;
+    };
+}
 
 function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) {
     //var canvasid = document.getElementById('canvasupper'+nr);
@@ -734,7 +734,6 @@ function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) 
         });
     }
 };
-
 
 function enumerateIt(nr, hei, spacv, spach) {
     var data = data2;
