@@ -1,183 +1,7 @@
-function chartCalling (chart, chartType, chartID) {
-    console.log(chart);
-    var charttype = chartType;
-    chart.container = chartID;
-    chart.wid = $("#" + chart.container).width() - 10;
-    //chart.hei = chart.wid  * .50;
-    chart.hei = $('#' + chart.container).height();
-    console.log("chart.wid :" + chart.wid + ", chart.hei : " + chart.hei);
-
-    if (charttype == 'linechartcomparision') {
-        $('#' + chart.container).css({
-            'height': chart.hei + 100
-        });
-        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        var verticaldevisions = (chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference;
-        console.log("verticaldevisions" + verticaldevisions);
-        drawGrid(chart.chartnumber, verticaldevisions, ctx, chart.data);
-        var canvas = 'canvas' + chart.chartnumber;
-        var maxdata = [chart.yaxis.min, chart.yaxis.max];
-        var linecord = [];
-        for (var i = 0; i < chart.data.length; i++) {
-            drawGraphicLinear(canvas, ctx, verticaldevisions, chart.data[i], maxdata, chart.data[i].stroke, linecord);
-        }
-
-        drawGraphicLinearYcord(canvas, ctx, verticaldevisions, chart);
-        //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
-    }
-    if (charttype == 'splinechart') {
-        $('#' + chart.container).css({
-            'height': chart.hei + 100
-        });
-        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawGrid(chart.chartnumber, 10, ctx, chart.data);
-        var canvas = 'canvas' + chart.chartnumber;
-        var maxdata = [];
-        maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-        for (var i = 0; i < chart.data.length; i++) {
-            for (var j = 0; j < chart.data[i].datapoints.length; j++) {
-                if (chart.data[i].datapoints[j].y < maxdata[0]) {
-                    maxdata[0] = chart.data[i].datapoints[j].y;
-                }
-                if (chart.data[i].datapoints[j].y > maxdata[1]) {
-                    maxdata[1] = chart.data[i].datapoints[j].y;
-                }
-            }
-        }
-        //console.log(maxdata);
-        var linecord = [];
-        for (var i = 0; i < chart.data.length; i++) {
-            drawsplinechart(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
-        }
-        //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
-    }
-    if (charttype == 'barchart') {
-        $('#' + chart.container).css({
-            'height': chart.hei + 100
-        });
-        //console.log(chart);
-        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        var verticaldevisions = (chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference;
-        console.log("verticaldevisions" + verticaldevisions);
-        var barwidth = drawGrid(chart.chartnumber, verticaldevisions, ctx, chart.data);
-        console.log("barwidth:" + barwidth);
-        var canvas = 'canvas' + chart.chartnumber;
-        var maxdata = [chart.yaxis.min, chart.yaxis.max];
-        console.log("maxdata:" + maxdata);
-        var linecord = [];
-        var nextcurve = 0;
-        var nextcurve = 60;
-        for (var i = 0; i < chart.data.length; i++) {
-            drawBar(canvas, ctx, verticaldevisions, chart.data[i], maxdata, nextcurve, chart.data[i].stroke, linecord, barwidth);
-            nextcurve += barwidth;
-        }
-        drawGraphicLinearYcord(canvas, ctx, verticaldevisions, chart);
-        //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
-    }
-    if (charttype == 'piechart') {
-        $('#' + chart.container).css({
-            'height': chart.hei + 100
-        });
-        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawGrid(chart.chartnumber, 10, ctx, chart.data);
-        var canvas = 'canvas' + chart.chartnumber;
-        var maxdata = [];
-        maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-        for (var i = 0; i < chart.data.length; i++) {
-            for (var j = 0; j < chart.data[i].datapoints.length; j++) {
-                if (chart.data[i].datapoints[j].y < maxdata[0]) {
-                    maxdata[0] = chart.data[i].datapoints[j].y;
-                }
-                if (chart.data[i].datapoints[j].y > maxdata[1]) {
-                    maxdata[1] = chart.data[i].datapoints[j].y;
-                }
-            }
-        }
-        //console.log(maxdata);
-        var linecord = [];
-        for (var i = 0; i < chart.data.length; i++) {
-            drawPie(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
-        }
-        //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
-    }
-    if (charttype == 'donutchart') {
-        $('#' + chart.container).css({
-            'height': chart.hei + 100
-        });
-        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawGrid(chart.chartnumber, 10, ctx, chart.data);
-        var canvas = 'canvas' + chart.chartnumber;
-        var maxdata = [];
-        maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-        for (var i = 0; i < chart.data.length; i++) {
-            for (var j = 0; j < chart.data[i].datapoints.length; j++) {
-                if (chart.data[i].datapoints[j].y < maxdata[0]) {
-                    maxdata[0] = chart.data[i].datapoints[j].y;
-                }
-                if (chart.data[i].datapoints[j].y > maxdata[1]) {
-                    maxdata[1] = chart.data[i].datapoints[j].y;
-                }
-            }
-        }
-        //console.log(maxdata);
-        var linecord = [];
-        var linewidth = 60;
-        for (var i = 0; i < chart.data.length; i++) {
-            drawDonut(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
-        }
-        //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
-    }
-    if (charttype == 'meterchart') {
-        $('#' + chart.container).css({
-            'height': chart.hei + 100
-        });
-        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
-        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawGrid(chart.chartnumber, 10, ctx, chart.data);
-        var canvas = 'canvas' + chart.chartnumber;
-        var maxdata = [];
-        maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-        for (var i = 0; i < chart.data.length; i++) {
-            for (var j = 0; j < chart.data[i].datapoints.length; j++) {
-                if (chart.data[i].datapoints[j].y < maxdata[0]) {
-                    maxdata[0] = chart.data[i].datapoints[j].y;
-                }
-                if (chart.data[i].datapoints[j].y > maxdata[1]) {
-                    maxdata[1] = chart.data[i].datapoints[j].y;
-                }
-            }
-        }
-        //console.log(maxdata);
-        var linecord = [];
-        var linewidth = 50;
-        for (var i = 0; i < chart.data.length; i++) {
-            drawMeter(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
-        }
-        //console.log(linecord);
-        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
-    }
-}
-
 function prepSurface(nr, width, height, container) {
     //var container = document.getElementById(container);
     $('#' + container).append('<canvas id="canvas' + nr + '" class="canvas"' +
-    ' style="position:absolute;" width="' + width + '" height="' + height + '"></canvas> ');
+        ' style="position:absolute;" width="' + width + '" height="' + height + '"></canvas> ');
     //document.write();
 }
 
@@ -384,16 +208,17 @@ var drawsplinechart = function (canvas, ctx, verticalNr, data, range, stroke, li
 function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) {
     //var canvasid = document.getElementById('canvasupper'+nr);
     console.log("linechart linecors : " + linecord);
-    if (charttype == 'linechartcomparision') {
+    if (charttype == 'linechartcomparision' || charttype == "linechart") {
         document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
             var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
-            //console.log(mousePos);
             var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
+            console.log(message);
             for (var i = 0; i < linecord.length; i++) {
                 ctx.beginPath();
                 ctx.arc(linecord[i].x, linecord[i].y, 7, 0, 2 * Math.PI);
                 if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
+                    console.log("lineChart compar mouse over on upper canvas");
                     ctx.lineWidth = 4;
                     ctx.strokeStyle = 'rgba(0,0,0,.7)';
                     ctx.stroke();
@@ -422,13 +247,13 @@ function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) 
             }, 2000);
         });
     }
-    if (charttype == 'barchart') {
+    if (charttype == 'barchart' || charttype == "multibarchart") {
         document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
             var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
             //console.log(mousePos);
             var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            //					/console.log(message);
+            console.log(message);
             for (var i = 0; i < linecord.length; i++) {
                 ctx.beginPath();
                 ctx.rect(linecord[i].x, linecord[i].y, linecord[i].wid, linecord[i].hei);
@@ -464,11 +289,11 @@ function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) 
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
             var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
             var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            //console.log(message);
+            console.log(message);
             for (var i = 0; i < linecord.length; i++) {
                 ctx.beginPath();
-                ctx.lineTo(linecord[i].wid/2, linecord[i].hei/2);
-                ctx.arc(linecord[i].wid/2, linecord[i].hei/2, linecord[i].hei/2, linecord[i].startangle, linecord[i].lastangle, false);
+                ctx.lineTo(linecord[i].wid / 2, linecord[i].hei / 2);
+                ctx.arc(linecord[i].wid / 2, linecord[i].hei / 2, linecord[i].hei / 2, linecord[i].startangle, linecord[i].lastangle, false);
                 ctx.lineTo(linecord[i].x, linecord[i].x);
                 if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
                     /*ctx.lineWidth=1;
@@ -508,10 +333,10 @@ function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) 
             var linewidth = 50;
             var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
             var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            //console.log(message);
+            console.log(message);
             for (var i = 0; i < linecord.length; i++) {
                 var radius = linecord[i].hei / 2 - linewidth;
-                ctx.lineWidth = radius/2;
+                ctx.lineWidth = radius / 2;
                 ctx.beginPath();
                 //ctx.lineTo(linecord[i].x, linecord[i].x);
                 ctx.arc(linecord[i].wid / 2, linecord[i].hei / 2, radius, linecord[i].startangle, linecord[i].lastangle, false);
@@ -584,7 +409,7 @@ function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) 
     }
 };
 
- function drawGraphicLinear(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+function drawGraphicLinear(canvas, ctx, verticalNr, data, range, stroke, linecord) {
     var canvas = document.getElementById(canvas);
     var hei = canvas.height - 60;
     var wid = canvas.width - +60
@@ -681,7 +506,7 @@ var drawBar = function (canvas, ctx, verticalNr, data, range, curx, stroke, line
     return linecord;
 };
 
-var drawPie = function(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+var drawPie = function (canvas, ctx, verticalNr, data, range, stroke, linecord) {
     var canvas = document.getElementById(canvas);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var lastend = 0;
@@ -742,12 +567,12 @@ var drawPie = function(canvas, ctx, verticalNr, data, range, stroke, linecord) {
     return linecord;
 }
 
-var drawDonut = function(canvas, ctx, verticalNr, data, range, stroke, linecord) {
+var drawDonut = function (canvas, ctx, verticalNr, data, range, stroke, linecord) {
     var canvas = document.getElementById(canvas);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     var linewidth = 50;
     var radius = canvas.height / 2 - linewidth;
-    ctx.lineWidth = radius/2;
+    ctx.lineWidth = radius / 2;
     var lastend = 0;
     var myTotal = 0; // Automatically calculated so don't touch
     for (var e = 0; e < data.datapoints.length; e++) {
@@ -768,7 +593,7 @@ var drawDonut = function(canvas, ctx, verticalNr, data, range, stroke, linecord)
         //ctx.lineTo(canvas.width / 2, canvas.height / 2);
         var newobj = {
             hei: canvas.height,
-            wid : canvas.width
+            wid: canvas.width
             , startangle: lastend
             , lastangle: lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal))
             , lable: data.datapoints[i].lable
@@ -791,7 +616,7 @@ var drawDonut = function(canvas, ctx, verticalNr, data, range, stroke, linecord)
         if (data.datapoints[i].y != 0) {
             anglenew = (Math.PI * 2 * (data.datapoints[i].y / myTotal));
             var anglemiddle = anglenew / 3;
-            var fx = (canvas.width/2) + radius * Math.cos(angle + anglemiddle);
+            var fx = (canvas.width / 2) + radius * Math.cos(angle + anglemiddle);
             var fy = (radius * 1.5) + radius * Math.sin(angle + anglemiddle);
             //ctx.moveTo(x, y);
             ctx.translate(fx, fy);
@@ -896,42 +721,7 @@ function drawMeter(canvas, ctx, verticalNr, data, range, stroke, linecord) {
     ctx.restore();
     return linecord;
 }
-/*function drawmultiBar(canvas, ctx, verticalNr, data, range, stroke, linecord){
- var canvas = document.getElementById('canvas'+nr);
- var spacingVertical = canvas.height/verticalNr;
- var spacingHorizontal = canvas.width/data.datapoints.length;
- var hei = canvas.height-spacingVertical;
- var width = 20;
- var curx = 0;
 
- ctx.beginPath();
- ctx.strokeStyle = stroke;
- //ctx.moveTo(0, hei-(data[0]-range[0])*verticalCoefficient+spacingVertical);
-
- for(var i = 0; i<data.datapoints.length;i++){
- var h = (data.datapoints[i].y/range[1])*hei;
- var h1 = ((data1[i]/range[1])*hei)+h;
- var h2 = ((data2[i]/range[1])*hei)+h1;
-
- ctx.fillStyle = plot1;
- ctx.fillRect(curx, hei - h2 , width, h2);
-
- ctx.fillStyle = text;
- ctx.fillRect(curx, hei - h1, width, h1);
-
- ctx.fillStyle = plot;
- ctx.fillRect(curx, hei - h , width, h);
-
- ctx.fillStyle = '#bbb';
- ctx.fillText(data2[i], curx, hei-h2+10);
- ctx.fillText(data1[i], curx, hei-h1+10);
- ctx.fillText(data[i], curx, hei-h+10);
-
- curx +=  spacingHorizontal;
- }
- ctx.stroke();
- ctx.closePath();
- }*/
 function enumerateIt(nr, hei, spacv, spach) {
     var data = data2;
     ctx.fillStyle = text;
@@ -954,32 +744,252 @@ function getMousePos(canvas, evt) {
     };
 }
 
+class chartCalling {
+    constructor() {
 
-var cChartMain = function () {
-    var selft = this;
-    self.initialize = function () {
+    }
+
+    lineChart(chart, chartID, chartNumber) {
+
+        console.log(chart);
+        chart.container = chartID;
+        chart.chartnumber = chartNumber;
+        chart.wid = $("#" + chart.container).width() - 10;
+        //chart.hei = chart.wid  * .50;
+        chart.hei = $('#' + chart.container).height();
+        console.log("chart.wid :" + chart.wid + ", chart.hei : " + chart.hei);
+
+        $('#' + chart.container).css({
+            'height': chart.hei + 100
+        });
+        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
+        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var verticaldevisions = (chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference;
+        console.log("verticaldevisions" + verticaldevisions);
+        drawGrid(chart.chartnumber, verticaldevisions, ctx, chart.data);
+        var canvas = 'canvas' + chart.chartnumber;
+        var maxdata = [chart.yaxis.min, chart.yaxis.max];
+        var linecord = [];
+        for (var i = 0; i < chart.data.length; i++) {
+            drawGraphicLinear(canvas, ctx, verticaldevisions, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+        }
+
+        drawGraphicLinearYcord(canvas, ctx, verticaldevisions, chart);
+        //console.log(linecord);
+        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+    }
+
+    barChart(chart, chartID, chartNumber) {
+        chart.container = chartID;
+        chart.chartnumber = chartNumber;
+        chart.wid = $("#" + chart.container).width() - 10;
+        chart.hei = $('#' + chart.container).height();
+
+        $('#' + chart.container).css({
+            'height': chart.hei + 100
+        });
+        //console.log(chart);
+        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
+        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        var verticaldevisions = (chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference;
+        console.log("verticaldevisions" + verticaldevisions);
+        var barwidth = drawGrid(chart.chartnumber, verticaldevisions, ctx, chart.data);
+        console.log("barwidth:" + barwidth);
+        var canvas = 'canvas' + chart.chartnumber;
+        var maxdata = [chart.yaxis.min, chart.yaxis.max];
+        console.log("maxdata:" + maxdata);
+        var linecord = [];
+        var nextcurve = 0;
+        var nextcurve = 60;
+        for (var i = 0; i < chart.data.length; i++) {
+            drawBar(canvas, ctx, verticaldevisions, chart.data[i], maxdata, nextcurve, chart.data[i].stroke, linecord, barwidth);
+            nextcurve += barwidth;
+        }
+        drawGraphicLinearYcord(canvas, ctx, verticaldevisions, chart);
+        //console.log(linecord);
+        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+    }
+
+    pieChart(chart, chartID, chartNumber) {
+        chart.container = chartID;
+        chart.chartnumber = chartNumber;
+        chart.wid = $("#" + chart.container).width() - 10;
+        chart.hei = $('#' + chart.container).height();
+
+        $('#' + chart.container).css({
+            'height': chart.hei + 100
+        });
+        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
+        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        drawGrid(chart.chartnumber, 10, ctx, chart.data);
+        var canvas = 'canvas' + chart.chartnumber;
+        var maxdata = [];
+        maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
+        for (var i = 0; i < chart.data.length; i++) {
+            for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+                if (chart.data[i].datapoints[j].y < maxdata[0]) {
+                    maxdata[0] = chart.data[i].datapoints[j].y;
+                }
+                if (chart.data[i].datapoints[j].y > maxdata[1]) {
+                    maxdata[1] = chart.data[i].datapoints[j].y;
+                }
+            }
+        }
+        //console.log(maxdata);
+        var linecord = [];
+        for (var i = 0; i < chart.data.length; i++) {
+            drawPie(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+        }
+        //console.log(linecord);
+        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+    }
+
+    donutChart(chart, chartID, chartNumber) {
+        chart.container = chartID;
+        chart.chartnumber = chartNumber;
+        chart.wid = $("#" + chart.container).width() - 10;
+        chart.hei = $('#' + chart.container).height();
+
+        $('#' + chart.container).css({
+            'height': chart.hei + 100
+        });
+        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
+        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        drawGrid(chart.chartnumber, 10, ctx, chart.data);
+        var canvas = 'canvas' + chart.chartnumber;
+        var maxdata = [];
+        maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
+        for (var i = 0; i < chart.data.length; i++) {
+            for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+                if (chart.data[i].datapoints[j].y < maxdata[0]) {
+                    maxdata[0] = chart.data[i].datapoints[j].y;
+                }
+                if (chart.data[i].datapoints[j].y > maxdata[1]) {
+                    maxdata[1] = chart.data[i].datapoints[j].y;
+                }
+            }
+        }
+        //console.log(maxdata);
+        var linecord = [];
+        var linewidth = 60;
+        for (var i = 0; i < chart.data.length; i++) {
+            drawDonut(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+        }
+        //console.log(linecord);
+        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+
+    }
+
+    meterChart(chart, chartID, chartNumber) {
+
+        chart.container = chartID;
+        chart.chartnumber = chartNumber;
+        chart.wid = $("#" + chart.container).width() - 10;
+        chart.hei = $('#' + chart.container).height();
+
+        $('#' + chart.container).css({
+            'height': chart.hei + 100
+        });
+        $('#' + chart.container).html('<h2 class="chartTitle">' + chart.title.text + '</h2>');
+        var ctx = preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        drawGrid(chart.chartnumber, 10, ctx, chart.data);
+        var canvas = 'canvas' + chart.chartnumber;
+        var maxdata = [];
+        maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
+        for (var i = 0; i < chart.data.length; i++) {
+            for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+                if (chart.data[i].datapoints[j].y < maxdata[0]) {
+                    maxdata[0] = chart.data[i].datapoints[j].y;
+                }
+                if (chart.data[i].datapoints[j].y > maxdata[1]) {
+                    maxdata[1] = chart.data[i].datapoints[j].y;
+                }
+            }
+        }
+        //console.log(maxdata);
+        var linecord = [];
+        var linewidth = 50;
+        for (var i = 0; i < chart.data.length; i++) {
+            drawMeter(canvas, ctx, 10, chart.data[i], maxdata, chart.data[i].stroke, linecord);
+        }
+        //console.log(linecord);
+        var ctx = preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
+        drawupercanvas(chart.chartnumber, ctx, chart.wid, chart.hei, linecord, chart.container, chart.type);
+
+    }
+}
+
+class cChartMain {
+    constructor() {
+        cChartMain.initialize();
+    };
+
+    static initialize() {
         try {
-
+            console.log("Start : initialize");
             var chartDefining = $('body').find('kakarChart');
             console.log(chartDefining);
+
+            let chartCall = new chartCalling();
+            
             for (var i = 0; i < chartDefining.length; i++) {
-                var chartType = $(chartDefining[0]).attr("data-chart-type");
-                var chartID = $(chartDefining[0]).attr("id");
-                var dataVal = $(chartDefining[0]).data("value");
+                let chartType = $(chartDefining[i]).attr("data-chart-type");
+                let chartID = $(chartDefining[i]).attr("id");
+                let dataVal = $(chartDefining[i]).data("value");
+                let chartNumber = i + 1;
                 console.log("chartType : " + chartType + ", chartID : " + chartID + ", dataVal : " + dataVal);
-                chartCalling(eval(dataVal), chartType, chartID);
+
+                switch(chartType) {
+                    case "linechart": {
+                        chartCall.lineChart(eval(dataVal), chartID, chartNumber);
+                        break;
+                    }
+                    case "linechartcomparision" : {
+                        chartCall.lineChart(eval(dataVal), chartID, chartNumber);
+                        break;
+                    }
+                    case 'barchart': {
+                        chartCall.barChart(eval(dataVal), chartID, chartNumber);
+                        break;
+                    }
+                    case "multibarchart": {
+                        chartCall.barChart(eval(dataVal), chartID, chartNumber);
+                        break;
+                    }
+                    case "piechart": {
+                        chartCall.pieChart(eval(dataVal), chartID, chartNumber);
+                        break;
+                    }
+                    case "donutchart": {
+                        chartCall.donutChart(eval(dataVal), chartID, chartNumber);
+                        break;
+                    }
+                    case "meterchart" : {
+                        chartCall.meterChart(eval(dataVal), chartID, chartNumber);
+                        break;
+                    }
+                    default: {
+                        console.log("Invalid choice of chart");
+                        break;
+                    }
+                }
             }
 
-            $( window ).resize(function() {
+            $(window).resize(function () {
                 console.log("resizing window");
-                self.initialize();
+                cChartMain.initialize();
             });
+
+            console.log("Start : initialize");
 
         } catch (err) {
             console.error("Exception occurred in Home module:  " + err.message);
         }
-    };
-    self.initialize();
+    }
 };
 
 (function () {
