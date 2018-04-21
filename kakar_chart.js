@@ -572,6 +572,7 @@ class DrawChartUpperCanvas {
             }, 2000);
         });
     }
+
     barChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
         document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
@@ -609,6 +610,7 @@ class DrawChartUpperCanvas {
             }, 2000);
         });
     }
+
     pieChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
         document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
@@ -652,6 +654,7 @@ class DrawChartUpperCanvas {
             }, 2000);
         });
     }
+
     donutChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
         document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
@@ -692,6 +695,7 @@ class DrawChartUpperCanvas {
             }, 2000);
         });
     }
+
     splineChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
         /*for (var i = 0; i < linecord.length; i++) {
          //console.log(linecord[i]);
@@ -734,210 +738,6 @@ class DrawChartUpperCanvas {
     }
 }
 
-function drawupercanvas(nr, ctx, width, height, linecord, container, charttype) {
-    //var canvasid = document.getElementById('canvasupper'+nr);
-    console.log("linechart linecors : " + linecord);
-    if (charttype == 'linechartcomparision' || charttype == "linechart") {
-        document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
-            ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-            var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
-            var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            console.log(message);
-            for (var i = 0; i < linecord.length; i++) {
-                ctx.beginPath();
-                ctx.arc(linecord[i].x, linecord[i].y, 7, 0, 2 * Math.PI);
-                if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-                    console.log("lineChart compar mouse over on upper canvas");
-                    ctx.lineWidth = 4;
-                    ctx.strokeStyle = 'rgba(0,0,0,.7)';
-                    ctx.stroke();
-                    //ctx.fill();
-                    $('#' + container + ' .canvasjs-chart-tooltip').css({
-                        'display': 'block'
-                        , 'left': linecord[i].x
-                        , 'top': linecord[i].y
-                    });
-                    $('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable + ' : ' + linecord[i].dataval);
-                    break;
-                }
-                else {
-                    ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-                    //$('#'+container+' .canvasjs-chart-tooltip').css({'display':'none'});
-                }
-                ctx.closePath();
-            }
-        }, false);
-
-        document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
-            setTimeout(function () {
-                $('#' + container + ' .canvasjs-chart-tooltip').css({
-                    'display': 'none'
-                });
-            }, 2000);
-        });
-    }
-    if (charttype == 'barchart' || charttype == "multibarchart") {
-        document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
-            ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-            var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
-            //console.log(mousePos);
-            var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            console.log(message);
-            for (var i = 0; i < linecord.length; i++) {
-                ctx.beginPath();
-                ctx.rect(linecord[i].x, linecord[i].y, linecord[i].wid, linecord[i].hei);
-                if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-                    ctx.lineWidth = .5;
-                    ctx.fillStyle = 'rgba(0,0,0,.3)'
-                    ctx.fill();
-                    ctx.stroke();
-                    $('#' + container + ' .canvasjs-chart-tooltip').css({
-                        'display': 'block'
-                        , 'left': linecord[i].x
-                        , 'top': linecord[i].y
-                    });
-                    $('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable + ' : ' + linecord[i].dataval);
-                    break;
-                }
-                else {
-                    ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-                    //$('#'+container+' .canvasjs-chart-tooltip').css({'display':'none'});
-                }
-            }
-        }, false);
-        document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
-            setTimeout(function () {
-                $('#' + container + ' .canvasjs-chart-tooltip').css({
-                    'display': 'none'
-                });
-            }, 2000);
-        });
-    }
-    if (charttype == 'piechart') {
-        document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
-            ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-            var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
-            var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            console.log(message);
-            for (var i = 0; i < linecord.length; i++) {
-                ctx.beginPath();
-                ctx.lineTo(linecord[i].wid / 2, linecord[i].hei / 2);
-                ctx.arc(linecord[i].wid / 2, linecord[i].hei / 2, linecord[i].hei / 2, linecord[i].startangle, linecord[i].lastangle, false);
-                ctx.lineTo(linecord[i].x, linecord[i].x);
-                if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-                    /*ctx.lineWidth=1;
-                     ctx.stroke();*/
-                    ctx.fillStyle = 'rgba(0,0,0,.3)'
-                    ctx.fill();
-                    $('#' + container + ' .canvasjs-chart-tooltip').css({
-                        'display': 'block'
-                        , 'left': mousePos.x
-                        , 'top': mousePos.y
-                    });
-                    $('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable + ' : ' + linecord[i].y);
-                    break;
-                }
-                else {
-                    ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-                    //$('#'+container+' .canvasjs-chart-tooltip').css({'display':'none'});
-                    /*ctx.fillStyle = 'rgba(255,255,255,0)';
-                     ctx.strokeStyle="#FF0000";
-                     ctx.lineWidth=0;*/
-                }
-                //
-            }
-        }, false);
-        document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
-            setTimeout(function () {
-                ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-                $('#' + container + ' .canvasjs-chart-tooltip').css({
-                    'display': 'none'
-                });
-            }, 2000);
-        });
-    }
-    if (charttype == 'donutchart') {
-        document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
-            ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-            var linewidth = 50;
-            var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
-            var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            console.log(message);
-            for (var i = 0; i < linecord.length; i++) {
-                var radius = linecord[i].hei / 2 - linewidth;
-                ctx.lineWidth = radius / 2;
-                ctx.beginPath();
-                //ctx.lineTo(linecord[i].x, linecord[i].x);
-                ctx.arc(linecord[i].wid / 2, linecord[i].hei / 2, radius, linecord[i].startangle, linecord[i].lastangle, false);
-                //ctx.lineTo(linecord[i].x, linecord[i].x);
-                if (ctx.isPointInStroke(mousePos.x, mousePos.y)) {
-                    /*ctx.lineWidth=1;*/
-                    ctx.strokeStyle = "rgba(0,0,0,0.2)";
-                    ctx.stroke();
-                    $('#' + container + ' .canvasjs-chart-tooltip').css({
-                        'display': 'block'
-                        , 'left': mousePos.x
-                        , 'top': mousePos.y + 5
-                    });
-                    $('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable + ' : ' + linecord[i].y);
-                    break;
-                }
-                if (!(ctx.isPointInStroke(mousePos.x, mousePos.y))) {
-                    ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-                }
-            }
-        }, false);
-        document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
-            setTimeout(function () {
-                ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-                $('#' + container + ' .canvasjs-chart-tooltip').css({
-                    'display': 'none'
-                });
-            }, 2000);
-        });
-    }
-    if (charttype == 'splinechart') {
-        /*for (var i = 0; i < linecord.length; i++) {
-         //console.log(linecord[i]);
-         ctx.beginPath();
-         ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2 * Math.PI);
-         ctx.stroke();
-         }*/
-        ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-        document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
-            var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
-            //console.log(mousePos);
-            var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-            for (var i = 0; i < linecord.length; i++) {
-                ctx.beginPath();
-                ctx.arc(linecord[i].x, linecord[i].y, 5, 0, 2 * Math.PI);
-                if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-                    ctx.lineWidth = 4;
-                    ctx.strokeStyle = 'rgba(0,0,0,.5)';
-                    ctx.stroke();
-                    $('#' + container + ' .canvasjs-chart-tooltip').css({
-                        'display': 'block'
-                        , 'left': linecord[i].x
-                        , 'top': linecord[i].y + 5
-                    });
-                    $('#' + container + ' .canvasjs-chart-tooltip div').html(linecord[i].lable);
-                    break;
-                }
-                if (!(ctx.isPointInStroke(mousePos.x, mousePos.y))) {
-                    ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-                }
-            }
-        }, false);
-        document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
-            setTimeout(function () {
-                $('#' + container + ' .canvasjs-chart-tooltip').css({
-                    'display': 'none'
-                });
-            }, 2000);
-        });
-    }
-};
-
 function enumerateIt(nr, hei, spacv, spach) {
     var data = data2;
     ctx.fillStyle = text;
@@ -964,7 +764,7 @@ class chartCalling {
     constructor() {
         this.chartSurface = new ChartSurface();
         this.drawChart = new DrawChart();
-        this.drawUpperChart = new DrawChartUpperCanvas()
+        this.drawUpperChart = new DrawChartUpperCanvas();
     }
 
     lineChart(chart, chartID, chartNumber) {
@@ -972,9 +772,10 @@ class chartCalling {
         console.log(chart);
         chart.container = chartID;
         chart.chartnumber = chartNumber;
-        chart.wid = $("#" + chart.container).width() - 10;
-        //chart.hei = chart.wid  * .50;
-        chart.hei = $('#' + chart.container).height();
+        //chart.wid = $("#" + chart.container).width() - 10;
+        chart.wid = chart.width;
+        chart.hei = chart.height;
+        //chart.hei = $('#' + chart.container).height();
         console.log("chart.wid :" + chart.wid + ", chart.hei : " + chart.hei);
 
         $('#' + chart.container).css({
@@ -1162,6 +963,9 @@ class cChartMain {
                 let dataVal = $(chartDefining[i]).data("value");
                 let chartNumber = i + 1;
                 console.log("chartType : " + chartType + ", chartID : " + chartID + ", dataVal : " + dataVal);
+
+                /*Define chart css properties*/
+                $(chartDefining[i]).css('display', 'block');
 
                 switch (chartType) {
                     case "linechart": {
