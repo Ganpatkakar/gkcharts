@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<canvas id="myCanvas" width="600" height="450" style="border:1px solid #d3d3d3;">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+
+function x(a, f) {
+	for (var b = [], c, e = 0; e < a.length; e++)
+		if (0 == e)
+			b.push(a[0]);
+		else {
+			var g, h, l;
+			l = e - 1;
+			g = 0 === l ? 0 : l - 1;
+			h = l === a.length - 1 ? l : l + 1;
+			c = Math.abs((a[h].x - a[g].x) / (0 === a[h].x - a[l].x ? 0.01 : a[h].x - a[l].x)) * (f - 1) / 2 + 1;
+			var t = (a[h].x - a[g].x) / c;
+			c = (a[h].y - a[g].y) / c;
+			b[b.length] = a[l].x > a[g].x && 0 < t || a[l].x < a[g].x && 0 > t ? {
+				x: a[l].x + t / 3,
+				y: a[l].y + c / 3
+			} : {
+				x: a[l].x,
+				y: a[l].y + c / 9
+			};
+			l = e;
+			g = 0 === l ? 0 : l - 1;
+			h = l === a.length - 1 ? l : l + 1;
+			c = Math.abs((a[h].x - a[g].x) / (0 === a[l].x - a[g].x ? 0.01 : a[l].x - a[g].x)) * (f - 1) / 2 + 1;
+			t = (a[h].x - a[g].x) / c;
+			c = (a[h].y - a[g].y) / c;
+			b[b.length] = a[l].x > a[g].x && 0 < t || a[l].x < a[g].x && 0 > t ? {
+				x: a[l].x - t / 3,
+				y: a[l].y - c / 3
+			} : {
+				x: a[l].x,
+				y: a[l].y - c / 9
+			};
+			b[b.length] = a[e]
+		}
+	return b
+}
+
+
+var a =[
+{x: 73, y: 199},
+{x: 106, y: 190},
+{x: 139, y: 173},
+{x: 172, y: 69},
+{x: 205, y: 96},
+{x: 238, y: 202},
+{x: 272, y: 217},
+{x: 305, y: 209},
+{x: 338, y: 59},
+{x: 371, y: 131},
+{x: 404, y: 213},
+{x: 438, y: 189},
+{x: 471, y: 202},
+{x: 504, y: 225},
+{x: 537, y: 189},
+{x: 570, y: 214}]
+
+var f = 2;
+
+var a = x(a, f);
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.beginPath();
+ctx.moveTo(a[0].x, a[0].y);
+/* ctx.bezierCurveTo(a[1].x, a[1].y, a[2].x, a[2].y, a[3].x, a[3].y);
+ctx.bezierCurveTo(a[4].x, a[4].y, a[5].x, a[5].y, a[6].x, a[6].y);
+ctx.bezierCurveTo(a[7].x, a[7].y, a[8].x, a[8].y, a[9].x, a[9].y);
+ctx.bezierCurveTo(a[10].x, a[10].y, a[11].x, a[11].y, a[12].x, a[12].y); */
+
+for(var i =1; i < a.length; i += 3) {
+  if(i <= a.length -3) {
+    ctx.bezierCurveTo(a[i].x, a[i].y, a[i+1].x, a[i+1].y, a[i+2].x, a[i+2].y);
+  }
+} 
+
+ctx.stroke();
+
+</script> 
+
+</body>
+</html>
