@@ -41,31 +41,48 @@ var datapoints1 = [{
 ];
 
 var chartline = {
-    "title": {
-        "text": "line chart Comparision"
+    "config": {
+        "title": "Line chart",
+        "chartType": "line"
     },
-    "width" : 650,
-    "height" : 400,
     "yaxis": {
         "min": 0,
         "max": 400,
         "difference": 50,
-        "title": "Days"
+        "title": "Data"
     }
     , "data": [
         {
-            "stroke": "#00d554"
+            "chartColor": "#00d554"
+            , "datapoints": datapoints
+        }
+    ]
+};
+
+var chartspline = {
+    "config": {
+        "title": "SpLine chart",
+        "chartType": "spline"
+    },
+    "yaxis": {
+        "min": 0,
+        "max": 400,
+        "difference": 50,
+        "title": "Data"
+    }
+    , "data": [
+        {
+            "chartColor": "#00d554"
             , "datapoints": datapoints
         }
     ]
 };
 
 var chartlineComparision = {
-    "title": {
-        "text": "line chart Comparision"
+    "config": {
+        "title": "Line chart Comparision",
+        "chartType": "line"
     },
-    "width" : 650,
-    "height" : 400,
     "yaxis": {
         "min": 0,
         "max": 400,
@@ -74,11 +91,36 @@ var chartlineComparision = {
     }
     , "data": [
         {
-            "stroke": "#00d554"
+            "chartColor": "#00d554"
             , "datapoints": datapoints
         }
         , {
-            "stroke": "#ff0000"
+            "chartColor": "#ff0000"
+            , "ydataname": "Days"
+            , "datapoints": datapoints1
+        }
+
+    ]
+};
+
+var multichartspline = {
+    "config": {
+        "title": "SpLine chart Comparision",
+        "chartType": "spline"
+    },
+    "yaxis": {
+        "min": 0,
+        "max": 400,
+        "difference": 50,
+        "title": "Days"
+    }
+    , "data": [
+        {
+            "chartColor": "#00d554"
+            , "datapoints": datapoints
+        }
+        , {
+            "chartColor": "#ff0000"
             , "ydataname": "Days"
             , "datapoints": datapoints1
         }
@@ -87,10 +129,9 @@ var chartlineComparision = {
 };
 
 var chartbar = {
-    "chartnumber": 3
-    , "type": 'barchart'
-    , "title": {
-        "text": "Bar Chart"
+    "config": {
+        "title": "Bar Chart",
+        "chartType": 'bar'
     },
     "yaxis": {
         "min": 0,
@@ -99,15 +140,61 @@ var chartbar = {
         "title": "Hours"
     }
     , "data": [{
-        "stroke": "#00d554"
+        "chartColor": "#00d554"
         , "datapoints": datapoints
     }]
 };
-/*chartCalling(chartbar);*/
+
+var chartColumn = {
+    "config": {
+        "title": "Column chart",
+        "chartType": 'column'
+    },
+    "yaxis": {
+        "min": 0,
+        "max": 400,
+        "difference": 50,
+        "title": "Hours"
+    }
+    , "data": [{
+        "chartColor": "#00d554",
+        "type": 'bar'
+        , "datapoints": datapoints1
+    },
+        {
+            "chartColor": "teal",
+            "type": 'bar'
+            , "datapoints": datapoints
+        },
+        {
+            "chartColor": "red",
+            "type": 'line'
+            , "datapoints": [{
+                "lable": "Jan"
+                , "y": 40
+            }, {
+                "lable": "Feb"
+                , "y": 180
+            }, {
+                "lable": "Mar"
+                , "y": 60
+            }, {
+                "lable": "Apr"
+                , "y": 300
+            }, {
+                "lable": "May"
+                , "y": 140
+            }, {
+                "lable": "Jun"
+                , "y": 200
+            }]
+        }]
+}
+
 var multilinebar = {
-    "type": 'barchart'
-    , "title": {
-        "text": "Multi Line Bar Chart"
+    "config": {
+        "title": "Multi Line Bar Chart",
+        "chartType": 'bar'
     },
     "yaxis": {
         "min": 0,
@@ -117,24 +204,24 @@ var multilinebar = {
     }
     , "data": [
         {
-            "stroke": "#009788"
+            "chartColor": "#009788"
             , "datapoints": datapoints
         }
         , {
-            "stroke": "#00d554"
+            "chartColor": "#00d554"
             , "datapoints": datapoints1
         }
 
     ]
 };
-/*chartCalling(multilinebar);*/
+
 var piechart = {
-    "type": 'piechart'
-    , "title": {
-        "text": "Pie Chart"
+    "config": {
+        "title": "Pie Chart",
+        "chartType": "pie"
     }
     , "data": [{
-        "stroke": "#ff0000"
+        "chartColor": "#ff0000"
         , "datapoints": [{
             "lable": "Jan"
             , "y": 200
@@ -150,13 +237,14 @@ var piechart = {
         }]
     }]
 };
-/*chartCalling(piechart);*/
+
 var donut = {
-    "title": {
-        "text": "Donut Chart"
+    "config": {
+        "title": "Donut Chart",
+        "chartType": "donut"
     }
     , "data": [{
-        "stroke": "#ff0000"
+        "chartColor": "#ff0000"
         , "datapoints": [{
             "lable": "Jan"
             , "y": 200
@@ -172,18 +260,20 @@ var donut = {
         }]
     }]
 };
-/*chartCalling(donut);*/
-var meter = {"type": 'meterchart',
-    "title": {
-        "text": "Meter Gauge Chart"
+
+
+var meter = {
+    "config": {
+        "title": "Meter Gauge Chart",
+        "chartType": "meter"
     }
     , "data": [/*Give as required data in given formate, syntax error with json will cause of error in charts*/
         {
-            "stroke": "#ff0000"
+            "chartColor": "#ff0000"
             , "datapoints": [
                 {
                     "lable": "Poor"
-                    , "y": 25
+                    , "y": 50
                     , "color": "#ff0000"
                 }
                 , {
@@ -198,7 +288,7 @@ var meter = {"type": 'meterchart',
                 }
                 , {
                     "lable": "Abv Avg"
-                    , "y": 15
+                    , "y": 35
                     , "color": "#00ff00"
                 }
                 , {
@@ -211,4 +301,3 @@ var meter = {"type": 'meterchart',
         }
     ]
 };
-/*chartCalling(meter);*/
