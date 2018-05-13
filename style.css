@@ -1,0 +1,207 @@
+@import url('http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600|Roboto Mono');
+body {
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #34495e;
+    background-color: #fff;
+    margin: 0;
+}
+
+h1, h2, h3, h4, strong {
+    font-family: "Source Sans Pro", "Helvetica Neue", Arial, sans-serif;
+    font-weight: 300;
+    color: #2c3e50;
+    letter-spacing: 1.1px;
+}
+
+.navbar-toggle {
+    border-color: #4ec08d;
+}
+.navbar-toggle .icon-bar {
+    border: 1px solid #40b783;
+}
+
+.banner h1{
+    font-size: 3.2em;
+    font-weight: 300;
+    line-height: 1.4em;
+    margin: 50px 0px 15px;
+}
+
+.banner .btn {
+    border: 1px solid #000;
+    border-radius: 24px;
+    height: 45px;
+    margin: 20px 5px 5px 0px;
+    letter-spacing: 1px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.banner .btn-why {
+    background: #4fc08d;
+    border-color: #4fc08d;
+    width: 180px;
+}
+
+.banner .btn-why a{
+    color: #fff;
+}
+
+.banner .btn-download {
+    border-color: #4fc08d;
+    width: 180px;
+}
+
+.banner .btn-download a{
+   color: #4fc08d;
+}
+
+.banner .btn-git {
+    color: #7f8c8d;
+    background: #f6f6f6;
+    width: 150px;
+    border-color: #f6f6f6;
+}
+
+.banner .btn-git img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 1px rgba(0,0,0,0.25);
+    border: 1px solid transparent
+}
+
+.navbar a {
+    color: #34495e;
+}
+
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap
+}
+
+.footer {
+    background: #727f80;
+    color: #fff;
+    padding: 35px 0;
+    margin-top: 50px;
+}
+
+.company-icons {
+    padding: 10px 0;
+}
+
+.company-icons a {
+    color: #fff;
+    font-size: 20px;
+    margin: 20px 5px;
+}
+
+.navbar-brand {
+    font-size: 2.0em;
+    font-weight: 500;
+}
+
+.logo-container {
+    max-width: 190px;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.specification {
+    margin: 30px -15px 50px -15px;
+    text-align: center;
+    padding: 0px 50px;
+}
+
+.specification .specification-content {
+    padding: 0px 40px;
+    color: #7f8c8d;
+}
+
+.specification-content hr {
+    width: 15px;
+    border-color: #4ec08d;
+    margin-top: 5px;
+}
+
+.specification h1 {
+    color: #42b983;
+    font-size: 1.5em;
+    font-weight: 400;
+    margin-top: 25px;
+    padding: 0.5em 0;
+}
+
+.thumbnail a>img, .thumbnail>img {
+    min-height: 152px;
+}
+
+.thumbnail .caption {
+    background-color: #f5f5f5;
+}
+
+.examples-container {
+    padding: 35px 40px 45px;
+    background-color: #f6f6f6;
+}
+
+.caption p {
+    font-size: 18px;
+    margin: 0;
+}
+
+@media screen and (max-width: 992px) {
+    .logo-container {
+        max-width: 150px;
+    }
+    .banner {
+        text-align: center;
+    }
+    .banner h1 {
+        text-align: center;
+        font-size: 2em;
+        margin: 10px 0 30px 0;
+    }
+    .banner .btn {
+        font-weight: 400;
+        font-size: 13px;
+    }
+    .banner .btn-why {
+        width: 160px;
+    }
+    .banner .btn-download {
+        width: 160px;
+    }
+    .specification {
+        padding: 0px;
+    }
+    .specification .specification-content {
+        padding: 0px 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .specification-content {
+        margin: 0 auto;
+        width: 300px;
+        padding: 0 40px 30px !important;
+    }
+}
+
+
