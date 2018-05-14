@@ -9,7 +9,7 @@ class ChartSurface {
 
     static ratio(canvasContainer) {
         let ctx = canvasContainer.getContext('2d');
-        let dpr = window.devicePixelRatio || 1;
+        let dpr = 2;
         let bsr = ctx.webkitBackingStorePixelRatio || ctx.mozBackingStorePixelRatio || ctx.msBackingStorePixelRatio || ctx.oBackingStorePixelRatio || ctx.backingStorePixelRatio || 1;
         return dpr / bsr;
     }
