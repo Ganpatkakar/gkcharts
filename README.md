@@ -1,15 +1,22 @@
 # Chartjs
-Chart Js is a canvas chart library with custom coding.
-Custom charts and custome js
+GKCharts is a charting plug and play library. Developed with the HTML 5 Canvas and ES6 JavaScript.
+This is an open source project for every one, anyone who want to improve this charting library can contribute for this project.
+
+I have placed gitbhub pages to see this project view https://ganpatkakar.github.io/GkCharts/.
+
+I have alos created a website to showcase this project along with some dashboard designs as http://gk-chart.org/
 
 
-# Contact Developer (Me)
-You can contact the developer "Ganpat Kakar" on kakarganpat@gmail.com or 8197354601
+## How do I install these GKCharts?
+To install GKCharts you can download GkCharts library from this URL http://gk-chart.org/gk_cahrt.js
+Or you can downalod our git repository for full examples.
+Then you have to just add this JavaScript file to your HTML page and show call our api.
+Examplesa are provided on our official website http://gk-chart.org/ .
 
-# About Me
 
-I am a Software Engineer at Toshiba TSIP.
-I have expereience with front end development and MEAN Framwork.
-I have skills in . :- 
-#
-HTML, CSS, JavaScript, jQuery, AngularJs, NodeJs, ExpressJs, MongoDB, Bootstrap, JSON, Canvas .... 
+## Contribution
+I would love for you to contribute for any chart and make GKCharts library more awesome.
+
+
+## Status of the Project
+This project is still under active development, so you might run into issues. If you do, please don't be shy about letting me know, or better yet, contribute a fix or feature.
