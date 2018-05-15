@@ -1,4 +1,4 @@
-# Chartjs
+# GKCharts
 GKCharts is a charting plug and play library. Developed with the HTML 5 Canvas and ES6 JavaScript.
 This is an open source project for every one, anyone who want to improve this charting library can contribute for this project.
 
