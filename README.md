@@ -7,16 +7,16 @@ I have placed gitbhub pages to see this project view https://ganpatkakar.github.
 I have alos created a website to showcase this project along with some dashboard designs as http://gk-chart.org/
 
 
-## How do I install these GKCharts?
+### How do I install these GKCharts?
 To install GKCharts you can download GkCharts library from this URL http://gk-chart.org/gk_cahrt.js
 Or you can downalod our git repository for full examples.
 Then you have to just add this JavaScript file to your HTML page and show call our api.
 Examplesa are provided on our official website http://gk-chart.org/ .
 
 
-## Contribution
+### Contribution
 I would love for you to contribute for any chart and make GKCharts library more awesome.
 
 
-## Status of the Project
+### Status of the Project
 This project is still under active development, so you might run into issues. If you do, please don't be shy about letting me know, or better yet, contribute a fix or feature.
