@@ -8,9 +8,10 @@ I have alos created a website to showcase this project along with some dashboard
 
 
 ### How do I install GKCharts?
-To install GKCharts you can download GkCharts library from this URL http://gk-chart.org/gk_cahrt.js
-Or you can downalod our git repository for full examples.
-Then you have to just add this JavaScript file to your HTML page and show call our api.
+To install GKCharts you can download GkCharts library from our website http://gk-chart.org/ download button.
+Or you can downalod our git repository with full examples.
+Then you have to add this JavaScript file to your HTML page and call our api
+"new GKChart({id: "stepChartComparision", data: stepChartComparision})"
 Examplesa are provided on our official website http://gk-chart.org/ .
 
 
