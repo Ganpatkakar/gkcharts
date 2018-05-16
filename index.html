@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang=en>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-spy=scroll data-target=.navbar data-offset=80>
+    <nav class="navbar navbar-fixed-top">
+    <div class=container>
+            <div class=navbar-header>
+                <button type=button class="navbar-toggle collapsed" data-toggle=collapse data-target=#navbar aria-controls=navbar>
+                    <span class=sr-only>Toggle navigation</span>
+                    <span class=icon-bar></span>
+                    <span class=icon-bar></span>
+                    <span class=icon-bar></span>
+                </button>
+                <a class=navbar-brand href=index.html>
+                    GK-Chart
+                </a>
+            </div>
+            <div id=navbar class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right scroll-to">
+                    <li>
+                        <a href=index.html>Home</a>
+                    </li>
+                    <li>
+                        <a href="gkcharts-galery.html">Charts Gallery</a>
+                    </li>
+                    <li>
+                        <a href="/kakar-master">Dashboards</a>
+                    </li>
+                    <li>
+                        <a href="gk_chart.js" download>Download</a>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="true">Support gk-chart
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="donation.html">One-time Donation</a>
+                            </li>
+                            <li>
+                                <a href="recurring.html">Recurring Pledges</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class=page-middle>
+        <section class=container>
+            <section class="row banner">
+                <section class=col-md-5>
+                    <div class="logo-container">
+                        <?xml version="1.0" encoding="utf-8"?>
+                        <!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 612 792" style="enable-background:new 0 0 612 792;" xml:space="preserve">
+                            <style type="text/css">
+                                .st0 {
+                                    fill: #41B783;
+                                }
+
+                                .st1 {
+                                    fill: #6FC59A;
+                                }
+
+                                .st2 {
+                                    fill: #94D1B4;
+                                }
+
+                                .st3 {
+                                    fill: #48AF9B;
+                                }
+
+                                .st4 {
+                                    fill: #37495D;
+                                }
+                            </style>
+                            <rect x="31.4" y="427.3" class="st0" width="156" height="159.2" />
+                            <rect x="187.4" y="427.3" class="st1" width="156" height="159.2" />
+                            <rect x="31.4" y="268.1" class="st1" width="156" height="159.2" />
+                            <rect x="187.4" y="268.1" class="st2" width="156" height="159.2" />
+                            <rect x="343.4" y="427.3" class="st2" width="156" height="159.2" />
+                            <rect x="31.4" y="109" class="st2" width="156" height="159.2" />
+                            <rect x="397.9" y="236.4" class="st3" width="156" height="159.2" />
+                            <rect x="226.3" y="61.3" class="st3" width="156" height="159.2" />
+                            <rect x="421.2" y="37.5" class="st4" width="156" height="159.2" />
+                            <g>
+                                <g>
+                                    <path class="st4" d="M118.9,738.1h-6.1c-0.5-1.2-0.8-6.9-0.9-17.4c-3.4,7.5-10.8,18.7-30.5,18.7c-27.1,0-41-23.8-41-54.8
+                        c0-32.6,14.8-57,42.5-57c20.4,0,33.9,12.3,36.8,32.4h-7.3c-4-15.4-13.4-24.6-29.8-24.6c-23.6,0-34.4,21.2-34.4,48.8
+                        c0,24.9,10.4,47.5,33.5,47.5c23.6,0,30.2-17.8,30.2-41.9v-1.2H81.4v-7.8h37.5V738.1z" />
+                                    <path class="st4" d="M142.3,629h7.3v56.7c7.6-8.4,34.5-37.7,51.4-56.7h9.7l-42.4,46.4l44.8,62.6h-9l-41-57.2l-13.5,13.7v43.5h-7.3
+                        V629z" />
+                                    <path class="st4" d="M248.6,694.4v7.6h-34v-7.6H248.6z" />
+                                    <path class="st4" d="M341.1,708.9c-4.5,17.3-15.5,30.4-35.5,30.4c-27.1,0-41.4-24.9-41.4-55.6c0-29.4,14-56.2,41.5-56.2
+                        c20.4,0,32.4,13.1,35.5,31.3H334c-4.3-14.2-12.3-23.5-28.6-23.5c-23.5,0-33.3,24.8-33.3,48.3c0,23.4,9.7,48,33.9,48
+                        c15.4,0,23.2-9.2,27.9-22.6H341.1z" />
+                                    <path class="st4" d="M364.7,623.2v50c3.8-8.1,10.4-15,22.3-15c9.6,0,22.8,5.6,22.8,30.2v49.5H403v-48c0-15.4-6.1-24.1-17.3-24.1
+                        c-13.4,0-21,9.5-21,28.7v43.5H358V623.2H364.7z" />
+                                    <path class="st4" d="M478.2,723.3c0,6.9,0.5,12.3,0.9,14.8h-6.5c-0.5-1.9-0.9-5.3-1.2-12c-2.3,5.8-8.2,13.9-22.1,13.9
+                        c-15.6,0-22.4-11.7-22.4-23.4c0-17.1,11.5-24.9,31.7-24.9c5.7,0,10.1,0,12.8,0v-7.9c0-7.8-2-18.2-17.4-18.2
+                        c-13.6,0-15.6,8.3-17.1,14.6h-6.7c0.8-8.6,5.4-21.8,24-21.8c15.4,0,24,7.5,24,24.6V723.3z M471.5,698.3c-2.6,0-8.8,0-13.2,0
+                        c-15,0-24.3,4.5-24.3,17.9c0,9.8,6.1,16.5,15.5,16.5c19.3,0,22-14.8,22-31.6V698.3z" />
+                                    <path class="st4" d="M500.4,681.4c0-13.1-0.1-18.7-0.1-21.2h6.6c0.1,2.5,0.3,7.5,0.3,17.4c3.9-11.7,12.5-18.7,23.5-19.3v8.4
+                        c-14,1.1-23.5,12.3-23.5,30.8v40.5h-6.7V681.4z" />
+                                    <path class="st4" d="M534,660.2h12.5v-24.3h6.7v24.3h16.1v7.3h-16.1v50.6c0,8.7,1.6,13.7,8.1,13.7c2,0,4.9-0.2,7-0.9v6.9
+                        c-2.3,1.1-5.5,1.4-8.4,1.4c-8.6,0-13.5-5-13.5-17.4v-54.2H534V660.2z" />
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+
+                </section>
+                <section class="col-md-7">
+                    <h1>The Progressive
+                        <br/>JavaScript Charts Library</h1>
+                    <button type="button" class="btn btn-why">
+                        <a href="gkcharts-galery.html">Samples</a>
+                    </button>
+                    <button type="button" class="btn btn-download">
+                        <a href="gk_chart.js" download>DOWNLOAD</a>
+                    </button>
+                    <button type="button" class="btn btn-git">
+                        <a target="blank" href="https://github.com/Ganpatkakar/Chartjs">
+                            <img src="assets/images/github.png">GITHUB</a>
+                    </button>
+                </section>
+
+            </section>
+        </section>
+
+        <div class="container">
+            <div class="row specification">
+                <div class="col-sm-4 specification-content">
+                    <h1>Open Source</h1>
+                    <hr>
+                    <p>Open source code on Github. Share your technical knowledge to improve gk-charts.</p>
+                </div>
+                <div class="col-sm-4 specification-content">
+                    <h1>Live Examples</h1>
+                    <hr>
+                    <p>Easy to implement on your system with the help of live examples</p>
+                </div>
+                <div class="col-sm-4 specification-content">
+                    <h1>Compatible</h1>
+                    <hr>
+                    <p>Compatible with all the browsers. No other extrnal library is required.</p>
+                </div>
+                <div class="col-sm-4 specification-content">
+                    <h1>Responsive</h1>
+                    <hr>
+                    <p>Open source code on Github. Share your technical knowledge to improve gk-charts.</p>
+                </div>
+                <div class="col-sm-4 specification-content">
+                    <h1>HTML 5 Canvas</h1>
+                    <hr>
+                    <p>Easy to implement on your system with the help of live examples</p>
+                </div>
+                <div class="col-sm-4 specification-content">
+                    <h1>20 Charts</h1>
+                    <hr>
+                    <p>Compatible with all the browsers. No other extrnal library is required.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row examples-container">
+                <div class="container">
+                    <div class="heading-area">
+                        <h2 class="">Few Chart Examples</h2>
+                    </div>
+                    <div class="">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/lineChart.png" alt="Lights" style="width:100%">
+                                        <div class="caption">
+                                            <p>Line Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/barChart.png" alt="Nature" style="width:100%">
+                                        <div class="caption">
+                                            <p>Bar Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/smoothLine.png" alt="Fjords" style="width:100%">
+                                        <div class="caption">
+                                            <p>Smooth Line Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/stepChart.png" alt="Fjords" style="width:100%">
+                                        <div class="caption">
+                                            <p>Step Line Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/lineComparision.png" alt="Lights" style="width:100%">
+                                        <div class="caption">
+                                            <p>Multi Line Comparision Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/barComparision.png" alt="Nature" style="width:100%">
+                                        <div class="caption">
+                                            <p>Multi Bar Comparision Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/smoothLineComparision.png" alt="Fjords" style="width:100%">
+                                        <div class="caption">
+                                            <p>Multi Smooth Line Chart Comparision</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/stepComparision.png" alt="Fjords" style="width:100%">
+                                        <div class="caption">
+                                            <p>Multi Step Line Chart Comparision</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/LineFillComparision.png" alt="Lights" style="width:100%">
+                                        <div class="caption">
+                                            <p>Multi Line Area Comparision Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/multiBarandSmoothLineComparision.png" alt="Nature" style="width:100%">
+                                        <div class="caption">
+                                            <p>Multi Bar and Smooth Line Comparision Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/smoothLineFillComparision.png" alt="Fjords" style="width:100%">
+                                        <div class="caption">
+                                            <p>Multi Smooth Line Area Chart Comparision</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/stepFillComparision.png" alt="Fjords" style="width:100%">
+                                        <div class="caption">
+                                            <p>Multi Step Line Area Chart Comparision</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/pieChart.png" alt="Lights" style="width:100%">
+                                        <div class="caption">
+                                            <p>Pie Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/doughnut.png" alt="Nature" style="width:100%">
+                                        <div class="caption">
+                                            <p>Doughnut Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/meterChart.png" alt="Fjords" style="width:100%">
+                                        <div class="caption">
+                                            <p>Meter Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="thumbnail">
+                                    <a href="gkcharts-galery.html">
+                                        <img src="assets/images/GK-Chart_Images/multiBar&LineChart.png" alt="Fjords" style="width:100%">
+                                        <div class="caption">
+                                            <p>Multi Bar and Line Chart</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Simple Integration</h2>
+            <p>GK-Chart is real easy to integrate with html and Js. See below exaple and fell yourself the easiyness of Gk-Chart.</p>
+            <div class="row">
+                <div class="col-sm-6">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a data-toggle="tab" href="#htmlCode">HTML</a>
+                        </li>
+                        <li>
+                            <a data-toggle="tab" href="#jsCode">JavaScript</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="htmlCode" class="tab-pane fade in active">
+                            <pre>
+            <xmp><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+</head>
+<body>
+<kakarChart id="multisplineChart" style="height:350px; width:100%;" data-value="multichartspline"></kakarChart>
+<script type="text/javascript" src="gk_chart.js"></script>
+</body>
+</html></xmp>
+        </pre>
+                        </div>
+                        <div id="jsCode" class="tab-pane fade">
+                            <pre>
+            <code>
+var chartlineComparision = {
+"config": {
+"title": "Line chart Comparision",
+"chartType": "line"
+},
+"yaxis": {
+"min": 0,
+"max": 400,
+"difference": 50,
+"title": "Days"
+}
+, "data": [
+{
+"chartColor": "#00d554",
+"fill" : false,
+"datapoints": [{ "lable": "Jan", "y": 40},
+{"lable": "Feb", "y": 180},
+{"lable": "Mar", "y": 60},
+{"lable": "Apr", "y": 300},
+{"lable": "May", "y": 140},
+{"lable": "Jun", "y": 240}]
+},
+{
+"chartColor": "#ff0000"
+, "fill" : false
+, "datapoints": [{ "lable": "January", "y": 20},
+{"lable": "Feb", "y": 120}, 
+{"lable": "Mar", "y": 210},
+{"lable": "Apr", "y": 246},
+{"lable": "May", "y": 96},
+{"lable": "Jun", "y": 15}]
+}
+]
+};
+            </code>
+        </pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <kakarChart id="multisplineChart" style="height:350px; width:100%;" data-value="multichartspline"></kakarChart>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class=footer>
+        <section class=footer-top>
+            <section class=container>
+                <section class="row text-center">
+                    <div class="col-xs-12">
+                        <div class=company-icons>
+                            <a href="https://github.com/Ganpatkakar/Chartjs">
+                                <i class="fa fa-github"></i>
+                            </a>
+                            <a href=#>
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href=#>
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a href=https://plus.google.com/114041444512265862583>
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                            <a href=mailto:kakarganpat@gmail.com>
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12"> Copyright © 2016-2018 Ganpat Kakar</div>
+                </section>
+            </section>
+        </section>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="data_new.js"></script>
+    <script type="text/javascript" src="gk_chart.js"></script>
+</body>
+
+</html>
