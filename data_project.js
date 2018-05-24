@@ -260,7 +260,7 @@ var chartbar = {
   },
   "data": [{
     "chartColor": "#00d554",
-    "dataLabel" : "Jan",
+    "dataLabel" : "Data set 1",
     "datapoints": datapoints
   }]
 };
@@ -275,19 +275,19 @@ var chartColumn = {
     {
       "chartColor": "#00d554",
       "type": 'bar',
-      "dataLabel" : "January",
+      "dataLabel" : "Data set 1",
       "datapoints": datapoints1
     },
     {
       "chartColor": "teal",
       "type": 'bar',
-      "dataLabel" : "Feburary",
+      "dataLabel" : "Data set 2",
       "datapoints": datapoints
     },
     {
       "chartColor": "red",
       "type": 'line',
-      "dataLabel" : "March",
+      "dataLabel" : "Data set 3",
       "fill": false,
       "datapoints": [{
         "label": "Jan",
@@ -322,20 +322,20 @@ var chartColumnFill = {
     {
       "chartColor": "#00d554",
       "type": 'bar',
-      "dataLabel" : "January",
+      "dataLabel" : "Data set 1",
       "datapoints": datapoints1
     },
     {
       "chartColor": "teal",
       "type": 'bar',
-      "dataLabel" : "Febuary",
+      "dataLabel" : "Data set 2",
       "datapoints": datapoints
     },
     {
       "chartColor": "red",
       "type": 'line',
       "fill": true,
-      "dataLabel" : "March",
+      "dataLabel" : "Data set 3",
       "datapoints": [{
         "label": "Jan",
         "y": 40
@@ -368,14 +368,14 @@ var columnLineBar = {
   "data": [{
       "chartColor": "teal",
       "type": 'bar',
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 1",
       "datapoints": datapoints
     },
     {
       "chartColor": "red",
       "type": 'line',
       "fill": true,
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 2",
       "datapoints": datapoints1
     }
   ]
@@ -390,20 +390,20 @@ var chartColumnSpline = {
   "data": [{
       "chartColor": "#00d554",
       "type": 'bar',
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 1",
       "datapoints": datapoints1
     },
     {
       "chartColor": "teal",
       "type": 'bar',
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 2",
       "datapoints": datapoints
     },
     {
       "chartColor": "red",
       "type": 'spline',
       "fill": false,
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 3",
       "datapoints": [{
         "label": "Jan",
         "y": 40
@@ -436,19 +436,19 @@ var chartColumnSplineFill = {
   "data": [{
       "chartColor": "#00d554",
       "type": 'bar',
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 1",
       "datapoints": datapoints1
     },
     {
       "chartColor": "teal",
       "type": 'bar',
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 2",
       "datapoints": datapoints
     },
     {
       "chartColor": "yellow",
       "type": 'bar',
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 3",
       "datapoints": [{
         "label": "Jan",
         "y": 40
@@ -473,6 +473,7 @@ var chartColumnSplineFill = {
       "chartColor": "red",
       "type": 'spline',
       "fill": true,
+      "dataLabel" : "Data set 4",
       "datapoints": [
         {
         "label": "Jan",
@@ -504,11 +505,11 @@ var multilinebar = {
   },
   "data": [{
       "chartColor": "#009788",
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 1",
       "datapoints": datapoints
     }, {
       "chartColor": "#00d554",
-      "dataLabel" : "Jan",
+      "dataLabel" : "Data set 2",
       "datapoints": datapoints1
     }
 
