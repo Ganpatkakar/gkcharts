@@ -59,6 +59,7 @@ var chartline = {
   "data": [{
     "chartColor": "#00d554",
     "fill": false,
+    "dataLabel" : "Data Set 1",
     "datapoints": datapoints
   }]
 };
@@ -72,6 +73,7 @@ var stepChart = {
   "data": [{
     "chartColor": "#00d554",
     "fill": false,
+    "dataLabel" : "Data Set 1",
     "datapoints": datapoints
   }]
 };
@@ -80,11 +82,13 @@ var stepChartFill = {
   "config": {
     "title": "Step Area Chart",
     "chartType": "step",
+    "dataLabel" : "Data Set 1",
     "printEnable" : true
   },
   "data": [{
     "chartColor": "#00d554",
     "fill": true,
+    "dataLabel" : "Data Set 2",
     "datapoints": datapoints
   }]
 };
@@ -98,10 +102,12 @@ var stepChartComparision = {
   "data": [{
     "chartColor": "#00d554",
     "fill": false,
+    "dataLabel" : "Data Set 1",
     "datapoints": datapoints
   }, {
     "chartColor": "#ff0000",
     "fill": false,
+    "dataLabel" : "Data Set 2",
     "datapoints": datapoints1
   }]
 };
@@ -115,10 +121,12 @@ var stepChartComparisionFill = {
   "data": [{
     "chartColor": "#00d554",
     "fill": true,
+    "dataLabel" : "Data Set 1",
     "datapoints": datapoints
   }, {
     "chartColor": "#ff0000",
     "fill": true,
+    "dataLabel" : "Data Set 2",
     "datapoints": datapoints1
   }]
 };
@@ -132,6 +140,7 @@ var chartlineFill = {
   "data": [{
     "chartColor": "#00d554",
     "fill": true,
+    "dataLabel" : "Data Set 1",
     "datapoints": datapoints
   }]
 };
@@ -144,6 +153,7 @@ var chartspline = {
   "data": [{
     "chartColor": "#00d554",
     "fill": false,
+    "dataLabel" : "Data Set 1",
     "datapoints": datapoints
   }]
 };
@@ -156,6 +166,7 @@ var chartsplineFill = {
   "data": [{
     "chartColor": "#00d554",
     "fill": true,
+    "dataLabel" : "Data Set 1",
     "datapoints": datapoints
   }]
 };
@@ -169,10 +180,12 @@ var chartlineComparision = {
   "data": [{
       "chartColor": "#00d554",
       "fill": false,
+      "dataLabel" : "Data Set 1",
       "datapoints": datapoints
     }, {
       "chartColor": "#ff0000",
       "fill": false,
+      "dataLabel" : "Data Set 2",
       "datapoints": datapoints1
     }
 
@@ -188,10 +201,12 @@ var chartlineComparisionFill = {
   "data": [{
       "chartColor": "#00d554",
       "fill": true,
+      "dataLabel" : "Data Set 1",
       "datapoints": datapoints
     }, {
       "chartColor": "#ff0000",
       "fill": true,
+      "dataLabel" : "Data Set 2",
       "datapoints": datapoints1
     }
 
@@ -205,9 +220,11 @@ var multichartspline = {
   },
   "data": [{
       "chartColor": "#00d554",
+      "dataLabel" : "Data Set 1",
       "datapoints": datapoints
     }, {
       "chartColor": "#ff0000",
+      "dataLabel" : "Data Set 2",
       "ydataname": "Days",
       "datapoints": datapoints1
     }
@@ -223,10 +240,13 @@ var multichartsplineFill = {
   "data": [{
       "chartColor": "#00d554",
       "fill": true,
+      "dataLabel" : "Data Set 1",
       "datapoints": datapoints
     }, {
       "chartColor": "#ff0000",
       "fill": true,
+      "dataLabel" : "Jan",
+      "dataLabel" : "Data Set 2",
       "datapoints": datapoints1
     }
 
@@ -240,6 +260,7 @@ var chartbar = {
   },
   "data": [{
     "chartColor": "#00d554",
+    "dataLabel" : "Jan",
     "datapoints": datapoints
   }]
 };
@@ -250,19 +271,23 @@ var chartColumn = {
     "chartType": 'column',
     "printEnable" : true
   },
-  "data": [{
+  "data": [
+    {
       "chartColor": "#00d554",
       "type": 'bar',
+      "dataLabel" : "January",
       "datapoints": datapoints1
     },
     {
       "chartColor": "teal",
       "type": 'bar',
+      "dataLabel" : "Feburary",
       "datapoints": datapoints
     },
     {
       "chartColor": "red",
       "type": 'line',
+      "dataLabel" : "March",
       "fill": false,
       "datapoints": [{
         "label": "Jan",
@@ -293,20 +318,24 @@ var chartColumnFill = {
     "chartType": 'column',
     "printEnable" : true
   },
-  "data": [{
+  "data": [
+    {
       "chartColor": "#00d554",
       "type": 'bar',
+      "dataLabel" : "January",
       "datapoints": datapoints1
     },
     {
       "chartColor": "teal",
       "type": 'bar',
+      "dataLabel" : "Febuary",
       "datapoints": datapoints
     },
     {
       "chartColor": "red",
       "type": 'line',
       "fill": true,
+      "dataLabel" : "March",
       "datapoints": [{
         "label": "Jan",
         "y": 40
@@ -339,12 +368,14 @@ var columnLineBar = {
   "data": [{
       "chartColor": "teal",
       "type": 'bar',
+      "dataLabel" : "Jan",
       "datapoints": datapoints
     },
     {
       "chartColor": "red",
       "type": 'line',
       "fill": true,
+      "dataLabel" : "Jan",
       "datapoints": datapoints1
     }
   ]
@@ -359,17 +390,20 @@ var chartColumnSpline = {
   "data": [{
       "chartColor": "#00d554",
       "type": 'bar',
+      "dataLabel" : "Jan",
       "datapoints": datapoints1
     },
     {
       "chartColor": "teal",
       "type": 'bar',
+      "dataLabel" : "Jan",
       "datapoints": datapoints
     },
     {
       "chartColor": "red",
       "type": 'spline',
       "fill": false,
+      "dataLabel" : "Jan",
       "datapoints": [{
         "label": "Jan",
         "y": 40
@@ -402,16 +436,19 @@ var chartColumnSplineFill = {
   "data": [{
       "chartColor": "#00d554",
       "type": 'bar',
+      "dataLabel" : "Jan",
       "datapoints": datapoints1
     },
     {
       "chartColor": "teal",
       "type": 'bar',
+      "dataLabel" : "Jan",
       "datapoints": datapoints
     },
     {
       "chartColor": "yellow",
       "type": 'bar',
+      "dataLabel" : "Jan",
       "datapoints": [{
         "label": "Jan",
         "y": 40
@@ -467,9 +504,11 @@ var multilinebar = {
   },
   "data": [{
       "chartColor": "#009788",
+      "dataLabel" : "Jan",
       "datapoints": datapoints
     }, {
       "chartColor": "#00d554",
+      "dataLabel" : "Jan",
       "datapoints": datapoints1
     }
 
