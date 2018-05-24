@@ -437,6 +437,7 @@ class DrawChart {
           wid: barwidth,
           hei: hei - rectHeight,
           label: data.datapoints[i].label,
+          dataLabel : data.dataLabel,
           dataval: data.datapoints[i].y
         };
         ctx.fillRect(newobj.x, newobj.y, newobj.wid, newobj.hei);
@@ -888,7 +889,8 @@ class DrawChartUpperCanvas {
               "top": linecord[i].y / DrawChartUpperCanvas.ratio(ctx) + "px",
               "display": "block"
             });
-            document.querySelector('#' + container + ' .canvasjs-chart-tooltip div').innerHTML = linecord[i].label + ' : ' + linecord[i].dataval;
+            document.querySelector('#' + container + ' .canvasjs-chart-tooltip div').innerHTML = 
+              linecord[i].dataLabel + " <br /> " + linecord[i].label + ' : ' + linecord[i].dataval;
             break;
           } else {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
@@ -1088,8 +1090,6 @@ class chartCalling {
       let titleAndPrintButton =''
       if(chart.config.title != undefined) {
         titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
-      } else {
-        titleAndPrintButton += '<h2 class="chartTitle">Chart</h2>'
       }
       if(chart.config.printEnable != undefined && chart.config.printEnable == true) {
         titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
@@ -1154,8 +1154,6 @@ class chartCalling {
       let titleAndPrintButton =''
       if(chart.config.title != undefined) {
         titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
-      } else {
-        titleAndPrintButton += '<h2 class="chartTitle">Chart</h2>'
       }
       if(chart.config.printEnable != undefined && chart.config.printEnable == true) {
         titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
@@ -1216,13 +1214,20 @@ class chartCalling {
       console.log("Start : pieChart");
       chart.container = chartID;
       var chartContainerSelector = document.querySelector("#" + chart.container);
+      let ChartContainer = document.querySelector("#" + chart.container);
       chart.chartnumber = chartID;
       chart.wid = chartContainerSelector.clientWidth * 2 / 3;
       chart.hei = chartContainerSelector.clientHeight - 33;
+      
+      let titleAndPrintButton =''
+      if(chart.config.title != undefined) {
+        titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
+      }
+      if(chart.config.printEnable != undefined && chart.config.printEnable == true) {
+        titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
+      }
+      ChartContainer.innerHTML = titleAndPrintButton;
 
-      let titleAndPrintButton = '<h2 class="chartTitle">' + chart.config.title + '</h2>';
-      titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
-      chartContainerSelector.innerHTML = titleAndPrintButton;
       let ctx_base = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
       //drawGrid(chart.chartnumber, 10, ctx_base, chart.data);
       let canvas = 'canvas' + chart.chartnumber;
@@ -1267,13 +1272,19 @@ class chartCalling {
       console.log("Start : donutChart");
       chart.container = chartID;
       let chartContainerSelector = document.querySelector("#" + chart.container);
+      let ChartContainer = document.querySelector("#" + chart.container);
       chart.chartnumber = chartID;
       chart.wid = chartContainerSelector.clientWidth * 2 / 3;
       chart.hei = chartContainerSelector.clientHeight - 33;
 
-      let titleAndPrintButton = '<h2 class="chartTitle">' + chart.config.title + '</h2>';
-      titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
-      chartContainerSelector.innerHTML = titleAndPrintButton;
+      let titleAndPrintButton =''
+      if(chart.config.title != undefined) {
+        titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
+      }
+      if(chart.config.printEnable != undefined && chart.config.printEnable == true) {
+        titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
+      }
+      ChartContainer.innerHTML = titleAndPrintButton;
       let ctx_base = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
       drawGrid(chart.chartnumber, 10, ctx_base, chart.data);
       let canvas = 'canvas' + chart.chartnumber;
@@ -1323,8 +1334,13 @@ class chartCalling {
       chart.wid = ChartContainer.clientWidth - 10;
       chart.hei = ChartContainer.clientHeight - 33;
 
-      let titleAndPrintButton = '<h2 class="chartTitle">' + chart.config.title + '</h2>';
-      titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
+      let titleAndPrintButton =''
+      if(chart.config.title != undefined) {
+        titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
+      }
+      if(chart.config.printEnable != undefined && chart.config.printEnable == true) {
+        titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
+      }
       ChartContainer.innerHTML = titleAndPrintButton;
       let ctx_base = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
       drawGrid(chart.chartnumber, 10, ctx_base, chart.data);
@@ -1369,8 +1385,6 @@ class chartCalling {
       let titleAndPrintButton =''
       if(chart.config.title != undefined) {
         titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
-      } else {
-        titleAndPrintButton += '<h2 class="chartTitle">Chart</h2>'
       }
       if(chart.config.printEnable != undefined && chart.config.printEnable == true) {
         titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
@@ -1405,6 +1419,8 @@ class chartCalling {
       let maxdata = [chart.yaxis.min, chart.yaxis.max];
       //console.log("maxdata:" + maxdata);
       let linecord = [];
+      let barCords = [];
+      let lineLineCords = [];
       let nextcurve = 100;
       let barChartCount = 0;
       for (let i in chart.data) {
@@ -1412,21 +1428,24 @@ class chartCalling {
       }
       for (let i = 0; i < chart.data.length; i++) {
         if (chart.data[i].type == "bar") {
-          this.drawChart.drawBar(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, nextcurve, chart.data[i].chartColor, linecord, barwidth, barChartCount);
+          this.drawChart.drawBar(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, nextcurve, chart.data[i].chartColor, barCords, barwidth, barChartCount);
           nextcurve += barwidth + 5;
         }
         if (chart.data[i].type == "line") {
-          this.drawChart.drawGraphicLinear(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, chart.data[i].chartColor, linecord);
+          this.drawChart.drawGraphicLinear(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, chart.data[i].chartColor, lineLineCords);
         }
         if (chart.data[i].type == "spline") {
-          this.drawChart.drawsplinechart(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, chart.data[i].chartColor, linecord);
+          let splineCord = this.drawChart.drawsplinechart(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, chart.data[i].chartColor, lineLineCords);
         }
       }
       drawGraphicLinearYcord(canvas, ctx_base, verticaldevisions, chart);
-      console.log(linecord);
+      console.log("barCords ", barCords);
+      console.log("lineLineCords ",lineLineCords);
       let ctx_upper = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, linecord, chart.container, chart.type);
-      this.drawUpperChart.barChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, linecord, chart.container, chart.type);
+      
+      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, lineLineCords, chart.container, chart.type);
+      this.drawUpperChart.barChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, barCords, chart.container, chart.type);
+      
       document.querySelector("#" + chartID + " #print_" + chartID).addEventListener('click', function (event) {
         PrintContent(event, chart.wid, chart.hei);
       });
@@ -1451,8 +1470,6 @@ class chartCalling {
       let titleAndPrintButton =''
       if(chart.config.title != undefined) {
         titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
-      } else {
-        titleAndPrintButton += '<h2 class="chartTitle">Chart</h2>'
       }
       if(chart.config.printEnable != undefined && chart.config.printEnable == true) {
         titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
@@ -1517,8 +1534,6 @@ class chartCalling {
       let titleAndPrintButton =''
       if(chart.config.title != undefined) {
         titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
-      } else {
-        titleAndPrintButton += '<h2 class="chartTitle">Chart</h2>'
       }
       if(chart.config.printEnable != undefined && chart.config.printEnable == true) {
         titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
@@ -1672,23 +1687,4 @@ class GKChart {
       // console.log("Error Found while calling Render GKChart", error);
     }
   }
-
-  // ResponseApi(objVal) {
-  //   window.resizeEvt;
-  //   window.addEventListener("resize", function () {
-  //     clearTimeout(window.resizeEvt);
-  //     objVal.renderGKChart();
-  //     window.resizeEvt = setTimeout(function () {
-
-  //       console.warn("ResizeCalled");
-  //     }, 250);
-  //   });
-  // }
-
 };
-
-// (function () {
-//     console.info("Enter: Chart Designing initialize function");
-//     new GKChart();
-//     console.info("Exit: Chart Designing initialize function");
-// })();
