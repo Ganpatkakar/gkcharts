@@ -1367,11 +1367,38 @@ class chartCalling {
       chart.wid = ChartContainer.clientWidth - 10;
       chart.hei = ChartContainer.clientHeight - 33;
 
-      let titleAndPrintButton = '<h2 class="chartTitle">' + chart.config.title + '</h2>';
-      titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
+      let titleAndPrintButton =''
+      if(chart.config.title != undefined) {
+        titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
+      } else {
+        titleAndPrintButton += '<h2 class="chartTitle">Chart</h2>'
+      }
+      if(chart.config.printEnable != undefined && chart.config.printEnable == true) {
+        titleAndPrintButton += '<button style="position: absolute;right: 25px;margin-top:-40px" id="print_' + chartID + '">Print</button>'
+      }
       ChartContainer.innerHTML = titleAndPrintButton;
       let ctx_base = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chart.hei, chart.container);
-      let verticaldevisions = (chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference;
+      (chart.yaxis === undefined) ? chart.yaxis = {} : null
+      if(chart.yaxis.max === undefined && chart.yaxis.min === undefined) {
+        chart.yaxis.max = chart.data[0].datapoints[0].y;
+        chart.yaxis.min = chart.data[0].datapoints[0].y;
+        for (var i = 0; i < chart.data.length; i++) {
+          for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+            if (chart.data[i].datapoints[j].y < chart.yaxis.min) {
+              chart.yaxis.min = chart.data[i].datapoints[j].y;
+            }
+            if (chart.data[i].datapoints[j].y > chart.yaxis.max) {
+              chart.yaxis.max = chart.data[i].datapoints[j].y;
+            }
+          }
+        }
+        chart.yaxis.max += 10;
+        (chart.yaxis.min >= 10) ? chart.yaxis.min += - 10 : null
+      }
+      if(chart.yaxis.difference === undefined) {
+        chart.yaxis.difference = Math.floor((chart.yaxis.max - chart.yaxis.min) / 8);
+      }
+      let verticaldevisions = Math.floor((chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference);
       //console.log("verticaldevisions" + verticaldevisions);
       let barwidth = drawGrid(chart.chartnumber, verticaldevisions, ctx_base, chart.data);
       //console.log("barwidth:" + barwidth);
