@@ -280,6 +280,7 @@ class DrawChart {
           x: i * spacingHorizontal + spacingHorizontal/2 + 100,
           y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient,
           label: data.datapoints[i].label,
+          dataLabel :  data.dataLabel,
           dataval: data.datapoints[i].y
         };
         //console.log(newobj);
@@ -349,6 +350,7 @@ class DrawChart {
           x: i * spacingHorizontal + spacingHorizontal/2 + 100,
           y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient,
           label: data.datapoints[i].label,
+          dataLabel : data.dataLabel,
           dataval: data.datapoints[i].y
         };
         //console.log(newobj);
@@ -750,6 +752,7 @@ class DrawChart {
           x: i * spacingHorizontal + spacingHorizontal/2 + 100,
           y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient,
           label: data.datapoints[i].label,
+          dataLabel :  data.dataLabel,
           dataval: data.datapoints[i].y
         };
         //console.log(newobj);
@@ -845,22 +848,18 @@ class DrawChartUpperCanvas {
               "top": linecord[i].y / DrawChartUpperCanvas.ratio(ctx) + "px",
               "display": "block"
             });
-            document.querySelector('#' + container + ' .canvasjs-chart-tooltip div').innerHTML = linecord[i].label + ' : ' + linecord[i].dataval;
+            document.querySelector('#' + container + ' .canvasjs-chart-tooltip div').innerHTML = 
+              linecord[i].dataLabel + " <br /> " + linecord[i].label + ' : ' + linecord[i].dataval;
             break;
           } else {
             ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+            css(document.querySelector('#' + container + ' .canvasjs-chart-tooltip'), {
+              'display': 'none'
+            });
           }
           ctx.closePath();
         }
       }, false);
-
-      document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
-        setTimeout(function () {
-          css(document.querySelector('#' + container + ' .canvasjs-chart-tooltip'), {
-            'display': 'none'
-          });
-        }, 2000);
-      });
       console.log("End : lineChartUpperCanvas");
     } catch (e) {
       console.log("error occurred in lineChartUpperCanvas : ", e);
