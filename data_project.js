@@ -247,13 +247,8 @@ var chartbar = {
 var chartColumn = {
   "config": {
     "title": "Multi Bar and Line Comparision Chart",
-    "chartType": 'column'
-  },
-  "yaxis": {
-    "min": 0,
-    "max": 400,
-    "difference": 50,
-    "title": "Hours"
+    "chartType": 'column',
+    "printEnable" : true
   },
   "data": [{
       "chartColor": "#00d554",
@@ -295,13 +290,8 @@ var chartColumn = {
 var chartColumnFill = {
   "config": {
     "title": "Multi Bar and Line Area Comparision Chart",
-    "chartType": 'column'
-  },
-  "yaxis": {
-    "min": 0,
-    "max": 400,
-    "difference": 50,
-    "title": "Hours"
+    "chartType": 'column',
+    "printEnable" : true
   },
   "data": [{
       "chartColor": "#00d554",
@@ -343,13 +333,8 @@ var chartColumnFill = {
 var columnLineBar = {
   "config": {
     "title": "Bar and Line Comparision Chart",
-    "chartType": 'column'
-  },
-  "yaxis": {
-    "min": 0,
-    "max": 400,
-    "difference": 50,
-    "title": "Hours"
+    "chartType": 'column',
+    "printEnable" : true
   },
   "data": [{
       "chartColor": "teal",
@@ -368,13 +353,8 @@ var columnLineBar = {
 var chartColumnSpline = {
   "config": {
     "title": "Multi Bar and Smooth Line Comparision Chart",
-    "chartType": 'column'
-  },
-  "yaxis": {
-    "min": 0,
-    "max": 400,
-    "difference": 50,
-    "title": "Hours"
+    "chartType": 'column',
+    "printEnable" : true
   },
   "data": [{
       "chartColor": "#00d554",
@@ -416,13 +396,8 @@ var chartColumnSpline = {
 var chartColumnSplineFill = {
   "config": {
     "title": "Multi Bar and Line Area Comparision Chart",
-    "chartType": 'column'
-  },
-  "yaxis": {
-    "min": 0,
-    "max": 400,
-    "difference": 50,
-    "title": "Hours"
+    "chartType": 'column',
+    "printEnable" : true
   },
   "data": [{
       "chartColor": "#00d554",
@@ -461,7 +436,8 @@ var chartColumnSplineFill = {
       "chartColor": "red",
       "type": 'spline',
       "fill": true,
-      "datapoints": [{
+      "datapoints": [
+        {
         "label": "Jan",
         "y": 40
       }, {
