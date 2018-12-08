@@ -2,8 +2,6 @@
 GKCharts is a charting plug and play library. Developed with the HTML 5 Canvas and ES6 JavaScript.
 This is an open source project for every one, anyone who want to improve this charting library can contribute for this project.
 
-I have placed gitbhub pages to see this project view https://ganpatkakar.github.io/GkCharts/.
-
 I have alos created a website to showcase this project along with some dashboard designs as http://gk-chart.org/
 
 
@@ -21,3 +19,6 @@ I would love for you to contribute for any chart and make GKCharts library more 
 
 ### Status of the Project
 This project is still under active development, so you might run into issues. If you do, please don't be shy about letting me know, or better yet, contribute a fix or feature.
+
+
+I have placed gitbhub pages to see this project view https://ganpatkakar.github.io/GkCharts/.
