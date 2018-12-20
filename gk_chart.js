@@ -7,7 +7,6 @@ function css(el, styles) {
 
 class ChartSurface {
 
-
   ratio(canvasContainer) {
     let ctx = canvasContainer.getContext('2d');
     let dpr = window.devicePixelRatio || 1; 1
@@ -260,9 +259,7 @@ function drawGraphicLinearYcord(canvas, ctx, verticalNr, cdata) {
 }
 
 class DrawChart {
-  constructor() {
-  }
-
+  
   drawGraphicLinear(canvas, ctx, verticalNr, data, range, chartColor, linecord) {
     try {
       console.log("Start : drawGraphicLinear");
@@ -751,7 +748,7 @@ class DrawChart {
     }
   }
 
-  static bezierPointsCalc(a, f) {
+  bezierPointsCalc(a, f) {
     for (var b = [], c, e = 0; e < a.length; e++)
       if (0 == e)
         b.push(a[0]);
@@ -821,7 +818,7 @@ class DrawChart {
 
       ctx.closePath();
       var f = 2;
-      var a = DrawChart.bezierPointsCalc(localLineCords, f);
+      var a = this.bezierPointsCalc(localLineCords, f);
       console.log(a);
       ctx.strokeStyle = chartColor;
       ctx.lineWidth = 3;
