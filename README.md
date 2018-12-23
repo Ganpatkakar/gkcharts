@@ -25,6 +25,6 @@ I have placed gitbhub pages to see this project view https://ganpatkakar.github.
 
 
 # New Released version available at official website with below beatures
-# Animations 
-# Optimizations
-# Issue Fixes
+## Animations 
+## Optimizations
+## Issue Fixes
