@@ -22,3 +22,9 @@ This project is still under active development, so you might run into issues. If
 
 
 I have placed gitbhub pages to see this project view https://ganpatkakar.github.io/GkCharts/.
+
+
+# New Released version available at official website with below beatures
+# Animations 
+# Optimizations
+# Issue Fixes
