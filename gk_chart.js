@@ -259,7 +259,7 @@ function drawGraphicLinearYcord(canvas, ctx, verticalNr, cdata) {
 }
 
 class DrawChart {
-  
+
   drawGraphicLinear(canvas, ctx, verticalNr, data, range, chartColor, linecord) {
     try {
       console.log("Start : drawGraphicLinear");
@@ -312,22 +312,18 @@ class DrawChart {
         return (waypoints);
       }
 
-      //points.unshift(localLineCords[0]);
       points.push(localLineCords[localLineCords.length - 1]);
 
       animate();
-      console.log("points,. length", points.length);
+      console.log("points.length", points.length);
       function animate() {
+        if (t < points.length - 1) {
+          requestAnimationFrame(animate);
+        }
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.globalAlpha = 1;
         ctx.strokeStyle = chartColor;
-        if (t < points.length - 1) {
-          requestAnimationFrame(animate);
-        }
-        // draw a line segment from the last waypoint
-        // to the current waypoint
-        ctx.beginPath();
         if (t == 0) {
           ctx.moveTo(points[t].x, points[t].y);
         } else {
@@ -336,15 +332,15 @@ class DrawChart {
         }
         ctx.stroke();
         // increment "t" to get the next waypoint
-        console.log()
         if (t % differencePoints == 0 || t == points.length - 1) {
           commonCodeCircle();
         }
         if (data.fill) {
-          // ctx.moveTo(localLineCords[0].x, hei);
-          // ctx.lineTo(localLineCords[0].x, localLineCords[0].y);
-          // ctx.lineTo(points[t].x, points[t].y);
-          fillAreaCall()
+          let p = {};
+          if (t) {
+            p = points.slice(t - 1, t + 1);
+          }
+          fillAreaCall(p);
         }
         t += 1;
       }
@@ -359,23 +355,20 @@ class DrawChart {
         ctx.closePath();
       }
 
-      function fillAreaCall() {
-        for (var i = 0; i < localLineCords.length; i++) {
-          if (i == 0) {
-            ctx.lineTo(localLineCords[i].x, hei);
-          } else {
-            ctx.lineTo(localLineCords[i].x, localLineCords[i - 1].y);
-            ctx.lineTo(localLineCords[i].x, localLineCords[i].y);
-          }
-        }
+      function fillAreaCall(vertices) {
         ctx.beginPath();
-        ctx.moveTo(localLineCords[0].x, hei);
-        ctx.lineTo(localLineCords[0].x, localLineCords[0].y);
-        ctx.lineTo(points[t].x, points[t].y);
-        ctx.lineTo(points[t].x, hei);
+        if (vertices.length) {
+          ctx.moveTo(vertices[0].x, hei);
+        }
+        for (let points = 0; points < vertices.length; points++) {
+          ctx.lineTo(vertices[points].x, vertices[points].y + 4);
+        }
+        if (vertices.length) {
+          ctx.lineTo(vertices[vertices.length - 1].x, hei);
+        }
+        ctx.closePath();
         ctx.globalAlpha = 0.1;
         ctx.fillStyle = chartColor;
-        ctx.closePath();
         ctx.fill();
       }
       ctx.globalAlpha = 1;
@@ -416,44 +409,99 @@ class DrawChart {
       ctx.beginPath();
       ctx.globalAlpha = 1;
       ctx.strokeStyle = chartColor;
+      let lPoints = []
       for (var i = 0; i < localLineCords.length; i++) {
-        ctx.lineWidth = 3;
         if (i == 0) {
-          ctx.moveTo(localLineCords[i].x, localLineCords[i].y);
+          lPoints.push({ x: localLineCords[i].x, y: localLineCords[i].y })
         } else {
-          ctx.lineTo(localLineCords[i].x, localLineCords[i - 1].y);
-          ctx.lineTo(localLineCords[i].x, localLineCords[i].y);
+          lPoints.push({ x: localLineCords[i].x, y: localLineCords[i - 1].y })
+          lPoints.push({ x: localLineCords[i].x, y: localLineCords[i].y })
         }
-        ctx.stroke();
-
-        (function () {
-          ctx.beginPath();
-          ctx.lineWidth = 5;
-          ctx.arc(localLineCords[i].x, localLineCords[i].y, 8, 0, 2 * Math.PI);
-          ctx.fillStyle = "#fff";
-          ctx.fill();
-          ctx.stroke();
-          ctx.closePath();
-          ctx.lineWidth = 5;
-        })();
       }
 
-      if (data.fill) {
-        ctx.beginPath();
-        ctx.moveTo(localLineCords[0].x, hei);
-        for (var i = 0; i < localLineCords.length; i++) {
-          if (i == 0) {
-            ctx.lineTo(localLineCords[i].x, localLineCords[i].y);
-          } else {
-            ctx.lineTo(localLineCords[i].x, localLineCords[i - 1].y);
-            ctx.lineTo(localLineCords[i].x, localLineCords[i].y);
+      var t = 0;
+      var differencePoints = 15;
+      var points = calcWaypoints(lPoints);
+
+      function calcWaypoints(vertices) {
+        var waypoints = [];
+        for (var i = 1; i < vertices.length; i++) {
+          var pt0 = vertices[i - 1];
+          var pt1 = vertices[i];
+          var dx = pt1.x - pt0.x;
+          var dy = pt1.y - pt0.y;
+          for (var j = 0; j < differencePoints; j++) {
+            var x = pt0.x + dx * j / differencePoints;
+            var y = pt0.y + dy * j / differencePoints;
+            waypoints.push({
+              x: x,
+              y: y
+            });
           }
         }
-        ctx.lineTo(localLineCords[localLineCords.length - 1].x, hei);
-        ctx.globalAlpha = 0.2;
-        ctx.fillStyle = chartColor;
+        return (waypoints);
+      }
+
+      points.push(localLineCords[localLineCords.length - 1]);
+
+      animate();
+      console.log("points.length", points.length);
+      function animate() {
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = chartColor;
+        if (t < points.length - 1) {
+          requestAnimationFrame(animate);
+        }
+        // draw a line segment from the last waypoint
+        // to the current waypoint
+        ctx.beginPath();
+        if (t == 0) {
+          ctx.moveTo(points[t].x, points[t].y);
+        } else {
+          ctx.moveTo(points[t - 1].x, points[t - 1].y);
+          ctx.lineTo(points[t].x, points[t].y);
+        }
+        ctx.stroke();
+        // increment "t" to get the next waypoint
+        if (t % (differencePoints * 2) == 0 || t == points.length - 1) {
+          commonCodeCircle();
+        }
+        if (data.fill) {
+          let p = {};
+          if (t) {
+            p = points.slice(t - 1, t + 1);
+          }
+          fillAreaCall(p);
+        }
+        t += 1;
+      }
+
+      function fillAreaCall(vertices) {
+        ctx.beginPath();
+        if (vertices.length) {
+          ctx.moveTo(vertices[0].x, hei);
+        }
+        for (let points = 0; points < vertices.length; points++) {
+          ctx.lineTo(vertices[points].x, vertices[points].y + 4);
+        }
+        if (vertices.length) {
+          ctx.lineTo(vertices[vertices.length - 1].x, hei);
+        }
         ctx.closePath();
+        ctx.globalAlpha = 0.1;
+        ctx.fillStyle = chartColor;
         ctx.fill();
+      }
+
+      function commonCodeCircle() {
+        ctx.beginPath();
+        ctx.fillStyle = chartColor;
+        ctx.arc(points[t].x, points[t].y, 8, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
       }
       ctx.globalAlpha = 1;
 
@@ -470,19 +518,12 @@ class DrawChart {
       var canvas = document.getElementById(canvas);
       var hei = canvas.height - 60;
       var wid = canvas.width - 100;
-      var spacingVertical = hei / verticalNr;
       var spacingHorizontal = wid / data.datapoints.length;
-      //console.log("barChart spacingHorizontal :" + spacingHorizontal);
-      //console.log("barchart div width :" + wid);
-      var totalcompare = data.datapoints.length;
       var totalRange = range[1] - range[0];
       var verticalCoefficient = hei / totalRange;
-      //var barwidth = 15;
       ctx.beginPath();
-      ctx.strokeStyle = chartColor;
-      //ctx.moveTo(0, hei-(data[0]-range[0])*verticalCoefficient+spacingVertical);
+      let localLinecord = [];
       for (var i = 0; i < data.datapoints.length; i++) {
-        ctx.fillStyle = chartColor;
         var rectHeight = (hei - (data.datapoints[i].y - range[0]) * verticalCoefficient);
         let barChartWidth = barChartCount * barwidth + (barChartCount - 1) * 5
         let fromLeft = (i * spacingHorizontal + spacingHorizontal / 2 + curx) - barChartWidth / 2;
@@ -495,14 +536,47 @@ class DrawChart {
           dataLabel: data.dataLabel,
           dataval: data.datapoints[i].y
         };
-        ctx.fillRect(newobj.x, newobj.y, newobj.wid, newobj.hei);
-        //console.log(newobj);
         linecord.push(newobj);
-        ctx.fillStyle = "#000";
+        localLinecord.push(newobj);
       }
-      ctx.stroke();
       ctx.closePath();
-      //console.log(linecord);
+      let points = calcWaypoints(localLinecord);
+      function calcWaypoints(points){
+        let wayPoints = [];
+        for(let i = 0; i < points.length; i++){
+          let x1 = points[i].x;
+          let totalHeight = hei;
+          let rectHeight = points[i].hei;
+          let currentHeight = 0;
+          //console.log(rectHeight);
+          let newWayPoint = [];
+          while(currentHeight <=  rectHeight ){
+            newWayPoint.push({x: x1, y : totalHeight-currentHeight, hei: currentHeight, wid: barwidth});
+            let difference = rectHeight - currentHeight;
+            currentHeight += (difference < 15 && difference > 0) ? difference : 15;
+          }
+          wayPoints.push(newWayPoint);
+        }
+        return (wayPoints);
+      }
+      for(let i = 0 ; i < points.length; i++){
+        let t = 0;
+        let cColor = chartColor;
+        animate(points[i], t, cColor);
+      }
+      function animate(animateArr, t, cColor){
+        ctx.beginPath();
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = cColor;
+        ctx.fillRect(animateArr[t].x, animateArr[t].y, animateArr[t].wid, animateArr[t].hei);
+        //ctx.stroke();
+        ctx.closePath();
+        t = t+1;
+        if(t < animateArr.length){
+          requestAnimationFrame(animate.bind(this, animateArr, t, cColor));
+        }
+      }
+      //console.log("Bar Chart Waypoints", points);
       console.log("End : drawBar");
       return linecord;
     } catch (e) {
@@ -803,7 +877,7 @@ class DrawChart {
       ctx.globalAlpha = 1;
       var localLineCords = [];
 
-      for (var i = 0; i < data.datapoints.length; i++) {
+      for (let i = 0; i < data.datapoints.length; i++) {
         var newobj = {
           x: i * spacingHorizontal + spacingHorizontal / 2 + 100,
           y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient,
@@ -820,50 +894,113 @@ class DrawChart {
       var f = 2;
       var a = this.bezierPointsCalc(localLineCords, f);
       console.log(a);
-      ctx.strokeStyle = chartColor;
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.moveTo(a[0].x, a[0].y);
-      for (var i = 1; i < a.length; i += 3) {
-        if (i <= a.length - 3) {
-          ctx.bezierCurveTo(a[i].x, a[i].y, a[i + 1].x, a[i + 1].y, a[i + 2].x, a[i + 2].y);
-        }
+      
+      // for (var i = 1; i <= a.length-3; i += 3) {
+      //   ctx.bezierCurveTo(a[i].x, a[i].y, a[i + 1].x, a[i + 1].y, a[i + 2].x, a[i + 2].y);
+      // }
+      let difference = 25
+      var points = calcWaypoints(a);
+      function calcWaypoints(vertices) {
+          var waypoints = [];
+          for (var i = 1; i < vertices.length; i+=3) {
+              let startPt = {x: vertices[i-1].x, y:vertices[i-1].y}
+              let ct1 = {x: vertices[i].x, y:vertices[i].y}
+              let ct2 = {x: vertices[i+1].x, y:vertices[i+1].y}
+              let endPt = {x: vertices[i+2].x, y:vertices[i+2].y}
+              for (var t = 0; t < difference; t++) {
+                  let pointers = getQuadraticBezierXYatT(startPt, ct1, ct2, endPt, t/difference);
+                  waypoints.push({
+                      x: pointers.x,
+                      y: pointers.y
+                  });
+              }
+          }
+          return (waypoints);
       }
-      ctx.stroke();
-      ctx.closePath();
 
-      for (var i = 0; i < localLineCords.length; i++) {
-        (function () {
-          /*Draw arc for line chart connecting and end points*/
-          //ctx.save();
+      function getQuadraticBezierXYatT(startPt, ct1, ct2, endPt, t) {
+        let x = Math.pow(1-t, 3) * startPt.x + 3*Math.pow(1-t, 2) * t * ct1.x + 3*(1-t) * Math.pow(t,2) * ct2.x + Math.pow(t,3) * endPt.x
+        let y = Math.pow(1-t, 3) * startPt.y + 3*Math.pow(1-t, 2) * t * ct1.y + 3*(1-t) * Math.pow(t,2) * ct2.y + Math.pow(t,3) * endPt.y 
+        return( {x:x,y:y} );
+      }
+
+      points.push(localLineCords[localLineCords.length-1]);
+
+      let i = 0;
+      //ctx.beginPath();
+      animate(points);
+      function animate(points){
+          if(i < points.length-1){
+              requestAnimationFrame(animate.bind(this, points));
+          }
+          ctx.lineWidth = 3;
           ctx.beginPath();
-          ctx.lineWidth = 5;
-          //ctx.strokeStyle = "red";
-          ctx.arc(localLineCords[i].x, localLineCords[i].y, 8, 0, 2 * Math.PI);
-          ctx.fillStyle = "#fff";
-          ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.strokeStyle = chartColor;
+          if (i == 0) {
+            ctx.moveTo(points[i].x, points[i].y);
+          } else {
+            ctx.moveTo(points[i - 1].x, points[i - 1].y);
+            ctx.lineTo(points[i].x, points[i].y);
+          }
           ctx.stroke();
-          ctx.closePath();
-          ctx.lineWidth = 5;
-          //ctx.restore();
-        })();
-      }
-      ctx.closePath();
 
-      if (data.fill) {
+          if (i % difference == 0 || i == points.length - 1) {
+            commonCodeCircle();
+          }
+
+          if (data.fill) {
+            let p = {};
+            if (i) {
+              p = points.slice(i - 1, i + 1);
+            }
+            fillAreaCall(p);
+          }
+
+          i = i + 1;
+      }
+
+      function commonCodeCircle() {
         ctx.beginPath();
-        ctx.moveTo(a[0].x, hei);
-        ctx.lineTo(a[0].x, a[0].y);
-        for (var i = 1; i < a.length; i += 3) {
-          ctx.bezierCurveTo(a[i].x, a[i].y, a[i + 1].x, a[i + 1].y, a[i + 2].x, a[i + 2].y);
-        }
-        ctx.lineTo(a[a.length - 1].x, hei);
-        ctx.globalAlpha = 0.2;
         ctx.fillStyle = chartColor;
+        ctx.arc(points[i].x, points[i].y, 8, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.strokeStyle = chartColor;
+        ctx.stroke();
+      }
+
+      function fillAreaCall(vertices) {
+        ctx.beginPath();
+        if (vertices.length) {
+          ctx.moveTo(vertices[0].x, hei);
+        }
+        for (let points = 0; points < vertices.length; points++) {
+          ctx.lineTo(vertices[points].x, vertices[points].y + 4);
+        }
+        if (vertices.length) {
+          ctx.lineTo(vertices[vertices.length - 1].x, hei);
+        }
         ctx.closePath();
+        ctx.globalAlpha = 0.1;
+        ctx.fillStyle = chartColor;
         ctx.fill();
       }
       ctx.globalAlpha = 1;
+
+      // if (data.fill) {
+      //   ctx.beginPath();
+      //   ctx.moveTo(a[0].x, hei);
+      //   ctx.lineTo(a[0].x, a[0].y);
+      //   for (let i = 1; i < a.length; i += 3) {
+      //     ctx.bezierCurveTo(a[i].x, a[i].y, a[i + 1].x, a[i + 1].y, a[i + 2].x, a[i + 2].y);
+      //   }
+      //   ctx.lineTo(a[a.length - 1].x, hei);
+      //   ctx.globalAlpha = 0.2;
+      //   ctx.fillStyle = chartColor;
+      //   ctx.closePath();
+      //   ctx.fill();
+      // }
+      //ctx.globalAlpha = 1;
       console.log("End : drawsplinechart");
       return linecord;
     } catch (e) {
