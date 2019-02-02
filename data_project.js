@@ -631,62 +631,52 @@ var step = new GKChart({
   id: "stepChart",
   data: stepChart
 });
-step.renderGKChart();
 
 var stepCompare = new GKChart({
   id: "stepChartComparision",
   data: stepChartComparision
 });
-stepCompare.renderGKChart();
 
 var stepFill = new GKChart({
   id: "stepChartFill",
   data: stepChartFill
 });
-stepFill.renderGKChart();
 
 var stepCompareFill = new GKChart({
   id: "stepChartComparisionFill",
   data: stepChartComparisionFill
 });
-stepCompareFill.renderGKChart();
 
 var chartLine = new GKChart({
   id: "chartline",
   data: chartline
 });
-chartLine.renderGKChart();
 
 var chartLineCompare = new GKChart({
   id: "chartlineComparision",
   data: chartlineComparision
 })
-chartLineCompare.renderGKChart();
 
 var chartLineFill = new GKChart({id: "chartlineFill", data: chartlineFill});
-chartLineFill.renderGKChart();
+
 
 var chartLineCompareFill = new GKChart({id: "chartlineComparisionFill", data: chartlineComparisionFill});
-chartLineCompareFill.renderGKChart();
 
-new GKChart({id: "chartspline", data: chartspline}).renderGKChart();
-new GKChart({id: "multichartspline", data: multichartspline}).renderGKChart();
-new GKChart({id: "chartsplineFill", data: chartsplineFill}).renderGKChart();
-new GKChart({id: "multichartsplineFill", data: multichartsplineFill}).renderGKChart();
 
-new GKChart({id: "chartbar", data: chartbar}).renderGKChart();
-new GKChart({id: "multilinebar", data: multilinebar}).renderGKChart();
+new GKChart({id: "chartspline", data: chartspline})
+new GKChart({id: "multichartspline", data: multichartspline});
+new GKChart({id: "chartsplineFill", data: chartsplineFill});
+new GKChart({id: "multichartsplineFill", data: multichartsplineFill});
 
-new GKChart({id: "piechart", data: piechart}).renderGKChart();
-new GKChart({id: "donut", data: donut}).renderGKChart();
-new GKChart({id: "meter", data: meter}).renderGKChart();
+new GKChart({id: "chartbar", data: chartbar});
+new GKChart({id: "multilinebar", data: multilinebar});
 
-new GKChart({id: "chartColumn", data: chartColumn}).renderGKChart();
-new GKChart({id: "chartColumnFill", data: chartColumnFill}).renderGKChart();
-new GKChart({id: "columnLineBar", data: columnLineBar}).renderGKChart();
-new GKChart({id: "chartColumnSpline", data: chartColumnSpline}).renderGKChart();
-new GKChart({id: "chartColumnSplineFill", data: chartColumnSplineFill}).renderGKChart();
+new GKChart({id: "piechart", data: piechart});
+new GKChart({id: "donut", data: donut});
+new GKChart({id: "meter", data: meter});
 
-setTimeout(function () {
-  step.renderGKChart({id: "stepChart", data: stepChartFill});
-}, 3000);
+new GKChart({id: "chartColumn", data: chartColumn});
+new GKChart({id: "chartColumnFill", data: chartColumnFill});
+new GKChart({id: "columnLineBar", data: columnLineBar});
+new GKChart({id: "chartColumnSpline", data: chartColumnSpline});
+new GKChart({id: "chartColumnSplineFill", data: chartColumnSplineFill});
