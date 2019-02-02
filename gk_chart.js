@@ -4,7 +4,6 @@ function css(el, styles) {
   }
 }
 
-
 class ChartSurface {
 
   ratio(canvasContainer) {
@@ -17,7 +16,7 @@ class ChartSurface {
 
   prepSurface(nr, width, height, container) {
     try {
-      console.log("Start : prepSurface");
+      // console.log("Start : prepSurface");
       var canvas = document.createElement("CANVAS");
       canvas.id = 'canvas' + nr;
       canvas.setAttribute('class', 'canvas');
@@ -33,46 +32,46 @@ class ChartSurface {
 
       // document.getElementById('container').append('<canvas id="canvas' + nr + '" class="canvas"' +
       //     ' style="position:absolute;" width="' + width + '" height="' + height + '"></canvas> ');
-      console.log("End : prepSurface");
+      // console.log("End : prepSurface");
     } catch (e) {
-      console.log("error occured in prepareSurface : ", e);
+      // console.log("error occured in prepareSurface : ", e);
     }
   }
 
   prepUI(nr) {
     try {
-      console.log("Start : prepUI");
-      //console.log(nr);
+      // console.log("Start : prepUI");
+      //// console.log(nr);
       var canvas = document.getElementById('canvas' + nr);
       var ctx = canvas.getContext('2d');
       ctx.font = "23px arial";
       ctx.lineWidth = 1;
-      console.log("End : prepUI");
+      // console.log("End : prepUI");
       return ctx;
     } catch (e) {
-      console.log("error occured in prepUI : ", e);
+      // console.log("error occured in prepUI : ", e);
     }
   }
 
   preparePlot(nr, sizex, sizey, container) {
     try {
-      console.log("Start : preparePlot");
+      // console.log("Start : preparePlot");
       this.prepSurface(nr, sizex, sizey, container);
       var canvasContext = this.prepUI(nr);
-      console.log("End : preparePlot");
+      // console.log("End : preparePlot");
       return canvasContext;
     } catch (e) {
-      console.log("error occured in preparePlot : ", e);
+      // console.log("error occured in preparePlot : ", e);
     }
   }
 
   prepSurfaceupper(nr, width, height, container) {
     try {
-      console.log("Start : prepSurfaceupper");
+      // console.log("Start : prepSurfaceupper");
       var container = document.getElementById(container);
       var innerCotent = '<canvas id="canvasupper' + nr + '" class="canvas" style="position:absolute;" width="' + width + '" height="' + height + '"></canvas>         '
       innerCotent += '<div class="canvasjs-chart-tooltip" style="position: absolute; height: auto; box-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 2px 2px; z-index: 1000; display: none; border-radius: 5px; transition: left 0.2s ease-out, bottom 0.2s ease-out;"> '
-      innerCotent += '<div style="width: auto; height: auto; min-width: 50px; margin: 0px; padding: 5px; font-family: Calibri, Arial, Georgia, serif; font-weight: normal; font-style: italic; color: rgb(0, 0, 0); text-shadow: rgba(0, 0, 0, 0.0980392) 1px 1px 1px; text-align: left; border: 2px solid rgb(127, 96, 132); text-indent: 0px; white-space: nowrap; border-radius: 5px; -webkit-user-select: none; background: rgba(255, 255, 255, 0.901961);">'
+      innerCotent += '<div style="width: auto; height: auto; min-width: 50px; padding: 5px; color: rgb(0, 0, 0); text-align: left; border: 2px solid rgb(127, 96, 132); text-indent: 0px; white-space: nowrap; border-radius: 5px; background: rgba(255, 255, 255, 1);">'
       innerCotent += '<span style="color:#7F6084;"></span>'
       innerCotent += '</div></div>'
       container.insertAdjacentHTML('beforeend', innerCotent);
@@ -83,37 +82,35 @@ class ChartSurface {
       canvasDom.style.width = width + "px";
       canvasDom.style.height = height + "px";
 
-      //container.innerHTML = '<canvas id="canvasupper'+nr+'" width="'+width+'" height="'+height+'"></canvas>'
-      //document.write();
-      console.log("End : prepSurfaceupper");
+      // console.log("End : prepSurfaceupper");
     } catch (e) {
-      console.log("error occured in prepSurfaceupper : ", e);
+      // console.log("error occured in prepSurfaceupper : ", e);
     }
   }
 
   prepUIUpper(nr) {
     try {
-      console.log("Start : prepUIUpper");
+      // console.log("Start : prepUIUpper");
       var canvas = document.getElementById('canvasupper' + nr);
       var ctx = canvas.getContext('2d');
       //ctx.font = '18px Arial';
       ctx.lineWidth = 1;
-      console.log("End : prepUIUpper");
+      // console.log("End : prepUIUpper");
       return ctx;
     } catch (e) {
-      console.log("error occured in prepUIUpper : ", e);
+      // console.log("error occured in prepUIUpper : ", e);
     }
   }
 
   preparePlotUpper(nr, sizex, sizey, container) {
     try {
-      console.log("Start : preparePlotUpper");
+      // console.log("Start : preparePlotUpper");
       this.prepSurfaceupper(nr, sizex, sizey, container);
       var canvasContext = this.prepUIUpper(nr);
-      console.log("End : preparePlotUpper");
+      // console.log("End : preparePlotUpper");
       return canvasContext;
     } catch (e) {
-      console.log("error occured in preparePlotUpper : ", e);
+      // console.log("error occured in preparePlotUpper : ", e);
     }
   }
 
@@ -121,21 +118,21 @@ class ChartSurface {
 
 function drawGrid(nr, verticanNr, ctx, data) {
   try {
-    console.log("Start : drawGrid");
+    // console.log("Start : drawGrid");
     var canvas = document.getElementById('canvas' + nr);
     var hei = canvas.height - 60;
-    //console.log("canvas height to draw grid lines:" + hei);
+    //// console.log("canvas height to draw grid lines:" + hei);
     var wid = canvas.width - 100;
-    //console.log("canvas width to draw grid lines:" + wid);
+    //// console.log("canvas width to draw grid lines:" + wid);
     ctx.beginPath();
     ctx.fillStyle = "#000";
 
     var spacingVertical = hei / verticanNr;
-    //console.log("canvas vertical spacings to draw grid lines:" + spacingVertical);
+    //// console.log("canvas vertical spacings to draw grid lines:" + spacingVertical);
     var spacingHorizontal = wid / data[0].datapoints.length;
-    //console.log("canvas horizontal spacings to draw grid lines:" + spacingHorizontal);
-    /*console.log(spacingVertical + 20);
-     console.log(wid);*/
+    //// console.log("canvas horizontal spacings to draw grid lines:" + spacingHorizontal);
+    /*// console.log(spacingVertical + 20);
+     // console.log(wid);*/
     var barwidth = 0;
     if (data.length > 1) {
       barwidth = (spacingHorizontal - 30) / data.length;
@@ -180,23 +177,23 @@ function drawGrid(nr, verticanNr, ctx, data) {
       ctx.stroke();
       ctx.strokeStyle = 'rgba(0,0,0,.2)';
     }
-    console.log("End : drawGrid");
+    // console.log("End : drawGrid");
     return barwidth;
   } catch (e) {
-    console.log("error occurred in drawGrid : ", e);
+    // console.log("error occurred in drawGrid : ", e);
   }
 }
 
 function drawGraphicLinearYcord(canvas, ctx, verticalNr, cdata) {
   try {
-    console.log("Start : drawGraphicLinearYcord");
-    //console.log(cdata);
+    // console.log("Start : drawGraphicLinearYcord");
+    //// console.log(cdata);
     var canvas = document.getElementById(canvas);
     var hei = canvas.height - 60;
     var wid = canvas.width - 100;
     var spacingVertical = hei / verticalNr;
     var spacingHorizontal = wid / cdata.data[0].datapoints.length;
-    //console.log(spacingHorizontal);
+    //// console.log(spacingHorizontal);
     ctx.beginPath();
     ctx.fillStyle = "#000";
     ctx.save();
@@ -228,7 +225,7 @@ function drawGraphicLinearYcord(canvas, ctx, verticalNr, cdata) {
         ctx.translate(i * spacingHorizontal + 104, hei + 8);
         ctx.rotate(Math.PI / 4);
         ctx.fillText(cdata.data[0].datapoints[i].label, 0, 0);
-        //console.log(cdata.xaxis.categories[i], i*spacingHorizontal, hei-spacingVertical);
+        //// console.log(cdata.xaxis.categories[i], i*spacingHorizontal, hei-spacingVertical);
         ctx.rotate(-Math.PI / 4);
         ctx.translate(-(i * spacingHorizontal + 104), -(hei + 8));
       }
@@ -251,9 +248,9 @@ function drawGraphicLinearYcord(canvas, ctx, verticalNr, cdata) {
     }
     //ctx.restore();
     ctx.closePath();
-    console.log("End : drawGraphicLinearYcord");
+    // console.log("End : drawGraphicLinearYcord");
   } catch (e) {
-    console.log("error occurred in drawGraphicLinearYcord : ", e);
+    // console.log("error occurred in drawGraphicLinearYcord : ", e);
   }
 
 }
@@ -262,31 +259,30 @@ class DrawChart {
 
   drawGraphicLinear(canvas, ctx, verticalNr, data, range, chartColor, linecord) {
     try {
-      console.log("Start : drawGraphicLinear");
+      // console.log("Start : drawGraphicLinear");
       var canvas = document.getElementById(canvas);
       var hei = canvas.height - 60;
-      var wid = canvas.width - +100
+      var wid = canvas.width - 100
       var spacingVertical = hei / verticalNr;
-      //console.log("spacingVertical:" + spacingVertical);
+      //// console.log("spacingVertical:" + spacingVertical);
       var spacingHorizontal = wid / data.datapoints.length;
-      //console.log("spacingHorizontal:" + spacingHorizontal);
+      //// console.log("spacingHorizontal:" + spacingHorizontal);
 
       var totalRange = range[1] - range[0];
       var verticalCoefficient = hei / totalRange;
       ctx.beginPath();
       var localLineCords = [];
       for (var i = 0; i < data.datapoints.length; i++) {
-        var newobj = {
+        let newobj = {
           x: i * spacingHorizontal + spacingHorizontal / 2 + 100,
           y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient,
           label: data.datapoints[i].label,
           dataLabel: data.dataLabel,
-          dataval: data.datapoints[i].y
+          dataval: data.datapoints[i].y,
+          dataColor: data.chartColor
         };
-        //console.log(newobj);
         // This linecord contains multiple charts data ponts for the visualization purpose of on hover.
         linecord.push(newobj);
-        // To differentiate between multiple line chart data points and current line chart data points.
         localLineCords.push(newobj);
       }
       var t = 0;
@@ -315,7 +311,7 @@ class DrawChart {
       points.push(localLineCords[localLineCords.length - 1]);
 
       animate();
-      console.log("points.length", points.length);
+      // console.log("points.length", points.length);
       function animate() {
         if (t < points.length - 1) {
           requestAnimationFrame(animate);
@@ -372,16 +368,16 @@ class DrawChart {
         ctx.fill();
       }
       ctx.globalAlpha = 1;
-      console.log("End : drawGraphicLinear");
+      // console.log("End : drawGraphicLinear");
       return linecord;
     } catch (e) {
-      console.log("error occured in drawGraphicLinear : ", e);
+      // console.log("error occured in drawGraphicLinear : ", e);
     }
   };
 
   drawStepchart(canvas, ctx, verticalNr, data, range, chartColor, linecord) {
     try {
-      console.log("Start : drawStepchart");
+      // console.log("Start : drawStepchart");
       var canvas = document.getElementById(canvas);
       var hei = canvas.height - 60;
       var wid = canvas.width - +100
@@ -399,9 +395,10 @@ class DrawChart {
           y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient,
           label: data.datapoints[i].label,
           dataLabel: data.dataLabel,
-          dataval: data.datapoints[i].y
+          dataval: data.datapoints[i].y,
+          dataColor: data.chartColor
         };
-        //console.log(newobj);
+        //// console.log(newobj);
         linecord.push(newobj);
         localLineCords.push(newobj);
       }
@@ -445,7 +442,7 @@ class DrawChart {
       points.push(localLineCords[localLineCords.length - 1]);
 
       animate();
-      console.log("points.length", points.length);
+      // console.log("points.length", points.length);
       function animate() {
         ctx.lineWidth = 3;
         ctx.beginPath();
@@ -505,16 +502,16 @@ class DrawChart {
       }
       ctx.globalAlpha = 1;
 
-      console.log("End : drawStepchart");
+      // console.log("End : drawStepchart");
       return linecord;
     } catch (e) {
-      console.log("error occured in drawGraphicLinear : ", e);
+      // console.log("error occured in drawGraphicLinear : ", e);
     }
   };
 
   drawBar(canvas, ctx, verticalNr, data, range, curx, chartColor, linecord, barwidth, barChartCount) {
     try {
-      console.log("Start : drawBar");
+      // console.log("Start : drawBar");
       var canvas = document.getElementById(canvas);
       var hei = canvas.height - 60;
       var wid = canvas.width - 100;
@@ -534,24 +531,25 @@ class DrawChart {
           hei: hei - rectHeight,
           label: data.datapoints[i].label,
           dataLabel: data.dataLabel,
-          dataval: data.datapoints[i].y
+          dataval: data.datapoints[i].y,
+          dataColor: data.chartColor
         };
         linecord.push(newobj);
         localLinecord.push(newobj);
       }
       ctx.closePath();
       let points = calcWaypoints(localLinecord);
-      function calcWaypoints(points){
+      function calcWaypoints(points) {
         let wayPoints = [];
-        for(let i = 0; i < points.length; i++){
+        for (let i = 0; i < points.length; i++) {
           let x1 = points[i].x;
           let totalHeight = hei;
           let rectHeight = points[i].hei;
           let currentHeight = 0;
-          //console.log(rectHeight);
+          //// console.log(rectHeight);
           let newWayPoint = [];
-          while(currentHeight <=  rectHeight ){
-            newWayPoint.push({x: x1, y : totalHeight-currentHeight, hei: currentHeight, wid: barwidth});
+          while (currentHeight <= rectHeight) {
+            newWayPoint.push({ x: x1, y: totalHeight - currentHeight, hei: currentHeight, wid: barwidth });
             let difference = rectHeight - currentHeight;
             currentHeight += (difference < 15 && difference > 0) ? difference : 15;
           }
@@ -559,34 +557,34 @@ class DrawChart {
         }
         return (wayPoints);
       }
-      for(let i = 0 ; i < points.length; i++){
+      for (let i = 0; i < points.length; i++) {
         let t = 0;
         let cColor = chartColor;
         animate(points[i], t, cColor);
       }
-      function animate(animateArr, t, cColor){
+      function animate(animateArr, t, cColor) {
         ctx.beginPath();
         ctx.globalAlpha = 1;
         ctx.fillStyle = cColor;
         ctx.fillRect(animateArr[t].x, animateArr[t].y, animateArr[t].wid, animateArr[t].hei);
         //ctx.stroke();
         ctx.closePath();
-        t = t+1;
-        if(t < animateArr.length){
+        t = t + 1;
+        if (t < animateArr.length) {
           requestAnimationFrame(animate.bind(this, animateArr, t, cColor));
         }
       }
-      //console.log("Bar Chart Waypoints", points);
-      console.log("End : drawBar");
+      //// console.log("Bar Chart Waypoints", points);
+      // console.log("End : drawBar");
       return linecord;
     } catch (e) {
-      console.log("error occured in drawBar : ", e);
+      // console.log("error occured in drawBar : ", e);
     }
   };
 
-  drawPie(canvas, ctx, verticalNr, data, range, chartColor, linecord) {
+  drawPie(canvas, ctx, data, linecord) {
     try {
-      console.log("Start : drawPie");
+      // console.log("Start : drawPie");
       var canvas = document.getElementById(canvas);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       var lastend = 0;
@@ -601,14 +599,14 @@ class DrawChart {
         ctx.moveTo(canvas.width / 2, canvas.height / 2);
         if (data.datapoints[i].y == 0) {
           ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
-          //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+          //// console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
           ctx.lineTo(canvas.width / 2, canvas.height / 2);
           ctx.strokeStyle = '1';
           ctx.strokeStyle = '#fff';
           ctx.stroke();
         }
         ctx.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
-        //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+        //// console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
         ctx.lineTo(canvas.width / 2, canvas.height / 2);
         var newobj = {
           wid: canvas.width,
@@ -618,10 +616,10 @@ class DrawChart {
           label: data.datapoints[i].label,
           y: data.datapoints[i].y
         };
-        //console.log(newobj);
+        //// console.log(newobj);
         linecord.push(newobj);
         lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
-        //console.log(lastend);
+        //// console.log(lastend);
         ctx.fill();
       }
       /* Draw piechart number values and numbers*/
@@ -645,16 +643,16 @@ class DrawChart {
           angle += (Math.PI * 2 * (data.datapoints[i].y / myTotal));
         }
       }
-      console.log("End : drawPie");
+      // console.log("End : drawPie");
       return linecord;
     } catch (e) {
-      console.log("error occured in drawPie : ", e);
+      // console.log("error occured in drawPie : ", e);
     }
   }
 
-  drawDonut(canvas, ctx, verticalNr, data, range, chartColor, linecord, chartHeight) {
+  drawDonut(canvas, ctx, data, linecord, chartHeight) {
     try {
-      console.log("Start : drawDonut");
+      // console.log("Start : drawDonut");
       var canvas = document.getElementById(canvas);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       var linewidth = chartHeight / 4;
@@ -676,7 +674,7 @@ class DrawChart {
         ctx.beginPath();
         //ctx.moveTo(canvas.width / 2, canvas.height / 2);
         ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)), false);
-        //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+        //// console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
         //ctx.lineTo(canvas.width / 2, canvas.height / 2);
         var newobj = {
           hei: canvas.height,
@@ -686,10 +684,10 @@ class DrawChart {
           label: data.datapoints[i].label,
           y: data.datapoints[i].y
         };
-        //console.log(newobj);
+        //// console.log(newobj);
         linecord.push(newobj);
         lastend += Math.PI * 2 * (data.datapoints[i].y / myTotal);
-        //console.log(lastend);
+        //// console.log(lastend);
         //ctx.fill();
         ctx.stroke();
       }
@@ -714,16 +712,16 @@ class DrawChart {
           angle += (Math.PI * 2 * (data.datapoints[i].y / myTotal));
         }
       }
-      console.log("End : drawDonut");
+      // console.log("End : drawDonut");
       return linecord;
     } catch (e) {
-      console.log("error occured in drawDonut : ", e);
+      // console.log("error occured in drawDonut : ", e);
     }
   }
 
   drawMeter(canvas, ctx, verticalNr, data, range, chartColor, ChartDataToShow) {
     try {
-      console.log("Start : drawMeter");
+      // console.log("Start : drawMeter");
       var linecord = [];
       var canvas = document.getElementById(canvas);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -741,7 +739,7 @@ class DrawChart {
         ctx.beginPath();
         ctx.moveTo(canvas.width / 2, canvas.height / 2);
         ctx.arc(canvas.width / 2, canvas.height / 2, radius, lastend, lastend + (Math.PI * (data.datapoints[i].y / myTotal)));
-        //console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
+        //// console.log(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data.datapoints[i].y / myTotal)));
         ctx.lineTo(canvas.width / 2, canvas.height / 2);
         ctx.fill();
         ctx.stroke();
@@ -754,7 +752,7 @@ class DrawChart {
         linecord.push(newobj);
         lastend += Math.PI * (data.datapoints[i].y / myTotal);
       }
-      //console.log(linecord);
+      //// console.log(linecord);
       ctx.beginPath();
       ctx.fillStyle = "#fff";
       ctx.arc(canvas.width / 2, canvas.height / 2, radius * 0.7, 0, 2 * Math.PI);
@@ -767,7 +765,7 @@ class DrawChart {
       ctx.closePath();
       ctx.beginPath();
       var rotateangel = Math.PI * (ChartDataToShow / 100) + 3.141592653589793;
-      //console.log(rotateangel);
+      //// console.log(rotateangel);
       var headlen = 10;
       ctx.lineWidth = 6;
       ctx.lineCap = "round";
@@ -803,7 +801,7 @@ class DrawChart {
          ctx.translate(-x, -y);
          ctx.fillText(data.datapoints[i].label.toString(), x + radius, y);
          angle = (Math.PI * (data.datapoints[i].y / myTotal)) - anglemiddle;*/
-        //console.log(angle);
+        //// console.log(angle);
 
         var fx = canvas.width / 2 + (radius * 1.01) * Math.cos(angle + anglemiddle);
         var fy = canvas.height / 2 + (radius * 1.01) * Math.sin(angle + anglemiddle);
@@ -815,10 +813,10 @@ class DrawChart {
         angle += (Math.PI * (data.datapoints[i].y / myTotal));
       }
       ctx.restore();
-      console.log("End : drawMeter");
+      // console.log("End : drawMeter");
       return linecord;
     } catch (e) {
-      console.log("error occured in drawMeter : ", e);
+      // console.log("error occured in drawMeter : ", e);
     }
   }
 
@@ -861,14 +859,14 @@ class DrawChart {
 
   drawsplinechart(canvas, ctx, verticalNr, data, range, chartColor, linecord) {
     try {
-      console.log("Start : drawGraphicLinear");
+      // console.log("Start : drawGraphicLinear");
       var canvas = document.getElementById(canvas);
       var hei = canvas.height - 60;
       var wid = canvas.width - +100
       var spacingVertical = hei / verticalNr;
-      //console.log("spacingVertical:" + spacingVertical);
+      //// console.log("spacingVertical:" + spacingVertical);
       var spacingHorizontal = wid / data.datapoints.length;
-      //console.log("spacingHorizontal:" + spacingHorizontal);
+      //// console.log("spacingHorizontal:" + spacingHorizontal);
 
       var totalRange = range[1] - range[0];
       var verticalCoefficient = hei / totalRange;
@@ -883,9 +881,10 @@ class DrawChart {
           y: hei - (data.datapoints[i].y - range[0]) * verticalCoefficient,
           label: data.datapoints[i].label,
           dataLabel: data.dataLabel,
-          dataval: data.datapoints[i].y
+          dataval: data.datapoints[i].y,
+          dataColor: data.chartColor
         };
-        //console.log(newobj);
+        //// console.log(newobj);
         linecord.push(newobj);
         localLineCords.push(newobj);
       }
@@ -893,71 +892,71 @@ class DrawChart {
       ctx.closePath();
       var f = 2;
       var a = this.bezierPointsCalc(localLineCords, f);
-      console.log(a);
-      
+      // console.log(a);
+
       // for (var i = 1; i <= a.length-3; i += 3) {
       //   ctx.bezierCurveTo(a[i].x, a[i].y, a[i + 1].x, a[i + 1].y, a[i + 2].x, a[i + 2].y);
       // }
       let difference = 25
       var points = calcWaypoints(a);
       function calcWaypoints(vertices) {
-          var waypoints = [];
-          for (var i = 1; i < vertices.length; i+=3) {
-              let startPt = {x: vertices[i-1].x, y:vertices[i-1].y}
-              let ct1 = {x: vertices[i].x, y:vertices[i].y}
-              let ct2 = {x: vertices[i+1].x, y:vertices[i+1].y}
-              let endPt = {x: vertices[i+2].x, y:vertices[i+2].y}
-              for (var t = 0; t < difference; t++) {
-                  let pointers = getQuadraticBezierXYatT(startPt, ct1, ct2, endPt, t/difference);
-                  waypoints.push({
-                      x: pointers.x,
-                      y: pointers.y
-                  });
-              }
+        var waypoints = [];
+        for (var i = 1; i < vertices.length; i += 3) {
+          let startPt = { x: vertices[i - 1].x, y: vertices[i - 1].y }
+          let ct1 = { x: vertices[i].x, y: vertices[i].y }
+          let ct2 = { x: vertices[i + 1].x, y: vertices[i + 1].y }
+          let endPt = { x: vertices[i + 2].x, y: vertices[i + 2].y }
+          for (var t = 0; t < difference; t++) {
+            let pointers = getQuadraticBezierXYatT(startPt, ct1, ct2, endPt, t / difference);
+            waypoints.push({
+              x: pointers.x,
+              y: pointers.y
+            });
           }
-          return (waypoints);
+        }
+        return (waypoints);
       }
 
       function getQuadraticBezierXYatT(startPt, ct1, ct2, endPt, t) {
-        let x = Math.pow(1-t, 3) * startPt.x + 3*Math.pow(1-t, 2) * t * ct1.x + 3*(1-t) * Math.pow(t,2) * ct2.x + Math.pow(t,3) * endPt.x
-        let y = Math.pow(1-t, 3) * startPt.y + 3*Math.pow(1-t, 2) * t * ct1.y + 3*(1-t) * Math.pow(t,2) * ct2.y + Math.pow(t,3) * endPt.y 
-        return( {x:x,y:y} );
+        let x = Math.pow(1 - t, 3) * startPt.x + 3 * Math.pow(1 - t, 2) * t * ct1.x + 3 * (1 - t) * Math.pow(t, 2) * ct2.x + Math.pow(t, 3) * endPt.x
+        let y = Math.pow(1 - t, 3) * startPt.y + 3 * Math.pow(1 - t, 2) * t * ct1.y + 3 * (1 - t) * Math.pow(t, 2) * ct2.y + Math.pow(t, 3) * endPt.y
+        return ({ x: x, y: y });
       }
 
-      points.push(localLineCords[localLineCords.length-1]);
+      points.push(localLineCords[localLineCords.length - 1]);
 
       let i = 0;
       //ctx.beginPath();
       animate(points);
-      function animate(points){
-          if(i < points.length-1){
-              requestAnimationFrame(animate.bind(this, points));
-          }
-          ctx.lineWidth = 3;
-          ctx.beginPath();
-          ctx.globalAlpha = 1;
-          ctx.strokeStyle = chartColor;
-          if (i == 0) {
-            ctx.moveTo(points[i].x, points[i].y);
-          } else {
-            ctx.moveTo(points[i - 1].x, points[i - 1].y);
-            ctx.lineTo(points[i].x, points[i].y);
-          }
-          ctx.stroke();
+      function animate(points) {
+        if (i < points.length - 1) {
+          requestAnimationFrame(animate.bind(this, points));
+        }
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = chartColor;
+        if (i == 0) {
+          ctx.moveTo(points[i].x, points[i].y);
+        } else {
+          ctx.moveTo(points[i - 1].x, points[i - 1].y);
+          ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.stroke();
 
-          if (i % difference == 0 || i == points.length - 1) {
-            commonCodeCircle();
-          }
+        if (i % difference == 0 || i == points.length - 1) {
+          commonCodeCircle();
+        }
 
-          if (data.fill) {
-            let p = {};
-            if (i) {
-              p = points.slice(i - 1, i + 1);
-            }
-            fillAreaCall(p);
+        if (data.fill) {
+          let p = {};
+          if (i) {
+            p = points.slice(i - 1, i + 1);
           }
+          fillAreaCall(p);
+        }
 
-          i = i + 1;
+        i = i + 1;
       }
 
       function commonCodeCircle() {
@@ -1001,16 +1000,17 @@ class DrawChart {
       //   ctx.fill();
       // }
       //ctx.globalAlpha = 1;
-      console.log("End : drawsplinechart");
+      // console.log("End : drawsplinechart");
       return linecord;
     } catch (e) {
-      console.log("error occured in drawsplinechart : ", e);
+      // console.log("error occured in drawsplinechart : ", e);
     }
   };
 }
 
 class DrawChartUpperCanvas {
   constructor() {
+    this.details = '';
   }
 
   ratio(ctx) {
@@ -1020,97 +1020,150 @@ class DrawChartUpperCanvas {
     //return dpr / bsr;
   }
 
-  lineChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
+  lineChartUpperCanvas(nr, ctx, linecord, container, chart) {
     try {
-      console.log("Start : lineChartUpperCanvas");
+      // console.log("Start : lineChartUpperCanvas");
+      let dataPointLen = chart.data[0].datapoints.length;
+      let wid = document.getElementById('canvasupper' + nr).width - 100
+      var spacingHorizontal = wid / dataPointLen;
+      let lineCordRepeat = linecord.length / dataPointLen;
+      // console.log(spacingHorizontal);
       document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
-        ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+        //ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
         var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
-        /*var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-        console.log(message);*/
-        for (var i = 0; i < linecord.length; i++) {
+
+        for (var i = 0; i < dataPointLen; i++) {
           ctx.beginPath();
-          ctx.arc(linecord[i].x, linecord[i].y, 7, 0, 2 * Math.PI);
+          let x1 = i * spacingHorizontal + 100;
+          let x2 = spacingHorizontal;
+          let y1 = 0;
+          let y2 = document.getElementById('canvasupper' + nr).height - 60;
+          ctx.rect(x1, y1, x2, y2);
           if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-            //console.log("lineChart compar mouse over on upper canvas");
-            ctx.lineWidth = 5;
-            ctx.strokeStyle = 'rgba(0,0,0,.7)';
+            //ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+            for (let j = 0; j < lineCordRepeat; j++) {
+              ctx.beginPath();
+              let position = j * dataPointLen + i;
+              ctx.arc(linecord[position].x, linecord[position].y, 12, 0, 2 * Math.PI);
+              // console.log("lineChart compare mouse over on upper canvas");
+              //ctx.lineWidth = 5;
+              ctx.strokeStyle = linecord[position].dataColor //'rgba(0,0,0,.7)';
+              ctx.fillStyle = linecord[position].dataColor //'rgba(0,0,0,.7)';
+              //ctx.stroke();
+              ctx.fill();
+              css(document.querySelector('#' + container + ' .canvasjs-chart-tooltip'), {
+                // "left": linecord[i].x / this.ratio(ctx) + "px",
+                // "top": linecord[i].y / this.ratio(ctx) + "px",
+                "left": mousePos.x / this.ratio(ctx) + 30 + "px",
+                "top": mousePos.y / this.ratio(ctx) + "px",
+                "display": "block"
+              });
+              this.details += `<div style="color: ${linecord[position].dataColor}">${linecord[position].dataLabel}  <br />  ${linecord[position].label} : ${linecord[position].dataval} <br /></div>`;
+            }
+
+            ctx.beginPath();
+            let lineX = x1 + (spacingHorizontal/2)
+            ctx.setLineDash([5, 15]);
+            ctx.strokeStyle = 'rgba(0,0,0,1)';
+            ctx.lineWidth = 1;
+            ctx.moveTo(lineX, y1);
+            ctx.lineTo(lineX, y2);
             ctx.stroke();
-            //ctx.fill();
-            css(document.querySelector('#' + container + ' .canvasjs-chart-tooltip'), {
-              "left": linecord[i].x / this.ratio(ctx) + "px",
-              "top": linecord[i].y / this.ratio(ctx) + "px",
-              "display": "block"
-            });
-            document.querySelector('#' + container + ' .canvasjs-chart-tooltip div').innerHTML =
-              linecord[i].dataLabel + " <br /> " + linecord[i].label + ' : ' + linecord[i].dataval;
+
+            document.querySelector('#' + container + ' .canvasjs-chart-tooltip div').innerHTML = this.details;
             break;
-          } else {
-            ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
-            css(document.querySelector('#' + container + ' .canvasjs-chart-tooltip'), {
-              'display': 'none'
-            });
           }
           ctx.closePath();
         }
       }.bind(this), false);
-      console.log("End : lineChartUpperCanvas");
+      return details;
+      // console.log("End : lineChartUpperCanvas");
     } catch (e) {
       console.log("error occurred in lineChartUpperCanvas : ", e);
     }
   }
 
-  barChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
+  barChartUpperCanvas(nr, ctx, linecord, container, chart) {
     try {
-      console.log("Start : barChartUpperCanvas");
+      // console.log("Start : barChartUpperCanvas");
+      let dataPointLen = chart.data[0].datapoints.length;
+      let wid = document.getElementById('canvasupper' + nr).width - 100;
+      var spacingHorizontal = wid / dataPointLen;
+      let lineCordRepeat = linecord.length / dataPointLen;
       document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
-        ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
         var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
-        //console.log(mousePos);
+        //// console.log(mousePos);
         /*var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-        console.log(message);*/
-        for (var i = 0; i < linecord.length; i++) {
+        // console.log(message);*/
+        for (var i = 0; i < dataPointLen; i++) {
           ctx.beginPath();
-          ctx.rect(linecord[i].x, linecord[i].y, linecord[i].wid, linecord[i].hei);
+          let x1 = i * spacingHorizontal + 100;
+          let x2 = spacingHorizontal;
+          let y1 = 0;
+          let y2 = document.getElementById('canvasupper' + nr).height - 60;
+          ctx.rect(x1, y1, x2, y2);
           if (ctx.isPointInStroke(mousePos.x, mousePos.y) || ctx.isPointInPath(mousePos.x, mousePos.y)) {
-            ctx.lineWidth = .5;
-            ctx.fillStyle = 'rgba(0,0,0,.3)';
-            ctx.fill();
+            //ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+            for (let j = 0; j < lineCordRepeat; j++) {
+              let position = j * dataPointLen + i;
+              ctx.beginPath();
+              ctx.rect(linecord[position].x, linecord[position].y, linecord[position].wid, linecord[position].hei);
+              ctx.lineWidth = .5;
+              ctx.fillStyle = 'rgba(0,0,0,.3)';
+              ctx.fill();
+              ctx.stroke();
+              css(document.querySelector('#' + container + ' .canvasjs-chart-tooltip'), {
+                "left": mousePos.x / this.ratio(ctx) + 30 + "px",
+                "top": mousePos.y / this.ratio(ctx) + "px",
+                "display": "block"
+              });
+              this.details += `<div style="color: ${linecord[position].dataColor}">${linecord[position].dataLabel}  <br />  ${linecord[position].label} : ${linecord[position].dataval} <br /></div>`;
+            }
+            ctx.beginPath();
+            let lineX = x1 + (spacingHorizontal/2)
+            ctx.setLineDash([5, 15]);
+            ctx.strokeStyle = 'rgba(0,0,0,1)';
+            ctx.lineWidth = 1;
+            ctx.moveTo(lineX, y1);
+            ctx.lineTo(lineX, y2);
             ctx.stroke();
-            css(document.querySelector('#' + container + ' .canvasjs-chart-tooltip'), {
-              "left": linecord[i].x / this.ratio(ctx) + "px",
-              "top": linecord[i].y / this.ratio(ctx) + "px",
-              "display": "block"
-            });
-            document.querySelector('#' + container + ' .canvasjs-chart-tooltip div').innerHTML =
-              linecord[i].dataLabel + " <br /> " + linecord[i].label + ' : ' + linecord[i].dataval;
+            document.querySelector('#' + container + ' .canvasjs-chart-tooltip div').innerHTML = this.details;
             break;
-          } else {
-            ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
           }
+          ctx.closePath();
         }
       }.bind(this), false);
-      document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
-        setTimeout(function () {
-          css(document.querySelector('#' + container + ' .canvasjs-chart-tooltip'), {
-            'display': 'none'
-          });
-        }, 2000);
-      });
-      console.log("End : barChartUpperCanvas");
+      return details;
+      // console.log("End : barChartUpperCanvas");
     } catch (e) {
       console.log("error occurred in barChartUpperCanvas : ", e);
     }
   }
 
-  pieChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
+  clearDetails(nr, ctx, container) {
+    document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
+      this.details = '';
+      ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+    }.bind(this));
+
+    document.getElementById('canvasupper' + nr).addEventListener('mouseout', function (evt) {
+      setTimeout(function () {
+        ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
+        css(document.querySelector('#' + container + ' .canvasjs-chart-tooltip'), {
+          'display': 'none'
+        });
+      }, 2000);
+    }.bind(this));
+  }
+
+  pieChartUpperCanvas(nr, ctx, linecord, container) {
     try {
-      console.log("Start : pieChartUpperCanvas");
+      // console.log("Start : pieChartUpperCanvas");
       document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
         ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
         var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
         /*var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-        console.log(message);*/
+        // console.log(message);*/
         for (var i = 0; i < linecord.length; i++) {
           ctx.beginPath();
           ctx.lineTo(linecord[i].wid / 2, linecord[i].hei / 2);
@@ -1142,21 +1195,21 @@ class DrawChartUpperCanvas {
           });
         }, 2000);
       });
-      console.log("End : pieChartUpperCanvas");
+      // console.log("End : pieChartUpperCanvas");
     } catch (e) {
-      console.log("error occurred in pieChartUpperCanvas : ", e);
+      // console.log("error occurred in pieChartUpperCanvas : ", e);
     }
   }
 
-  donutChartUpperCanvas(nr, ctx, width, height, linecord, container, charttype) {
+  donutChartUpperCanvas(nr, ctx, linecord, container) {
     try {
-      console.log("Start : donutChartUpperCanvas");
+      // console.log("Start : donutChartUpperCanvas");
       document.getElementById('canvasupper' + nr).addEventListener('mousemove', function (evt) {
         ctx.clearRect(0, 0, document.getElementById('canvasupper' + nr).width, document.getElementById('canvasupper' + nr).height);
         var linewidth = 80;
         var mousePos = getMousePos(document.getElementById('canvasupper' + nr), evt);
         /*var message = 'Mouse position: ' + mousePos.x + ',' + mousePos.y;
-        console.log(message);*/
+        // console.log(message);*/
         for (var i = 0; i < linecord.length; i++) {
           var radius = linecord[i].hei / 2 - linewidth;
           ctx.lineWidth = linewidth * 2;
@@ -1189,55 +1242,55 @@ class DrawChartUpperCanvas {
           });
         }, 2000);
       });
-      console.log("End : donutChartUpperCanvas");
+      // console.log("End : donutChartUpperCanvas");
     } catch (e) {
-      console.log("error occurred in donutChartUpperCanvas : ", e);
+      // console.log("error occurred in donutChartUpperCanvas : ", e);
     }
   }
 }
 
 function enumerateIt(nr, hei, spacv, spach) {
   try {
-    console.log("Start : enumerateIt");
+    // console.log("Start : enumerateIt");
     var data = data2;
     ctx.fillStyle = text;
     for (var i = 0; i < data.length; i++) {
       ctx.fillText(i + 1, spach * i + 4, hei + 2 * spacv + 20);
     }
-    console.log("End : enumerateIt");
+    // console.log("End : enumerateIt");
   } catch (e) {
-    console.log("error occurred in enumerateIt : ", e);
+    // console.log("error occurred in enumerateIt : ", e);
   }
 }
 
 function writeMessage(canvas, message) {
   try {
-    console.log("Start : writeMessage");
+    // console.log("Start : writeMessage");
     //ctx.font = '18px Arial';
     ctx.fillStyle = 'black';
     ctx.fillText(message, 10, 25);
-    console.log("End : writeMessage");
+    // console.log("End : writeMessage");
   } catch (e) {
-    console.log("error occurred in writeMessage : ", e);
+    // console.log("error occurred in writeMessage : ", e);
   }
 }
 
 function getMousePos(canvas, evt) {
   try {
-    //console.log("Start : getMousePos");
+    //// console.log("Start : getMousePos");
     var rect = canvas.getBoundingClientRect();
     return {
       x: (evt.clientX - rect.left) / (rect.right - rect.left) * canvas.width,
       y: (evt.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
     };
-    //console.log("End : getMousePos");
+    //// console.log("End : getMousePos");
   } catch (e) {
-    console.log("error occurred in getMousePos : ", e);
+    // console.log("error occurred in getMousePos : ", e);
   }
 }
 
 function PrintContent(event, canvasWidth, canvasHeight) {
-  //console.log(event);
+  //// console.log(event);
   let elem = event.target.parentNode;
   let dataUrl = document.querySelector('#' + elem.id + " canvas").toDataURL();
 
@@ -1271,14 +1324,14 @@ class chartCalling {
 
   lineChart(chart, chartID) {
     try {
-      console.log("Start : lineChart");
-      //console.log(chart);
+      // console.log("Start : lineChart");
+      console.log(chart);
       chart.container = chartID;
       chart.chartnumber = chartID;
       let ChartContainer = document.querySelector("#" + chart.container);
       chart.wid = ChartContainer.clientWidth - 10;
       chart.hei = ChartContainer.clientHeight - 33;
-      //console.log("chart.wid :" + chart.wid + ", chart.hei : " + chart.hei);
+      //// console.log("chart.wid :" + chart.wid + ", chart.hei : " + chart.hei);
 
       let titleAndPrintButton = ''
       if (chart.config.title != undefined) {
@@ -1311,20 +1364,21 @@ class chartCalling {
         chart.yaxis.difference = Math.floor((chart.yaxis.max - chart.yaxis.min) / 8);
       }
       let verticaldevisions = Math.floor((chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference);
-      //console.log("verticaldevisions" + verticaldevisions);
+      //// console.log("verticaldevisions" + verticaldevisions);
       drawGrid(chart.chartnumber, verticaldevisions, ctx_base, chart.data);
       let canvas = 'canvas' + chart.chartnumber;
       let maxdata = [chart.yaxis.min, chart.yaxis.max];
       let linecord = [];
-      for (var i = 0; i < chart.data.length; i++) {
+      for (let i = 0; i < chart.data.length; i++) {
         this.drawChart.drawGraphicLinear(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, chart.data[i].chartColor, linecord);
       }
 
       drawGraphicLinearYcord(canvas, ctx_base, verticaldevisions, chart);
-      console.log(linecord);
+      // console.log(linecord);
       let ctx_upper = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, linecord, chart.container, chart.type);
-      console.log("End : lineChart");
+      this.drawUpperChart.clearDetails(chart.chartnumber, ctx_upper, chart.container);
+      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, linecord, chart.container, chart);
+      // console.log("End : lineChart");
       if (chart.config.printEnable != undefined && chart.config.printEnable == true) {
         document.querySelector("#" + chartID + " #print_" + chartID).addEventListener('click', function (event) {
           PrintContent(event, chart.wid, chart.hei);
@@ -1332,13 +1386,14 @@ class chartCalling {
       }
 
     } catch (err) {
-      console.error("Exception occurred in line chart module:  " + err.message);
+      // console.error("Exception occurred in line chart module:  " + err.message);
     }
   }
 
   barChart(chart, chartID) {
     try {
-      console.log("Start : barChart");
+      // console.log("Start : barChart");
+      console.log("chart Data ", chart);
       chart.container = chartID;
       chart.chartnumber = chartID;
       let ChartContainer = document.querySelector("#" + chart.container);
@@ -1377,12 +1432,12 @@ class chartCalling {
         chart.yaxis.difference = Math.floor((chart.yaxis.max - chart.yaxis.min) / 8);
       }
       let verticaldevisions = Math.floor((chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference);
-      //console.log("verticaldevisions" + verticaldevisions);
+      //// console.log("verticaldevisions" + verticaldevisions);
       let barwidth = drawGrid(chart.chartnumber, verticaldevisions, ctx_base, chart.data);
-      //console.log("barwidth:" + barwidth);
+      //// console.log("barwidth:" + barwidth);
       let canvas = 'canvas' + chart.chartnumber;
       let rangedata = [chart.yaxis.min, chart.yaxis.max];
-      //console.log("maxdata:" + maxdata);
+      //// console.log("maxdata:" + maxdata);
       let linecord = [];
       let nextcurve = 100;
       let barChartCount = chart.data.length;
@@ -1392,36 +1447,34 @@ class chartCalling {
         //this.drawChart.drawGraphicLinear(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, chart.data[i].chartColor, linecord);
       }
       drawGraphicLinearYcord(canvas, ctx_base, verticaldevisions, chart);
-      //console.log(linecord);
+      // console.log(linecord);
       let ctx_upper = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-      this.drawUpperChart.barChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, linecord, chart.container, chart.type);
-      console.log("End : barChart");
+      this.drawUpperChart.clearDetails(chart.chartnumber, ctx_upper, chart.container);
+      this.drawUpperChart.barChartUpperCanvas(chart.chartnumber, ctx_upper, linecord, chart.container, chart);
+      // console.log("End : barChart");
       if (chart.config.printEnable != undefined && chart.config.printEnable == true) {
         document.querySelector("#" + chartID + " #print_" + chartID).addEventListener('click', function (event) {
           PrintContent(event, chart.wid, chart.hei);
         });
       }
     } catch (err) {
-      console.error("Exception occurred in bar chart module:  " + err.message);
+      // console.error("Exception occurred in bar chart module:  " + err.message);
     }
   }
 
   pieChart(chart, chartID) {
     try {
-      console.log("Start : pieChart");
+      // console.log("Start : pieChart");
       chart.container = chartID;
       var chartContainerSelector = document.querySelector("#" + chart.container);
       let ChartContainer = document.querySelector("#" + chart.container);
       chart.chartnumber = chartID;
       chart.wid = chartContainerSelector.clientWidth;
       chart.hei = chartContainerSelector.clientHeight - 33;
-
       let chartHeight = chart.hei;
-
       if (chart.hei > chart.wid) {
         chartHeight = chart.wid;
       }
-
       let titleAndPrintButton = ''
       if (chart.config.title != undefined) {
         titleAndPrintButton += '<h2 class="chartTitle">' + chart.config.title + '</h2>';
@@ -1434,26 +1487,31 @@ class chartCalling {
       let ctx_base = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chartHeight, chart.container);
       //drawGrid(chart.chartnumber, 10, ctx_base, chart.data);
       let canvas = 'canvas' + chart.chartnumber;
-      let maxdata = [];
-      maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-      for (var i = 0; i < chart.data.length; i++) {
-        for (var j = 0; j < chart.data[i].datapoints.length; j++) {
-          if (chart.data[i].datapoints[j].y < maxdata[0]) {
-            maxdata[0] = chart.data[i].datapoints[j].y;
-          }
-          if (chart.data[i].datapoints[j].y > maxdata[1]) {
-            maxdata[1] = chart.data[i].datapoints[j].y;
-          }
-        }
-      }
-      console.log(maxdata);
+      // -- Removed the Calculation of maxdata, since it is not used for pie chart 1 Feb 2019 -- //
+      // let maxdata = [];
+      // maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
+      // for (var i = 0; i < chart.data.length; i++) {
+      //   for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+      //     if (chart.data[i].datapoints[j].y < maxdata[0]) {
+      //       maxdata[0] = chart.data[i].datapoints[j].y;
+      //     }
+      //     if (chart.data[i].datapoints[j].y > maxdata[1]) {
+      //       maxdata[1] = chart.data[i].datapoints[j].y;
+      //     }
+      //   }
+      // }
+      // // console.log(maxdata);
       var linecord = [];
       for (var i = 0; i < chart.data.length; i++) {
-        this.drawChart.drawPie(canvas, ctx_base, 10, chart.data[i], maxdata, chart.data[i].chartColor, linecord);
+        // Extra unused parameters removed 1 Feb 2019
+        //this.drawChart.drawPie(canvas, ctx_base, 10, chart.data[i], maxdata, chart.data[i].chartColor, linecord);
+        this.drawChart.drawPie(canvas, ctx_base, chart.data[i], linecord);
       }
-      //console.log(linecord);
+      //// console.log(linecord);
       let ctx_upper = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chartHeight, chart.container);
-      this.drawUpperChart.pieChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chartHeight, linecord, chart.container, chart.type);
+      // Removed unused parameters 1 Feb 2019
+      //this.drawUpperChart.pieChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chartHeight, linecord, chart.container, chart.type);
+      this.drawUpperChart.pieChartUpperCanvas(chart.chartnumber, ctx_upper, linecord, chart.container);
 
       var pieChartDataDisplay = '<ul style="list-style: none; width: ' + chart.wid + 'px; padding: 0px; display: inline-block; position: relative; top: ' + chart.hei + 'px">'
       for (var i = 0; i < chart.data[0].datapoints.length; i++) {
@@ -1469,15 +1527,15 @@ class chartCalling {
           PrintContent(event, chart.wid, chart.hei);
         });
       }
-      console.log("End : pieChart");
+      // console.log("End : pieChart");
     } catch (err) {
-      console.error("Exception occurred in pie chart module:  " + err.message);
+      // console.error("Exception occurred in pie chart module:  " + err.message);
     }
   }
 
   donutChart(chart, chartID) {
     try {
-      console.log("Start : donutChart");
+      // console.log("Start : donutChart");
       chart.container = chartID;
       let chartContainerSelector = document.querySelector("#" + chart.container);
       let ChartContainer = document.querySelector("#" + chart.container);
@@ -1502,27 +1560,28 @@ class chartCalling {
       let ctx_base = this.chartSurface.preparePlot(chart.chartnumber, chart.wid, chartHeight, chart.container);
       drawGrid(chart.chartnumber, 10, ctx_base, chart.data);
       let canvas = 'canvas' + chart.chartnumber;
-      let maxdata = [];
-      maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
-      for (var i = 0; i < chart.data.length; i++) {
-        for (var j = 0; j < chart.data[i].datapoints.length; j++) {
-          if (chart.data[i].datapoints[j].y < maxdata[0]) {
-            maxdata[0] = chart.data[i].datapoints[j].y;
-          }
-          if (chart.data[i].datapoints[j].y > maxdata[1]) {
-            maxdata[1] = chart.data[i].datapoints[j].y;
-          }
-        }
-      }
-      //console.log(maxdata);
+      //  -- maxdata is not used for dougnut chart so remvoed 1 feb 2019 --//
+      // let maxdata = [];
+      // maxdata[0] = maxdata[1] = chart.data[0].datapoints[0].y;
+      // for (var i = 0; i < chart.data.length; i++) {
+      //   for (var j = 0; j < chart.data[i].datapoints.length; j++) {
+      //     if (chart.data[i].datapoints[j].y < maxdata[0]) {
+      //       maxdata[0] = chart.data[i].datapoints[j].y;
+      //     }
+      //     if (chart.data[i].datapoints[j].y > maxdata[1]) {
+      //       maxdata[1] = chart.data[i].datapoints[j].y;
+      //     }
+      //   }
+      // }
+      //// console.log(maxdata);
       let linecord = [];
       let linewidth = 60;
       for (let i = 0; i < chart.data.length; i++) {
-        this.drawChart.drawDonut(canvas, ctx_base, 10, chart.data[i], maxdata, chart.data[i].chartColor, linecord, chartHeight);
+        this.drawChart.drawDonut(canvas, ctx_base, chart.data[i], linecord, chartHeight);
       }
-      //console.log(linecord);
+      //// console.log(linecord);
       let ctx_upper = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chartHeight, chart.container);
-      this.drawUpperChart.donutChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chartHeight, linecord, chart.container, chart.type);
+      this.drawUpperChart.donutChartUpperCanvas(chart.chartnumber, ctx_upper, linecord, chart.container);
 
       var pieChartDataDisplay = '<ul style="list-style: none; width: ' + chart.wid + 'px; padding: 0px; display: inline-block; position: relative; top: ' + chart.hei + 'px">'
       for (let i = 0; i < chart.data[0].datapoints.length; i++) {
@@ -1538,15 +1597,15 @@ class chartCalling {
           PrintContent(event, chart.wid, chart.hei);
         });
       }
-      console.log("End : donutChart");
+      // console.log("End : donutChart");
     } catch (err) {
-      console.error("Exception occurred in donut chart module:  " + err.message);
+      // console.error("Exception occurred in donut chart module:  " + err.message);
     }
   }
 
   meterChart(chart, chartID) {
     try {
-      console.log("Start : meterChart");
+      // console.log("Start : meterChart");
       chart.container = chartID;
       chart.chartnumber = chartID;
       let ChartContainer = document.querySelector("#" + chart.container);
@@ -1576,26 +1635,27 @@ class chartCalling {
         }
         meterTotal += chart.data[0].datapoints[j].y;
       }
-      console.log("meterTotal " + meterTotal);
+      // console.log("meterTotal " + meterTotal);
       let ChartDataToShow = chart.data[0].dataval;
       let linewidth = 50;
       ChartDataToShow = Math.round((ChartDataToShow / meterTotal) * 100);
-      //console.log(ChartDataToShow);
+      //// console.log(ChartDataToShow);
       this.drawChart.drawMeter(canvas, ctx_base, 10, chart.data[0], maxdata, chart.data[0].chartColor, ChartDataToShow);
       if (chart.config.printEnable != undefined && chart.config.printEnable == true) {
         document.querySelector("#" + chartID + " #print_" + chartID).addEventListener('click', function (event) {
           PrintContent(event, chart.wid, chart.hei);
         });
       }
-      console.log("End : meterChart");
+      // console.log("End : meterChart");
     } catch (err) {
-      console.error("Exception occurred in  meter chart module:  " + err.message);
+      // console.error("Exception occurred in  meter chart module:  " + err.message);
     }
   }
 
   column(chart, chartID) {
     try {
-      console.log("Start : barChart");
+      // console.log("Start : barChart");
+      console.log(chart);
       chart.container = chartID;
       chart.chartnumber = chartID;
       let ChartContainer = document.querySelector("#" + chart.container);
@@ -1632,12 +1692,12 @@ class chartCalling {
         chart.yaxis.difference = Math.floor((chart.yaxis.max - chart.yaxis.min) / 8);
       }
       let verticaldevisions = Math.floor((chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference);
-      //console.log("verticaldevisions" + verticaldevisions);
+      //// console.log("verticaldevisions" + verticaldevisions);
       let barwidth = drawGrid(chart.chartnumber, verticaldevisions, ctx_base, chart.data);
-      //console.log("barwidth:" + barwidth);
+      //// console.log("barwidth:" + barwidth);
       let canvas = 'canvas' + chart.chartnumber;
       let maxdata = [chart.yaxis.min, chart.yaxis.max];
-      //console.log("maxdata:" + maxdata);
+      //// console.log("maxdata:" + maxdata);
       let linecord = [];
       let barCords = [];
       let lineLineCords = [];
@@ -1659,18 +1719,20 @@ class chartCalling {
         }
       }
       drawGraphicLinearYcord(canvas, ctx_base, verticaldevisions, chart);
-      console.log("barCords ", barCords);
+      // console.log("barCords ", barCords);
       console.log("lineLineCords ", lineLineCords);
       let ctx_upper = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
 
-      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, lineLineCords, chart.container, chart.type);
-      this.drawUpperChart.barChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, barCords, chart.container, chart.type);
+      this.drawUpperChart.clearDetails(chart.chartnumber, ctx_upper, chart.container);
+      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, lineLineCords, chart.container, chart);
+      this.drawUpperChart.barChartUpperCanvas(chart.chartnumber, ctx_upper, barCords, chart.container, chart);
+
       if (chart.config.printEnable != undefined && chart.config.printEnable == true) {
         document.querySelector("#" + chartID + " #print_" + chartID).addEventListener('click', function (event) {
           PrintContent(event, chart.wid, chart.hei);
         });
       }
-      console.log("End : barChart");
+      // console.log("End : barChart");
     } catch (err) {
       console.error("Exception occurred in bar chart module:  " + err.message);
     }
@@ -1678,8 +1740,8 @@ class chartCalling {
 
   splineChart(chart, chartID) {
     try {
-      console.log("Start : splineChart");
-      //console.log(chart);
+      // console.log("Start : splineChart");
+      //// console.log(chart);
       chart.container = chartID;
       chart.chartnumber = chartID;
       let ChartContainer = document.querySelector("#" + chart.container);
@@ -1720,7 +1782,7 @@ class chartCalling {
         chart.yaxis.difference = Math.floor((chart.yaxis.max - chart.yaxis.min) / 8);
       }
       let verticaldevisions = Math.floor((chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference);
-      //console.log("verticaldevisions" + verticaldevisions);
+      //// console.log("verticaldevisions" + verticaldevisions);
       drawGrid(chart.chartnumber, verticaldevisions, ctx_base, chart.data);
       let canvas = 'canvas' + chart.chartnumber;
       drawGraphicLinearYcord(canvas, ctx_base, verticaldevisions, chart);
@@ -1730,24 +1792,25 @@ class chartCalling {
         this.drawChart.drawsplinechart(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, chart.data[i].chartColor, linecord);
       }
 
-      //console.log(linecord);
+      //// console.log(linecord);
       let ctx_upper = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, linecord, chart.container, chart.type);
+      this.drawUpperChart.clearDetails(chart.chartnumber, ctx_upper, chart.container);
+      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, linecord, chart.container, chart);
       if (chart.config.printEnable != undefined && chart.config.printEnable == true) {
         document.querySelector("#" + chartID + " #print_" + chartID).addEventListener('click', function (event) {
           PrintContent(event, chart.wid, chart.hei);
         });
       }
-      console.log("End : splineChart");
+      // console.log("End : splineChart");
     } catch (err) {
-      console.error("Exception occurred in line chart module:  " + err.message);
+      // console.error("Exception occurred in line chart module:  " + err.message);
     }
   }
 
   stepChart(chart, chartID) {
     try {
-      console.log("Start : stepChart");
-      //console.log(chart);
+      // console.log("Start : stepChart");
+      //// console.log(chart);
       chart.container = chartID;
       chart.chartnumber = chartID;
       let ChartContainer = document.querySelector("#" + chart.container);
@@ -1785,7 +1848,7 @@ class chartCalling {
         chart.yaxis.difference = Math.floor((chart.yaxis.max - chart.yaxis.min) / 8);
       }
       let verticaldevisions = Math.floor((chart.yaxis.max - chart.yaxis.min) / chart.yaxis.difference);
-      //console.log("verticaldevisions" + verticaldevisions);
+      //// console.log("verticaldevisions" + verticaldevisions);
       drawGrid(chart.chartnumber, verticaldevisions, ctx_base, chart.data);
 
       let canvas = 'canvas' + chart.chartnumber;
@@ -1796,17 +1859,19 @@ class chartCalling {
         this.drawChart.drawStepchart(canvas, ctx_base, verticaldevisions, chart.data[i], maxdata, chart.data[i].chartColor, linecord);
       }
 
-      console.log(linecord);
+      // console.log(linecord);
       let ctx_upper = this.chartSurface.preparePlotUpper(chart.chartnumber, chart.wid, chart.hei, chart.container);
-      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, linecord, chart.container, chart.type);
+      this.drawUpperChart.clearDetails(chart.chartnumber, ctx_upper, chart.container);
+      this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, linecord, chart.container, chart);
+      // this.drawUpperChart.lineChartUpperCanvas(chart.chartnumber, ctx_upper, chart.wid, chart.hei, linecord, chart.container, chart.type);
       if (chart.config.printEnable != undefined && chart.config.printEnable == true) {
         document.querySelector("#" + chartID + " #print_" + chartID).addEventListener('click', function (event) {
           PrintContent(event, chart.wid, chart.hei);
         });
       }
-      console.log("End : stepChart");
+      // console.log("End : stepChart");
     } catch (error) {
-      console.log("Error Occured while chart calling of step chart" + error.message)
+      // console.log("Error Occured while chart calling of step chart" + error.message)
     }
   }
 }
@@ -1814,20 +1879,20 @@ class chartCalling {
 class GKChart {
   constructor(data) {
     try {
-      console.info("Enter: Chart Designing initialize function");
+      // console.info("Enter: Chart Designing initialize function");
       this.chartID = data.id;
       this.chartData = data.data;
       this.chartCall = new chartCalling();
       this.initialize.bind(this)();
-      console.info("Exit: Chart Designing initialize function");
+      // console.info("Exit: Chart Designing initialize function");
     } catch (err) {
-      console.log("Error Found in GKChart Constructoru", err);
+      // console.log("Error Found in GKChart Constructoru", err);
     }
   };
 
   initialize() {
     try {
-      console.log("Start : initialize");
+      // console.log("Start : initialize");
 
       /*Define chart css properties*/
       css(document.querySelector("#" + this.chartID), {
@@ -1868,7 +1933,7 @@ class GKChart {
           break;
         }
         default: {
-          console.log("Invalid choice of chart");
+          // console.log("Invalid choice of chart");
           break;
         }
       }
@@ -1880,9 +1945,9 @@ class GKChart {
         }.bind(this), 100);
       }.bind(this));
 
-      console.log("End : initialize");
+      // console.log("End : initialize");
     } catch (err) {
-      console.error("Exception occurred in Home module:  " + err.message);
+      // console.error("Exception occurred in Home module:  " + err.message);
     }
   }
 };
