@@ -2,15 +2,13 @@
 GKCharts is a charting plug and play library. Developed with the HTML 5 Canvas and ES6 JavaScript.
 This is an open source project for every one, anyone who want to improve this charting library can contribute for this project.
 
-I have alos created a website to showcase this project along with some dashboard designs as http://gk-chart.org/
-
 
 ### How do I install GKCharts?
-To install GKCharts you can download GkCharts library from our website http://gk-chart.org/ download button.
+To install GKCharts you can download GkCharts library from our website https://ganpatkakar.github.io/GkCharts/ download button.
 Or you can downalod our git repository with full examples.
 Then you have to add this JavaScript file to your HTML page and call our api
 "new GKChart({id: "stepChartComparision", data: stepChartComparision})"
-Examplesa are provided on our official website http://gk-chart.org/ .
+Examplesa are provided at https://ganpatkakar.github.io/GkCharts/.
 
 
 ### Contribution
