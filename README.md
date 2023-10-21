@@ -6,11 +6,11 @@ Current version of GkChart => V1.1.0
 
 ### How do I install GKCharts?
 There are two different version of gkCharts :-
-1. For static website using gkchart.js file.
+1. ~~For static website using gkchart.js file.
   To install GKCharts you can download GkCharts library from our website http://gkchart.com download button.
   Then you have to add this JavaScript file to your HTML page and call our api
   "new GKChart({id: "stepChartComparision", data: stepChartComparision})"
-  Examples are provided at http://gkchart.com.
+  Examples are provided at http://gkchart.com.~~
   
 2. For React/Angular/Vue js NPM package
   To use with npm package run command => npm i gk-chart
